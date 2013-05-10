@@ -5,6 +5,7 @@ namespace User\Service;
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Result;
 use User\Service\User as UserService;
+use Application\Service\Result as ServiceResult;
 
 class Authentication
 {
@@ -52,14 +53,17 @@ class Authentication
         $result = $service->authenticate();
 
         if($result->getCode()==Result::SUCCESS){
-            
+            return new ServiceResult(ServiceResult::SUCCESS);
         }
+        
+        return new ServiceResult(ServiceResult::FAILURE,null,$result->getMessages());
     }
 
     public function logout()
     {
         $service = $this->getAuthenticationService();
         $service->clearIdentity();
+        return new ServiceResult(ServiceResult::SUCCESS);
     }
 
 }

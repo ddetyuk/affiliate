@@ -32,6 +32,9 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                            <li><a href="<?php echo $this->url('user', array('action'=>'login')) ?>"><?php echo $this->translate('login') ?></a></li>
+                            <li><a href="<?php echo $this->url('user', array('action'=>'register')) ?>"><?php echo $this->translate('register') ?></a></li>
+                            <li><a href="<?php echo $this->url('user', array('action'=>'logout')) ?>"><?php echo $this->translate('logout') ?></a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>

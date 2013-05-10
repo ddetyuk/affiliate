@@ -14,10 +14,6 @@ class Login extends Form implements FactoryInterface, InputFilterProviderInterfa
 {
     public function createService(ServiceLocatorInterface $sm)
     {
-        $em = $sm->get('Doctrine\ORM\EntityManager');
-        $this->setHydrator(new DoctrineEntity($em, 'User\Entity\User'));
-        $this->setObject(new User());
-
         return $this;
     }
     
@@ -43,7 +39,7 @@ class Login extends Form implements FactoryInterface, InputFilterProviderInterfa
                 'label' => 'Password:'
             ),
             'attributes' => array(
-                'type' => 'text'
+                'type' => 'password'
             )
         ));
 

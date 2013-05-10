@@ -71,7 +71,6 @@ return array(
             'annotation_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'filesystem',
-                'paths' => array(__DIR__ . '/../src/Application/Entity')
             ),
             'orm_default' => array(
                 'drivers' => array(

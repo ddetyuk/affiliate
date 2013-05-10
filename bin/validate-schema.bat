@@ -1,3 +1,3 @@
-cd ..
-./vendor/bin/doctrine-module orm:validate-schema
+../vendor/bin/doctrine-module orm:validate-schema
+
 pause

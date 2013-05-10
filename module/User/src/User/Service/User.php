@@ -5,8 +5,7 @@ namespace User\Service;
 use Doctrine\ORM\EntityManager;
 use User\Entity\User as UserEntity;
 
-class User
-{
+class User {
 
     protected $em;
 
@@ -31,18 +30,24 @@ class User
     {
         $this->em->persist($user);
         $this->em->flush();
+
+        return new ServiceResult(ServiceResult::SUCCESS, $user);
     }
 
     public function update(UserEntity $user)
     {
         $this->em->persist($user);
         $this->em->flush();
+        
+        return new ServiceResult(ServiceResult::SUCCESS, $user);
     }
 
     public function delete(UserEntity $user)
     {
         $this->em->remove($user);
         $this->em->flush();
+
+        return new ServiceResult(ServiceResult::SUCCESS, $user);
     }
 
 }

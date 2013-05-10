@@ -14,10 +14,6 @@ class Register extends Form implements FactoryInterface, InputFilterProviderInte
 
     public function createService(ServiceLocatorInterface $sm)
     {
-        $em = $sm->get('Doctrine\ORM\EntityManager');
-        $this->setHydrator(new DoctrineObject($em, 'User\Entity\User'));
-        $this->setObject(new User());
-
         return $this;
     }
 
@@ -43,7 +39,7 @@ class Register extends Form implements FactoryInterface, InputFilterProviderInte
                 'label' => 'Password:'
             ),
             'attributes' => array(
-                'type' => 'text'
+                'type' => 'password'
             )
         ));
 
@@ -53,7 +49,7 @@ class Register extends Form implements FactoryInterface, InputFilterProviderInte
                 'label' => 'Confirm Password:'
             ),
             'attributes' => array(
-                'type' => 'text'
+                'type' => 'password'
             )
         ));
         $this->add(array(

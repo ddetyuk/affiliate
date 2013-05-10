@@ -43,6 +43,16 @@ return array(
             'User\Controller\Index' => 'User\Controller\IndexController'
         ),
     ),
+    'controller_plugins' => array(
+        'invokables' => array(
+            'IsGranted' => 'User\Controller\Plugin\IsGranted',
+        )
+    ),
+    'view_helpers' => array(
+        'invokables' => array(
+            'IsGranted' => 'User\View\Helper\IsGranted',
+        ),
+    ),
     'view_manager' => array(
         'template_path_stack' => array(__DIR__ . '/../view'),
     ),

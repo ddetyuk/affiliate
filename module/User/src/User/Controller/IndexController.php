@@ -4,6 +4,9 @@ namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+
 use User\Entity\User;
 
 class IndexController extends AbstractActionController
@@ -28,9 +31,14 @@ class IndexController extends AbstractActionController
 
     public function registerAction()
     {
+        
         $user = new User();
         $form = $this->getServiceLocator()->get('User\Form\Register');
+        $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $form->setHydrator(new DoctrineEntity($em, 'User\Entity\User'));
+        $form->setBindOnValidate(false);
         $form->bind($user);
+            
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
