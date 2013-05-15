@@ -12,11 +12,12 @@ class IndexController extends AbstractActionController
     
     public function profileAction()
     {
+        
         $user = $this->getUser();
         $form = $this->getServiceLocator()->get('User\Form\Profile');
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User'));
-        $form->bind($user);
+        //$form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User'));
+        //$form->bind($user);
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());

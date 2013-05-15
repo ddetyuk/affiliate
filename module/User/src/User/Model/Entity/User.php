@@ -87,6 +87,11 @@ class User extends AbstractEntity
      * */
     protected $roles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="UserPage\Model\Entity\Page", mappedBy="user")
+     */
+    protected $pages;
+    
     public function __construct()
     {
         $this->roles = new ArrayCollection();

@@ -11,6 +11,7 @@ return array(
         'DOMPDFModule',
         'Application',
         'User',
+        'UserPage',
         'CKEditor',
     ),
 

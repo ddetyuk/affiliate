@@ -24,7 +24,7 @@ return array(
                     'dbname'   => 'affiliate',
                 )
             )
-        )
+        ),
     )
 );
 
