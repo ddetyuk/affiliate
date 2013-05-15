@@ -2,19 +2,29 @@
 
 namespace Application\Service;
 
-class Result {
+use Doctrine\Common\Collections\ArrayCollection;
+
+class Result
+{
 
     const FAILURE = 0;
     const SUCCESS = 1;
 
     protected $code;
     protected $entity;
+    protected $collection;
     protected $messages;
 
-    public function __construct($code, $entity, array $messages = array())
+    public function __construct($code, $entity = null, array $messages = array())
     {
         $this->code = $code;
-        $this->entity = $entity;
+
+        if ($entity instanceof ArrayCollection) {
+            $this->collection = $entity;
+        } else {
+            $this->entity = $entity;
+        }
+
         $this->messages = $messages;
     }
 
@@ -31,6 +41,11 @@ class Result {
     public function getEntity()
     {
         return $this->entity;
+    }
+
+    public function getCollection()
+    {
+        return $this->collection;
     }
 
     public function getMessages()

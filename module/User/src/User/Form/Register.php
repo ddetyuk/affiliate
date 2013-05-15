@@ -6,8 +6,6 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use User\Entity\User;
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject;
 
 class Register extends Form implements FactoryInterface, InputFilterProviderInterface
 {

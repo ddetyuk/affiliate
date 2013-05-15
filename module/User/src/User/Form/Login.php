@@ -6,9 +6,6 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use User\Entity\User;
-
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 
 class Login extends Form implements FactoryInterface, InputFilterProviderInterface
 {

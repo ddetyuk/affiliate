@@ -10,14 +10,30 @@ class Authorization
     protected $authenticationService;
     protected $userService;
     
-    public function __construct(AuthenticationService $service = null, UserService $user = null)
+    public function __construct(AuthenticationService $service = null, UserService $userService = null)
     {
         if (null !== $service) {
             $this->setAuthenticationService($service);
         }
-        if (null !== $user) {
-            $this->setUserService($user);
+        if (null !== $userService) {
+            $this->setUserService($userService);
         }
+        $user = $service->getIdentity();
+        if(!$user){
+            return;
+        }
+        /*
+        $result= $userService->getUserByEmail($user->getEmail());
+        $entity = $result->getEntity();
+        
+        foreach($entity->getRoles() as $role){
+            $permissions = $role->getPermissions();
+            foreach($permissions as $permission){
+                
+            }
+        }
+         */
+        
     }
     
     public function setAuthenticationService(AuthenticationService $service)
@@ -42,7 +58,7 @@ class Authorization
     
     public function isGranted()
     {
-        
+        return true;
     }
 
 }

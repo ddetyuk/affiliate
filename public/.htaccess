@@ -14,3 +14,21 @@ RewriteRule ^.*$ - [NC,L]
 RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
 RewriteRule ^(.*) - [E=BASE:%1]
 RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
+
+<ifModule mod_deflate.c>
+  <filesMatch "\.(css|js|x?html?|php)$">
+    SetOutputFilter DEFLATE
+  </filesMatch>
+</ifModule>
+
+<ifModule mod_headers.c>
+  ExpiresActive On
+  <FilesMatch "\.(gif|jpg|jpeg|png|swf)$">
+    ExpiresDefault "access plus 1 week"
+    HHeader set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+  <FilesMatch "\.(js|css)$">
+    ExpiresDefault "access plus 1 week"
+    Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+</ifModule>

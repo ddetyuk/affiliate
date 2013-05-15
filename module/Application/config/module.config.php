@@ -68,13 +68,13 @@ return array(
     ),
     'doctrine' => array(
         'driver' => array(
-            'annotation_driver' => array(
+            'mapping_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'filesystem',
             ),
             'orm_default' => array(
                 'drivers' => array(
-                    'Application\Entity' => 'annotation_driver'
+                    'Application\Model\Entity' => 'mapping_driver'
                 )
             )
         )
@@ -91,13 +91,61 @@ return array(
         'not_found_template' => 'error/404',
         'exception_template' => 'error/index',
         'template_map' => array(
-            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404' => __DIR__ . '/../view/error/404.phtml',
-            'error/index' => __DIR__ . '/../view/error/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+    ),
+    'assetic_configuration' => array(
+        'buildOnRequest' => false,
+        'debug' => false,
+        'default' => array(
+            'assets' => array(
+                '@base_css',
+                '@base_js',
+            ),
+            'options' => array(
+                'mixin' => true
+            ),
+        ),
+        'modules' => array(
+            'application' => array(
+                'root_path' => __DIR__ . '/../public',
+                'collections' => array(
+                    'base_css' => array(
+                        'assets' => array(
+                            'css/bootstrap.min.css',
+                            'css/style.css',
+                            'css/bootstrap-responsive.min.css',
+                        ),
+                        'filters' => array(
+                            'CssRewriteFilter' => array(
+                                'name' => 'Assetic\Filter\CssRewriteFilter'
+                            )
+                        ),
+                        'options' => array(),
+                    ),
+                    'base_js' => array(
+                        'assets' => array(
+                            'js/jquery.min.js',
+                            'js/bootstrap.min.js',
+                        )
+                    ),
+                    'base_images' => array(
+                        'assets' => array(
+                            'img/*.png',
+                            'img/*.ico',
+                        ),
+                        'options' => array(
+                            'move_raw' => true,
+                        )
+                    ),
+                ),
+            ),
+        )
     ),
 );

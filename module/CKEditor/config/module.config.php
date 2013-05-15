@@ -1,24 +1,16 @@
 <?php
 
+namespace CKEditor;
+
 return array(
     'assetic_configuration' => array(
-        'buildOnRequest' => true,
-        'debug' => true,
         'default' => array(
             'assets' => array(
-                
-            ),
-            'options' => array(
-                'mixin' => true
-            ),
-        ),
-        'routes' => array(
-            'default' => array(
-                
+                //'js/ckeditor/ckeditor.js'
             ),
         ),
         'modules' => array(
-            'application' => array(
+            __NAMESPACE__ => array(
                 'root_path' => __DIR__ . '/../public',
                 'collections' => array(
                     'ckeditor' => array(

@@ -1,0 +1,12 @@
+<?php
+$title = 'Profile';
+$this->headTitle($title);
+?>
+<h3><?php echo $this->escapeHtml($title); ?></h3>
+<?php echo $this->ztbFlashMessenger('error'); ?>
+<?php
+$form->setAttribute('action', $this->url('user', array('action' => 'profile')));
+$form->setAttribute('class', 'form-horizontal');
+
+echo $this->ztbForm($this->form);
+?>

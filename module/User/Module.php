@@ -35,8 +35,12 @@ class Module
                 },
                 'User\Service\User' => function($sm) {
                     $em = $sm->get('Doctrine\ORM\EntityManager');
-//\Doctrine\Common\Util\Debug::dump($em);
                     $service =  new \User\Service\User($em);
+                    return $service;
+                },
+                'User\Service\Role' => function($sm) {
+                    $em = $sm->get('Doctrine\ORM\EntityManager');
+                    $service =  new \User\Service\Role($em);
                     return $service;
                 },
                 'User\Collector\RoleCollector' => function($sm) {
