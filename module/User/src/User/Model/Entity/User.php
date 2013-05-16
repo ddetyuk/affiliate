@@ -92,6 +92,11 @@ class User extends AbstractEntity
      */
     protected $pages;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Contact\Model\Entity\Message", mappedBy="user")
+     */
+    protected $messages;
+    
     public function __construct()
     {
         $this->roles = new ArrayCollection();

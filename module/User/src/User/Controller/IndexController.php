@@ -22,7 +22,7 @@ class IndexController extends AbstractActionController
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $user->populate($form->getData());
+                $message->populate($form->getData());
                 $service = $this->getServiceLocator()->get('User\Service\User');
                 $result = $service->update($user);
                 if ($result->isSuccess()) {

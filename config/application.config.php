@@ -7,10 +7,11 @@ return array(
         'AsseticBundle',
         'ZfcTwitterBootstrap',
         'ZendDeveloperTools',
-        'Zf2Whoops',
         'DOMPDFModule',
+        
         'Application',
         'User',
+        'Contact',
         'UserPage',
         'CKEditor',
     ),

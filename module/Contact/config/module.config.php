@@ -1,20 +1,16 @@
 <?php
 
-namespace UserPage;
+namespace Contact;
 
 return array(
     'router' => array(
         'routes' => array(
-            'wellcome' => array(
-                'type' => 'Segment',
+            'contact' => array(
+                'type' => 'literal',
                 'options' => array(
-                    'route' => '/wellcome/:id[/:action]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
+                    'route' => '/contact',
                     'defaults' => array(
-                        'id' => '',
-                        'controller' => 'UserPage\Controller\Index',
+                        'controller' => 'Contact\Controller\Index',
                         'action' => 'index',
                     ),
                 ),
@@ -24,18 +20,18 @@ return array(
     'doctrine' => array(
         'driver' => array(
             'mapping_driver' => array(
-                'paths' => array(__DIR__ . '/../src/UserPage/Model/Entity')
+                'paths' => array(__DIR__ . '/../src/Contact/Model/Entity')
             ),
             'orm_default' => array(
                 'drivers' => array(
-                    'UserPage\Model\Entity' => 'mapping_driver'
+                    'Contact\Model\Entity' => 'mapping_driver'
                 )
             )
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'UserPage\Controller\Index' => 'UserPage\Controller\IndexController'
+            'Contact\Controller\Index' => 'Contact\Controller\IndexController'
         ),
     ),
     'view_manager' => array(
