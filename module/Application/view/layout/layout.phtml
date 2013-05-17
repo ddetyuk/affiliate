@@ -3,46 +3,34 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
-        <?php $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/assets/favicon.ico'))?>
+        <link href="css/parallax-slider.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
+        <!-- end: CSS -->
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!--[if IE 9]>
+          <link href="/assets/css/styleie9.css" rel="stylesheet">
+        <![endif]-->
+
+        <?php echo $this->headTitle('REP ')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/assets/favicon.ico')) ?>
         <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
-        <?php echo $this->plugin('HeadLink');?>
-        <?php echo $this->plugin('HeadStyle');?>
-        <?php echo $this->plugin('HeadScript');?>
+        <?php echo $this->plugin('HeadLink'); ?>
+        <?php echo $this->plugin('HeadStyle'); ?>
+        <?php echo $this->plugin('HeadScript'); ?>
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Skeleton Application') ?></a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                            <?php if($this->HasIdentity()):?>
-                            <li><a href="<?php echo $this->url('user', array('action'=>'profile')) ?>"><?php echo $this->translate('Profile') ?></a></li>
-                            <li><a href="<?php echo $this->url('user', array('action'=>'logout')) ?>"><?php echo $this->translate('Logout') ?></a></li>
-                            <?php else:?>
-                            <li><a href="<?php echo $this->url('user', array('action'=>'login')) ?>"><?php echo $this->translate('Login') ?></a></li>
-                            <li><a href="<?php echo $this->url('user', array('action'=>'register')) ?>"><?php echo $this->translate('Register') ?></a></li>
-                            <?php endif;?>
-                            <li><a href="<?php echo $this->url('contact') ?>"><?php echo $this->translate('Contact Us') ?></a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
-        </div> <!-- /container -->
+        <?php echo $this->partial('layout/partial/header.phtml'); ?>
+        <?php //echo $this->partial('layout/partial/slider.phtml'); ?>
+        <?php echo $this->content; ?>
+        <?php echo $this->render('layout/partial/footer.phtml'); ?>
         <?php echo $this->inlineScript() ?>
     </body>
 </html>

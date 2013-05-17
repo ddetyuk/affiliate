@@ -19,31 +19,78 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'application' => array(
-                'type' => 'Literal',
+            'page' => array(
+                'type' => 'Segment',
                 'options' => array(
-                    'route' => '/application',
+                    'route' => '/:action',
+                            'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Index',
                         'action' => 'index',
                     ),
                 ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type' => 'Segment',
-                        'options' => array(
-                            'route' => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
+            ),
+        ),
+    ),
+    //admin menu
+    'navigation' => array(
+        'guest-menu' => array(
+            'Home' => array(
+                'label' => 'Home',
+                'route' => 'home',
+            ),
+            'How it works' => array(
+                'label' => 'How it works',
+                'route' => 'page',
+                'params' => array('action' => 'how-it-works'),
+            ),
+            'About us' => array(
+                'label' => 'About us',
+                'route' => 'page',
+                'params' => array('action' => 'about'),
+            ),
+            'Login' => array(
+                'label' => 'Login',
+                'route' => 'user',
+                'params' => array('action' => 'login'),
+            ),
+            'Register' => array(
+                'label' => 'Register',
+                'route' => 'user',
+                'params' => array('action' => 'register'),
+            ),
+        ),
+        'user-menu' => array(
+            'Welcome' => array(
+                'label' => 'Welcome',
+                'route' => 'home',
+            ),
+            'Step by Step' => array(
+                'label' => 'Step by Step',
+                'route' => 'page',
+                'params' => array('action' => 'step-by-step'),
+            ),
+            'Rate of Return' => array(
+                'label' => 'Rate of Return',
+                'route' => 'page',
+                'params' => array('action' => 'rate-of-return'),
+            ),
+            'Contact Us' => array(
+                'label' => 'Contact Us',
+                'route' => 'contact',
+            ),
+            'Profile' => array(
+                'label' => 'Profile',
+                'route' => 'user',
+                'params' => array('action' => 'profile'),
+            ),
+            'Logout' => array(
+                'label' => 'Logout',
+                'route' => 'user',
+                'params' => array('action' => 'logout'),
             ),
         ),
     ),
@@ -55,6 +102,10 @@ return array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
+        'factories' => array(
+            'Application\Service\GuestNavigationFactory' => 'Application\Service\GuestNavigationFactory',
+            'Application\Service\UserNavigationFactory' => 'Application\Service\UserNavigationFactory',
+        )
     ),
     'translator' => array(
         'locale' => 'en_US',
@@ -101,7 +152,7 @@ return array(
         ),
     ),
     'assetic_configuration' => array(
-        'buildOnRequest' => false,
+        'buildOnRequest' => true,
         'debug' => false,
         'default' => array(
             'assets' => array(
@@ -118,9 +169,10 @@ return array(
                 'collections' => array(
                     'base_css' => array(
                         'assets' => array(
-                            'css/bootstrap.min.css',
+                            'css/bootstrap.css',
                             'css/style.css',
-                            'css/bootstrap-responsive.min.css',
+                            'css/icons.css',
+                            'css/bootstrap-responsive.css',
                         ),
                         'filters' => array(
                             'CssRewriteFilter' => array(
@@ -138,7 +190,14 @@ return array(
                     'base_images' => array(
                         'assets' => array(
                             'img/*.png',
+                            'img/*.jpg',
                             'img/*.ico',
+                            'img/*/*.png',
+                            'img/*/*.jpg',
+                            'img/*/*.ico',
+                            'img/*/*/*.png',
+                            'img/*/*/*.jpg',
+                            'img/*/*/*.ico',
                         ),
                         'options' => array(
                             'move_raw' => true,

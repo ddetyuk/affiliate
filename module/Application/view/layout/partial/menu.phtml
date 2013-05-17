@@ -1,0 +1,14 @@
+<?php if ( isset( $this->container ) ): ?>
+    <ul <?php echo (!empty( $this->class ) ? 'class="' . $this->class . '"' : "") ?>>
+        <?php foreach ( $this->container as $page ): ?>
+        <?php if ( (!$page->getResource() && !$page->getPrivilege()) || $this->acl()->isAllowed( $page->getResource(), $page->getPrivilege() ) ): ?>
+                <li class="<?php echo (!empty( $page->pages ) ? "has-dropdown" : "") ?><?php echo ($page->isActive( true ) ? " active" : ""); ?>">
+                    <a href="<?php echo $page->getHref(); ?>"><?php echo $this->translate( $page->getLabel() ); ?></a>
+                    <?php if ( !empty( $page->pages ) ): ?>
+                        <?php echo $this->partial( 'layout/partial/menu', array('container' => $page->pages) ); ?>
+                <?php endif; ?>
+                </li>
+            <?php endif; ?>
+    <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

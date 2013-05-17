@@ -58,6 +58,8 @@ class IndexController extends AbstractActionController
                         $this->flashMessenger()->addErrorMessage($message);
                     }
                 }
+            }else{
+                $this->flashMessenger()->addErrorMessage('Authentication failure.');
             }
         }
         return new ViewModel(array('form' => $form));

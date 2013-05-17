@@ -1,0 +1,25 @@
+        <header>
+            <!--start: Container -->
+            <div class="container">
+                <!--start: Navbar -->
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a href="/" class="brand"><i class="ico-charts circle"></i>REP<span> Real Profit with Real Estate</span>.</a>
+                        <div class="nav-collapse collapse">
+                            <?php if ($this->HasIdentity()): ?>
+                                <?php echo $this->navigation( 'Application\Service\UserNavigationFactory' )->menu()->setUlClass('nav');?>
+                            <?php else: ?>
+                                <?php echo $this->navigation( 'Application\Service\GuestNavigationFactory' )->menu()->setUlClass('nav');?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <!--end: Navbar -->
+            </div>
+            <!--end: Container-->			
+        </header>

@@ -8,6 +8,7 @@ return array(
         'ZfcTwitterBootstrap',
         'ZendDeveloperTools',
         'DOMPDFModule',
+        'ZF2NetteDebug',
         
         'Application',
         'User',

@@ -10,8 +10,8 @@
         "zendframework/zend-developer-tools": "dev-master",
         "widmogrod/zf2-assetic-module": "1.*",
         "firephp/firephp-core": "dev-master",
+        "webino/zf2nette-debug": "dev-master",
         "mwillbanks/zfc-twitter-bootstrap": "dev-master",
-        "ghislainf/zf2-whoops": "dev-master",
         "dino/dompdf-module": "dev-master"
     }
 }
