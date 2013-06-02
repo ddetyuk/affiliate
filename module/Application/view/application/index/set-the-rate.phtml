@@ -1,0 +1,131 @@
+<?php $this->headTitle('Set The Rate');?>
+<div id="page-title">
+    <div id="page-title-inner">
+        <div class="container">
+            <h2><i class="ico-stats ico-white"></i>Set The Rate</h2>
+        </div>
+    </div>	
+</div>
+
+<div id="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span2">
+                <ul class="nav nav-tabs nav-stacked">  
+                    <li class="active"><a href="<?php echo $this->url('page', array('action' => 'set-the-rate')); ?>">Set The Rate</a></li>
+                    <li><a href="<?php echo $this->url('page', array('action' => 'purchase-the-rate')); ?>">Purchase the Rate</a></li>
+                    <li><a href="<?php echo $this->url('page', array('action' => 'balance')); ?>">Balance</a></li> 
+                </ul>
+            </div>
+            <div class="span10">
+                <div class="popover right" style="position: relative; display: block; max-width:100%">
+                    <div class="arrow" style=" position: relative; top:20px"></div>
+                    <div class="popover-content">
+                        <div class="title"><h3>Instructions:</h3></div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                        </p>
+                        <div class="controls">
+                            <div class="progress">
+                                <div class="bar bar-success" style="width: 35%;"  data-trigger="hover" data-placement="top" data-original-title="Joined" data-content="Joined" >Joined (5)</div>
+                                <div class="bar bar-warning" style="width: 20%;"  data-trigger="hover" data-placement="top" data-original-title="Invited" data-content="Invited" >Invited(15)</div>
+                            </div> 
+                        </div>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Referrals</th>
+                                    <th>Payout</th>
+                                    <th>Fee</th>
+                                    <th>Limit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10</td>
+                                    <td>400%</td>
+                                    <td rowspan="8" style="text-align: center; vertical-align: middle;"><span class="badge badge-success">5$</span></td>
+                                    <td rowspan="8" style="text-align: center; vertical-align: middle;"><span class="badge badge-warning">125$</span></td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>500%</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>600%</td>
+                                </tr>
+                                <tr>
+                                    <td>25</td>
+                                    <td>700%</td>
+                                </tr>
+                                <tr>
+                                    <td>30</td>
+                                    <td>800%</td>
+                                </tr>
+                                <tr>
+                                    <td>35</td>
+                                    <td>900%</td>
+                                </tr>
+                                <tr>
+                                    <td>40</td>
+                                    <td>1000%</td>
+                                </tr>
+                                <tr>
+                                    <td>45</td>
+                                    <td>1100%</td>
+                                </tr>
+                                <tr>
+                                    <td>50</td>
+                                    <td>1200%</td>
+                                    <td rowspan="2" style="text-align: center; vertical-align: middle;"><span class="badge badge-success">25$</span></td>
+                                    <td rowspan="2" style="text-align: center; vertical-align: middle;"><span class="badge badge-warning">250$</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">...</td>
+                                </tr>
+                                <tr>
+                                    <td>100</td>
+                                    <td>2200%</td>
+                                    <td rowspan="2" style="text-align: center; vertical-align: middle;"><span class="badge badge-success">50$</span></td>
+                                    <td rowspan="2" style="text-align: center; vertical-align: middle;"><span class="badge badge-warning">500$</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">...</td>
+                                </tr>
+                                <tr>
+                                    <td>1000</td>
+                                    <td>Call</td>
+                                    <td rowspan="2" style="text-align: center; vertical-align: middle;"><span class="badge badge-success">75$</span></td>
+                                    <td rowspan="2" style="text-align: center; vertical-align: middle;"><span class="badge badge-warning">1000$</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <?php echo $this->render('application/partial/calculator.phtml'); ?>
+                        <div class="title"><h3>Set the Rate:</h3></div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                        </p>
+
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <a class="btn btn-small" href="<?php echo $this->url('page', array('action' => 'wellcome', 'id' => 1)); ?>" data-trigger="hover" data-placement="left" data-original-title="Personal Link" data-content="Personal Link" >Personal Link</a>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-small" href="<?php echo $this->url('page', array('action' => 'invitation')); ?>" data-trigger="hover" data-placement="left" data-original-title="Send an Email Invitation" data-content="Send an Email Invitation" >Send an Email Invitation</a>
+                            </div>
+                        </div>
+                        <ul class="pager">
+                            <li class="next">
+                                <a href="<?php echo $this->url('page', array('action' => 'purchase-the-rate')); ?>">Next &rarr;</a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>	
+        </div>
+    </div>
+</div>

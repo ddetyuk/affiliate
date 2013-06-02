@@ -9,41 +9,52 @@ use User\Model\Entity\User;
 
 class IndexController extends AbstractActionController
 {
-    
+
     public function profileAction()
     {
-        
         $user = $this->getUser();
-        $form = $this->getServiceLocator()->get('User\Form\Profile');
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        //$form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User'));
-        //$form->bind($user);
+        $form = $this->getServiceLocator()->get('User\Form\Profile');
+        $form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User', false));
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
             if ($form->isValid()) {
-                $message->populate($form->getData());
+                $user->populate($form->getData());
+                $password = $user->getPassword();
+                if (!empty($password)) {
+                    $service = $this->getServiceLocator()->get('User\Service\Authentication');
+                    $result = $service->check($user, $form->getData('old_password'));
+                    if (!$result->isSuccess()) {
+                        foreach ($result->getMessages() as $message) {
+                            $this->flashMessenger()->addErrorMessage($message);
+                        }
+                        return new ViewModel(array('form' => $form));
+                    }
+                }
+
                 $service = $this->getServiceLocator()->get('User\Service\User');
                 $result = $service->update($user);
                 if ($result->isSuccess()) {
-                    //return $this->redirect()->toRoute('home');
+                    return $this->redirect()->toRoute('user', array('action' =>'profile'));
                 } else {
                     foreach ($result->getMessages() as $message) {
                         $this->flashMessenger()->addErrorMessage($message);
                     }
                 }
             }
+        } else {
+            $form->bind($user);
         }
         return new ViewModel(array('form' => $form));
     }
-    
+
     public function loginAction()
     {
         $user = new User();
         $form = $this->getServiceLocator()->get('User\Form\Login');
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User'));
-        
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
@@ -58,21 +69,24 @@ class IndexController extends AbstractActionController
                         $this->flashMessenger()->addErrorMessage($message);
                     }
                 }
-            }else{
+            } else {
                 $this->flashMessenger()->addErrorMessage('Authentication failure.');
             }
         }
         return new ViewModel(array('form' => $form));
     }
-
+    
+    public function forgotAction()
+    {
+        
+    }
+    
     public function registerAction()
     {
-
         $user = new User();
         $form = $this->getServiceLocator()->get('User\Form\Register');
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User'));
-
+        $form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User', false));
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());

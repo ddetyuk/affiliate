@@ -1,0 +1,12 @@
+<form action="<?php echo $this->posturl;?>" method="post"/>    
+	Price: 
+	<input type='text' name='ap_amount' value=' ' />
+	<input type="hidden" name="ap_purchasetype" value="item-goods" />
+	<input type="hidden" name="ap_merchant" value="<?php echo $this->username;?>" />     
+	<input type="hidden" name="ap_itemname" value="Payment" />    
+	<input type="hidden" name="ap_currency" value="USD" />
+    <input type="hidden" name="ap_alerturl" value="<?php echo $this->alerturl;?>" />  
+	<input type="hidden" name="ap_cancelurl" value="<?php echo $this->cancelurl;?>" />        
+	<input type="hidden" name="ap_returnurl" value="<?php echo $this->successurl;?>" />  
+	<input type="image" name="ap_image" src="https://www.payza.com/images/payza-buy-now.png" />
+</form> 

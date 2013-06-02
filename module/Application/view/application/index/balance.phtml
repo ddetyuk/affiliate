@@ -1,0 +1,133 @@
+<?php $this->headTitle('Balance');?>
+<div id="page-title">
+    <div id="page-title-inner">
+        <div class="container">
+            <h2><i class="ico-stats ico-white"></i>Rate of Return</h2>
+        </div>
+    </div>	
+</div>
+<div id="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span2">
+                <ul class="nav nav-tabs nav-stacked">  
+                    <li><a href="<?php echo $this->url('page', array('action' => 'set-the-rate')); ?>">Set The Rate</a></li>
+                    <li><a href="<?php echo $this->url('page', array('action' => 'purchase-the-rate')); ?>">Purchase the Rate</a></li>
+                    <li class="active"><a href="<?php echo $this->url('page', array('action' => 'balance')); ?>">Balance</a></li> 
+                </ul>
+            </div>
+            <div class="span10">
+                <div class="popover right" style="position: relative; display: block; max-width:100%">
+                    <div class="arrow" style=" position: relative; top:88px"></div>
+                    <div class="popover-content">
+                        <div class="title"><h3>Balance</h3></div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                        </p>
+                        <form class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label" for="rate">Current Rate:</label>
+                                <div class="controls">
+                                    <div class="input-prepend">
+                                        <span class="add-on"><i class="icon-user"></i></span>
+                                        <input class="span2" id="rate" value ="0" type="text" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="ratefee">Balance:</label>
+                                <div class="controls">
+                                    <div class="input-prepend">
+                                        <span class="add-on">$</span>
+                                        <input class="span2" name="ratefee" value ="0" disabled="disabled" type="text" data-toggle="popover" data-trigger="hover" data-placement="left" data-original-title="Rate Fee" data-content="Rate Fee">
+                                    </div>
+                                    <div class="btn-group" style="margin-left: 10px;">
+                                        <a href="#" class="btn btn-primary span">Withdraw</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                        <br>
+
+                        <div class="title"><h3>Activity:</h3></div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                        </p>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#home"  data-toggle="tab">Referral Commissions Log</a></li>
+                            <li><a href="#profile"  data-toggle="tab">Rate of Return Log</a></li>
+                            <li><a href="#profile"  data-toggle="tab">Withdraw Log</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="20px">#</th>
+                                            <th width="50px">Amount</th>
+                                            <th width="80px">Date</th>
+                                            <th>Comment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="profile">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Username</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>	
+        </div>
+    </div>
+</div>

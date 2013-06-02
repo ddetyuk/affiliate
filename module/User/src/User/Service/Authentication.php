@@ -50,6 +50,24 @@ class Authentication
         return $password;
     }
 
+    public function check(UserEntity $user, $password)
+    {
+        $username = $user->getEmail();
+        $password = $this->encodePassword($password);
+        $service = $this->getAuthenticationService();
+        $adapter = $service->getAdapter();
+        $adapter->setIdentity($username);
+        $adapter->setCredential($password);
+
+        $result = $adapter->authenticate();
+
+        if ($result->getCode() == Result::SUCCESS) {
+            return new ServiceResult(ServiceResult::SUCCESS);
+        }
+
+        return new ServiceResult(ServiceResult::FAILURE, null, $result->getMessages());
+    }
+    
     public function login(UserEntity $user)
     {
         $username = $user->getEmail();

@@ -19,7 +19,12 @@ class Login extends Form implements FactoryInterface, InputFilterProviderInterfa
         parent::__construct('login');
 
         $this->setLabel('Login');
-
+        
+        $this->add(array(
+            'name' => 'csrf',
+            'type' => 'csrf',
+        ));
+        
         $this->add(array(
             'name' => 'email',
             'options' => array(
@@ -58,6 +63,14 @@ class Login extends Form implements FactoryInterface, InputFilterProviderInterfa
     public function getInputFilterSpecification()
     {
         return array(
+            'csrf' => array(
+                'required' => true,
+                'validators' => array(
+                    array(
+                        'name' => 'csrf',
+                    ),
+                ),
+            ),
             'email' => array(
                 'required' => true,
                 'filters' => array(

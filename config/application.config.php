@@ -14,7 +14,8 @@ return array(
         'User',
         'Contact',
         'UserPage',
-        'CKEditor',
+        'Account',
+        'Payment'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

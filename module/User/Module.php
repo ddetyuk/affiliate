@@ -9,6 +9,7 @@ use User\Collector\RoleCollector;
 
 class Module
 {
+
     public function getServiceConfig()
     {
         return array(
@@ -30,17 +31,18 @@ class Module
                 },
                 'User\Authentication\Adapter\User' => function($sm) {
                     $user = $sm->get('User\Service\User');
-                    $adapter =  new \User\Authentication\Adapter\User($user);
+                    $adapter = new \User\Authentication\Adapter\User($user);
                     return $adapter;
                 },
                 'User\Service\User' => function($sm) {
                     $em = $sm->get('Doctrine\ORM\EntityManager');
-                    $service =  new \User\Service\User($em);
+                    $events = $sm->get('EventManager');
+                    $service = new \User\Service\User($em, $events);
                     return $service;
                 },
                 'User\Service\Role' => function($sm) {
                     $em = $sm->get('Doctrine\ORM\EntityManager');
-                    $service =  new \User\Service\Role($em);
+                    $service = new \User\Service\Role($em);
                     return $service;
                 },
                 'User\Collector\RoleCollector' => function($sm) {

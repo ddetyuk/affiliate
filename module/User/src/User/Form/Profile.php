@@ -72,7 +72,7 @@ class Profile extends Form implements FactoryInterface, InputFilterProviderInter
             'name' => 'submit',
             'attributes' => array(
                 'type' => 'submit',
-                'value' => 'Register',
+                'value' => 'Save',
             )
         ));
     }

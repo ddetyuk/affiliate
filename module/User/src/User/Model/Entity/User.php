@@ -42,21 +42,42 @@ class User extends AbstractEntity
      * @access protected
      */
     protected $reset;
-    
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     * @access protected
+     */
+    protected $referal;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     * @access protected
+     */
+    protected $balance;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     * @access protected
+     */
+    protected $rate;
+
     /**
      * @ORM\Column(type="string", nullable=true)
      * @var string
      * @access protected
      */
     protected $firstname;
-    
+
     /**
      * @ORM\Column(type="string", nullable=true)
      * @var string
      * @access protected
      */
     protected $lastname;
-    
+
     /**
      * @ORM\Column(type="string", columnDefinition="ENUM('active', 'inactive')", options={"default":"active"} ) 
      * @var string
@@ -93,10 +114,25 @@ class User extends AbstractEntity
     protected $pages;
     
     /**
+     * @ORM\OneToMany(targetEntity="Account\Model\Repository\Payout", mappedBy="user")
+     */
+    protected $payouts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Account\Model\Repository\Payment", mappedBy="user")
+     */
+    protected $payments;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Payment\Model\Repository\Transaction", mappedBy="user")
+     */
+    protected $transactions;
+    
+    /**
      * @ORM\OneToMany(targetEntity="Contact\Model\Entity\Message", mappedBy="user")
      */
     protected $messages;
-    
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();

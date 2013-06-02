@@ -12,9 +12,9 @@
                         <a href="/" class="brand"><i class="ico-charts circle"></i>REP<span> Real Profit with Real Estate</span>.</a>
                         <div class="nav-collapse collapse">
                             <?php if ($this->HasIdentity()): ?>
-                                <?php echo $this->navigation( 'Application\Service\UserNavigationFactory' )->menu()->setUlClass('nav');?>
+                                <?php echo $this->navigation( 'Application\Service\UserNavigationFactory' )->menu()->setMaxDepth(0)->setUlClass('nav');?>
                             <?php else: ?>
-                                <?php echo $this->navigation( 'Application\Service\GuestNavigationFactory' )->menu()->setUlClass('nav');?>
+                                <?php echo $this->navigation( 'Application\Service\GuestNavigationFactory' )->menu()->setMaxDepth(0)->setUlClass('nav');?>
                             <?php endif; ?>
                         </div>
                     </div>

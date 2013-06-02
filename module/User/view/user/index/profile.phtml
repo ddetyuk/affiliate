@@ -1,12 +1,58 @@
+<?php $this->headTitle('Profile'); ?>
+<?php $form->setAttribute('action', $this->url('user', array('action' => 'profile'))); ?>
 <?php
-$title = 'Profile';
-$this->headTitle($title);
+$firstname = $this->form->get('firstname')->setAttributes(array('class' => 'span12', 'placeholder' => 'First name'));
+$lastname = $this->form->get('lastname')->setAttributes(array('class' => 'span12', 'placeholder' => 'Last name'));
+$password_old = $this->form->get('password_old')->setAttributes(array('class' => 'span12', 'placeholder' => 'Password'));
+$password = $this->form->get('password')->setAttributes(array('class' => 'span12', 'placeholder' => 'New Password'));
+$password_retype = $this->form->get('password_retype')->setAttributes(array('class' => 'span12', 'placeholder' => 'Confirm New Password'));
 ?>
-<h3><?php echo $this->escapeHtml($title); ?></h3>
-<?php echo $this->ztbFlashMessenger('error'); ?>
-<?php
-$form->setAttribute('action', $this->url('user', array('action' => 'profile')));
-$form->setAttribute('class', 'form-horizontal');
 
-echo $this->ztbForm($this->form);
-?>
+<div id="page-title">
+    <div id="page-title-inner">
+        <div class="container">
+            <h2 style="text-align:center; width: 100%; padding: 10px 0px 5px 0px"><?php echo $this->escapeHtml('Profile'); ?></h2>
+        </div>
+    </div>	
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="lr-page span4 offset4">
+            <div id="login-box">
+                <!-- start: Row -->
+                <div class="row-fluid">
+                    <div class="span12" id="login-form">
+                        <?php echo $this->ztbFlashMessenger('error'); ?>
+                        <?php echo $this->form()->openTag($this->form); ?>
+                        <div class="row-fluid">
+                            <div class="control-group<?php echo $firstname->getMessages() ? ' error' : ''; ?>">
+                                <?php echo $this->formInput($firstname); ?>
+                                <?php echo $this->formElementErrors($firstname); ?>
+                            </div>
+                            <div class="control-group<?php echo $lastname->getMessages() ? ' error' : ''; ?>">
+                                <?php echo $this->formInput($lastname); ?>
+                                <?php echo $this->formElementErrors($lastname); ?>
+                            </div>
+                            <div class="control-group<?php echo $password_old->getMessages() ? ' error' : ''; ?>">
+                                <?php echo $this->formInput($password_old); ?>
+                                <?php echo $this->formElementErrors($password_old); ?>
+                            </div>
+                            <div class="control-group<?php echo $password->getMessages() ? ' error' : ''; ?>">
+                                <?php echo $this->formInput($password); ?>
+                                <?php echo $this->formElementErrors($password); ?>
+                            </div>
+                            <div class="control-group<?php echo $password_retype->getMessages() ? ' error' : ''; ?>">
+                                <?php echo $this->formInput($password_retype); ?>
+                                <?php echo $this->formElementErrors($password_retype); ?>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button class="btn btn-primary span12" type="submit">Save</button>
+                        </div>
+                        <?php echo $this->form()->closeTag(); ?>
+                    </div>
+                </div>
+            </div>
+        </div>	
+    </div>
+</div>

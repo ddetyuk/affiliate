@@ -24,7 +24,15 @@ class IndexController extends AbstractActionController
         return new ViewModel();
     }
     
-    public function rateOfReturnAction()
+    public function setTheRateAction()
+    {
+        return new ViewModel();
+    }
+    public function purchaseTheRateAction()
+    {
+        return new ViewModel();
+    }
+    public function balanceAction()
     {
         return new ViewModel();
     }
@@ -37,4 +45,13 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+    public function wellcomeAction()
+    {
+        return new ViewModel();
+    }
+    public function invitationAction()
+    {
+        return new ViewModel();
+    }
+    
 }

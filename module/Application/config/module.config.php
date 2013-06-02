@@ -22,10 +22,11 @@ return array(
             'page' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route' => '/:action',
-                            'constraints' => array(
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
+                    'route' => '/:action[/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
                         'controller' => 'Index',
@@ -66,17 +67,52 @@ return array(
         'user-menu' => array(
             'Welcome' => array(
                 'label' => 'Welcome',
-                'route' => 'home',
+                'route' => 'page',
+                'params' => array('action' => 'wellcome'),
             ),
             'Step by Step' => array(
                 'label' => 'Step by Step',
                 'route' => 'page',
                 'params' => array('action' => 'step-by-step'),
+                'pages' => array(
+                    array(
+                        'label' => 'Step 1',
+                        'route' => 'page',
+                        'params' => array('action' => ''),
+                    ),
+                    array(
+                        'label' => 'Step 2',
+                        'route' => 'page',
+                        'params' => array('action' => 'step2'),
+                    ),
+                    array(
+                        'label' => 'Step 3',
+                        'route' => 'page',
+                        'params' => array('action' => 'step3'),
+                    )
+                )
             ),
             'Rate of Return' => array(
                 'label' => 'Rate of Return',
                 'route' => 'page',
-                'params' => array('action' => 'rate-of-return'),
+                'params' => array('action' => 'set-the-rate'),
+                'pages' => array(
+                    array(
+                        'label' => 'Rate of Return',
+                        'route' => 'page',
+                        'params' => array('action' => 'set-the-rate'),
+                    ),
+                    array(
+                        'label' => 'Purchase the Rate',
+                        'route' => 'page',
+                        'params' => array('action' => 'purchase-the-rate'),
+                    ),
+                    array(
+                        'label' => 'Balance',
+                        'route' => 'page',
+                        'params' => array('action' => 'balance'),
+                    )
+                )
             ),
             'Contact Us' => array(
                 'label' => 'Contact Us',
@@ -142,10 +178,10 @@ return array(
         'not_found_template' => 'error/404',
         'exception_template' => 'error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'error/404' => __DIR__ . '/../view/error/404.phtml',
+            'error/index' => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
@@ -153,11 +189,13 @@ return array(
     ),
     'assetic_configuration' => array(
         'buildOnRequest' => true,
-        'debug' => false,
+        'debug' => true,
         'default' => array(
             'assets' => array(
                 '@base_css',
                 '@base_js',
+                '@slider_css',
+                '@slider_js',
             ),
             'options' => array(
                 'mixin' => true
@@ -173,6 +211,8 @@ return array(
                             'css/style.css',
                             'css/icons.css',
                             'css/bootstrap-responsive.css',
+                             'js/tagsinput/*.css',
+                            'js/markdown/css/*.css',
                         ),
                         'filters' => array(
                             'CssRewriteFilter' => array(
@@ -185,6 +225,9 @@ return array(
                         'assets' => array(
                             'js/jquery.min.js',
                             'js/bootstrap.min.js',
+                            'js/module.js',
+                            'js/tagsinput/*.js',
+                            'js/markdown/js/*.js',
                         )
                     ),
                     'base_images' => array(
@@ -202,6 +245,37 @@ return array(
                         'options' => array(
                             'move_raw' => true,
                         )
+                    ),
+                    
+                ),
+            ),
+            'slider' => array(
+                'root_path' => __DIR__ . '/../public',
+                'collections' => array(
+                    'slider_img' => array(
+                        'assets' => array(
+                            'slider/img/*.*',
+                            'slider/css/fonts/*.*',
+                        ),
+                        'options' => array(
+                            'move_raw' => true,
+                        )
+                    ),
+                    'slider_js' => array(
+                        'assets' => array(
+                            'slider/js/*.js',
+                        )
+                    ),
+                    'slider_css' => array(
+                        'assets' => array(
+                            'slider/css/*.css',
+                        ),
+                        'filters' => array(
+                            'CssRewriteFilter' => array(
+                                'name' => 'Assetic\Filter\CssRewriteFilter'
+                            )
+                        ),
+                        'options' => array(),
                     ),
                 ),
             ),

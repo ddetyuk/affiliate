@@ -3,24 +3,24 @@
 namespace UserPage;
 
 return array(
-    'router' => array(
-        'routes' => array(
-            'wellcome' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route' => '/wellcome/:id[/:action]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
-                    'defaults' => array(
-                        'id' => '',
-                        'controller' => 'UserPage\Controller\Index',
-                        'action' => 'index',
-                    ),
-                ),
-            ),
-        ),
-    ),
+//    'router' => array(
+//        'routes' => array(
+//            'wellcome' => array(
+//                'type' => 'Segment',
+//                'options' => array(
+//                    'route' => '/wellcome[/:id[/:action]]',
+//                    'constraints' => array(
+//                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                    ),
+//                    'defaults' => array(
+//                        'id' => '',
+//                        'controller' => 'UserPage\Controller\Index',
+//                        'action' => 'index',
+//                    ),
+//                ),
+//            ),
+//        ),
+//    ),
     'doctrine' => array(
         'driver' => array(
             'mapping_driver' => array(

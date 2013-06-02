@@ -1906,12 +1906,14 @@ li.current {
 	margin-left: 51px;
 }
 
-#login-form input[type="text"], #login-form input[type="password"] {
+#login-form input[type="text"], #login-form input[type="password"], #login-form textarea {
 	margin-bottom: 8px;
 	font-size: 16px;
 	height: 40px;
 }
-
+#login-form textarea{
+	height: 160px;
+}
 #login-form input[type="checkbox"] {
 	margin-top: -4px;
 }

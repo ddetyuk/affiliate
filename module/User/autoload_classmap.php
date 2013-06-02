@@ -10,6 +10,8 @@ return array(
     'User\Controller\Plugin\IsGranted'    => __DIR__ . '/src/User/Controller/Plugin/IsGranted.php',
     'User\Controller\RoleController'      => __DIR__ . '/src/User/Controller/RoleController.php',
     'User\Controller\UserController'      => __DIR__ . '/src/User/Controller/UserController.php',
+    'User\Event'                          => __DIR__ . '/src/User/Event.php',
+    'User\Form\Forgot'                    => __DIR__ . '/src/User/Form/Forgot.php',
     'User\Form\Login'                     => __DIR__ . '/src/User/Form/Login.php',
     'User\Form\Profile'                   => __DIR__ . '/src/User/Form/Profile.php',
     'User\Form\Register'                  => __DIR__ . '/src/User/Form/Register.php',

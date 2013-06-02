@@ -3,7 +3,6 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link href="css/parallax-slider.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
@@ -25,12 +24,12 @@
         <?php echo $this->plugin('HeadLink'); ?>
         <?php echo $this->plugin('HeadStyle'); ?>
         <?php echo $this->plugin('HeadScript'); ?>
+        <?php echo $this->inlineScript() ?>
     </head>
     <body>
         <?php echo $this->partial('layout/partial/header.phtml'); ?>
-        <?php //echo $this->partial('layout/partial/slider.phtml'); ?>
         <?php echo $this->content; ?>
         <?php echo $this->render('layout/partial/footer.phtml'); ?>
-        <?php echo $this->inlineScript() ?>
+        
     </body>
 </html>
