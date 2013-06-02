@@ -114,17 +114,17 @@ class User extends AbstractEntity
     protected $pages;
     
     /**
-     * @ORM\OneToMany(targetEntity="Account\Model\Repository\Payout", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Account\Model\Entity\Payout", mappedBy="user")
      */
     protected $payouts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Account\Model\Repository\Payment", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Account\Model\Entity\Payment", mappedBy="user")
      */
     protected $payments;
     
     /**
-     * @ORM\OneToMany(targetEntity="Payment\Model\Repository\Transaction", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Payment\Model\Entity\Transaction", mappedBy="user")
      */
     protected $transactions;
     

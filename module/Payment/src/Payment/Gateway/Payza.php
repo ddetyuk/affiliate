@@ -5,15 +5,15 @@
  * and open the template in the editor.
  */
 
-namespace Payment\Service;
+namespace Payment\Gateway;
 
 
 /**
- * Description of PayzaService
+ * Description of Payza
  *
  * @author ddetyuk
  */
-class PayzaService
+class Payza
 {
 
     protected $APIServer;

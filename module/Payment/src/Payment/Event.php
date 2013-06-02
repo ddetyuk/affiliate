@@ -2,24 +2,25 @@
 
 namespace Payment;
 
-use User\Event as UserEvent;
+use Zend\EventManager\Event as ZendEvent;
+use Payment\Model\Entity\Transaction;
 
-class Event extends UserEvent
+class Event extends ZendEvent
 {
 
     const EVENT_CREATE_PAYMENT = 'createpayment';
     const EVENT_CREATE_PAYOUT = 'createpayout';
 
-    protected $amount;
+    protected $transaction;
 
-    public function setAmount($amount)
+    public function setTransaction(Transaction $transaction)
     {
-        $this->amount = $amount;
+        $this->transaction = $transaction;
     }
 
-    public function getAmount()
+    public function getTransaction()
     {
-        return $this->amount;
+        return $this->transaction;
     }
 
 }

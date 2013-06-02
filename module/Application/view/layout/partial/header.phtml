@@ -1,25 +1,39 @@
-        <header>
-            <!--start: Container -->
-            <div class="container">
-                <!--start: Navbar -->
-                <div class="navbar navbar-inverse">
-                    <div class="navbar-inner">
-                        <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>
-                        <a href="/" class="brand"><i class="ico-charts circle"></i>REP<span> Real Profit with Real Estate</span>.</a>
-                        <div class="nav-collapse collapse">
-                            <?php if ($this->HasIdentity()): ?>
-                                <?php echo $this->navigation( 'Application\Service\UserNavigationFactory' )->menu()->setMaxDepth(0)->setUlClass('nav');?>
-                            <?php else: ?>
-                                <?php echo $this->navigation( 'Application\Service\GuestNavigationFactory' )->menu()->setMaxDepth(0)->setUlClass('nav');?>
-                            <?php endif; ?>
-                        </div>
+<header>
+    <?php if ($this->HasIdentity()): ?>
+        <div id="admin" class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse-admin">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">Admin Panel</a>
+                    <div class="nav-collapse collapse nav-collapse-admin">
+                        <?php echo $this->navigation('Application\Service\AdminNavigationFactory')->menu()->setUlClass('nav'); ?>
                     </div>
                 </div>
-                <!--end: Navbar -->
             </div>
-            <!--end: Container-->			
-        </header>
+        </div>
+    <?php endif; ?>
+    
+    <div class="container">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <a data-target=".nav-collapse-user" data-toggle="collapse" class="btn btn-navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a href="/" class="brand"><i class="ico-charts circle"></i>REP<span> Real Profit with Real Estate</span>.</a>
+                <div class="nav-collapse collapse nav-collapse-user">
+                    <?php if ($this->HasIdentity()): ?>
+                        <?php echo $this->navigation('Application\Service\UserNavigationFactory')->menu()->setMaxDepth(0)->setUlClass('nav'); ?>
+                    <?php else: ?>
+                        <?php echo $this->navigation('Application\Service\GuestNavigationFactory')->menu()->setMaxDepth(0)->setUlClass('nav'); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

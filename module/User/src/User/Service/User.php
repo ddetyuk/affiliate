@@ -2,7 +2,7 @@
 
 namespace User\Service;
 
-use Zend\EventManager\ProvidesEvents;
+use Zend\EventManager\EventManagerInterface;
 use Doctrine\ORM\EntityManager;
 use Application\Service\Result as ServiceResult;
 use User\Model\Entity\User as UserEntity;
@@ -10,11 +10,11 @@ use User\Event;
 
 class User
 {
-    use ProvidesEvents;
-    
+
+//    use ProvidesEvents;
+    protected $events;
     protected $em;
     protected $entity;
-    
     protected $evm;
 
     public function __construct(EntityManager $em = null, $events = null)
@@ -27,7 +27,18 @@ class User
         }
         $this->entity = 'User\Model\Entity\User';
     }
-    
+
+    public function setEventManager(EventManagerInterface $events)
+    {
+        $this->events = $events;
+        return $this;
+    }
+
+    public function getEventManager()
+    {
+        return $this->events;
+    }
+
     public function setEntityManager(EntityManager $em)
     {
         $this->em = $em;
@@ -41,22 +52,22 @@ class User
     public function create(UserEntity $user)
     {
         $validator = new \DoctrineModule\Validator\ObjectExists(array(
-                'object_repository' => $this->em->getRepository($this->entity),
-                'fields' => array('email')
-        ));
+                    'object_repository' => $this->em->getRepository($this->entity),
+                    'fields' => array('email')
+                ));
         if ($validator->isValid($user->getEmail())) {
             return new ServiceResult(ServiceResult::FAILURE, $user, array('Email already exists'));
         }
         $validator = new \DoctrineModule\Validator\ObjectExists(array(
-                'object_repository' => $this->em->getRepository($this->entity),
-                'fields' => array('id')
-        ));
+                    'object_repository' => $this->em->getRepository($this->entity),
+                    'fields' => array('id')
+                ));
         if (!$validator->isValid($user->getReferal())) {
             return new ServiceResult(ServiceResult::FAILURE, $user, array('Referal code not found'));
         }
         $this->em->persist($user);
         $this->em->flush();
-        
+
         $event = new Event(Event::EVENT_CREATE_USER);
         $event->setUser($user);
         $this->getEventManager()->trigger($event);

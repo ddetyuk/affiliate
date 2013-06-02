@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Application\Entity\AbstractEntity;
 
 /**
- * @ORM\Entity(repositoryClass="Account\Model\Repository\Payout")
+ * @ORM\Entity
  * @ORM\Table(name="account_payouts")
  */
 class Payout extends AbstractEntity
@@ -22,7 +22,7 @@ class Payout extends AbstractEntity
     protected $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", scale=2)
      * @var decimal
      * @access protected
      */

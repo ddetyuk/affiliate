@@ -4,9 +4,8 @@ return array(
     'Payment\Module'                     => __DIR__ . '/Module.php',
     'Payment\Controller\IndexController' => __DIR__ . '/src/Payment/Controller/IndexController.php',
     'Payment\Event'                      => __DIR__ . '/src/Payment/Event.php',
-    'PayzaPayment\Service\PayzaService'  => __DIR__ . '/src/Payment/Gateway/AbstractGateway.php',
-    'Payment\Service\PayzaService'       => __DIR__ . '/src/Payment/Gateway/PayzaService.php',
-    'Account\Model\Entity\Payment'       => __DIR__ . '/src/Payment/Model/Entity/Payment.php',
+    'Payment\Gateway\Payza'              => __DIR__ . '/src/Payment/Gateway/Payza.php',
+    'Payment\Model\Entity\Transaction'   => __DIR__ . '/src/Payment/Model/Entity/Transaction.php',
     'Payment\Service\Payment'            => __DIR__ . '/src/Payment/Service/Payment.php',
-    'Payment\View\Helper\PayzaButton'    => __DIR__ . '/src/Payment/View/Helper/PaymentButton.php',
+    'Payment\View\Helper\PaymentButton'  => __DIR__ . '/src/Payment/View/Helper/PaymentButton.php',
 );

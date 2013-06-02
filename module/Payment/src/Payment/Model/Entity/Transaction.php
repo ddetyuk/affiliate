@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Application\Entity\AbstractEntity;
 
 /**
- * @ORM\Entity(repositoryClass="Payment\Model\Repository\Payment")
+ * @ORM\Entity
  * @ORM\Table(name="payment_transactions")
  */
 class Transaction extends AbstractEntity
@@ -22,7 +22,7 @@ class Transaction extends AbstractEntity
     protected $id;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", scale=2)
      * @var decimal
      * @access protected
      */
@@ -47,7 +47,7 @@ class Transaction extends AbstractEntity
      * @var string
      * @access protected
      */
-    protected $gateaway;
+    protected $gateway;
     
     /**
      * @ORM\Column(type="string") 

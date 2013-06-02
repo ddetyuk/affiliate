@@ -5,6 +5,19 @@ namespace Application;
 return array(
     'router' => array(
         'routes' => array(
+            'admin' => array(
+                'type' => 'literal',
+                'options' => array(
+                    'route' => '/admin',
+                    'defaults' => array(
+                        'controller' => 'User\Controller\User',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                )
+            ),
             'home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -15,10 +28,6 @@ return array(
                     ),
                 ),
             ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
             'page' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -38,6 +47,24 @@ return array(
     ),
     //admin menu
     'navigation' => array(
+        'admin-menu' => array(
+            'Users' => array(
+                'label' => 'Users',
+                'route' => 'admin/user',
+            ),
+            'Messages' => array(
+                'label' => 'Messages',
+                'route' => 'admin/user',
+            ),
+            'Payments' => array(
+                'label' => 'Payments',
+                'route' => 'admin/user',
+            ),
+            'Settings' => array(
+                'label' => 'Settings',
+                'route' => 'admin/user',
+            ),
+        ),
         'guest-menu' => array(
             'Home' => array(
                 'label' => 'Home',
@@ -141,6 +168,7 @@ return array(
         'factories' => array(
             'Application\Service\GuestNavigationFactory' => 'Application\Service\GuestNavigationFactory',
             'Application\Service\UserNavigationFactory' => 'Application\Service\UserNavigationFactory',
+            'Application\Service\AdminNavigationFactory' => 'Application\Service\AdminNavigationFactory',
         )
     ),
     'translator' => array(

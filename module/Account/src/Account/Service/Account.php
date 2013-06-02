@@ -2,7 +2,6 @@
 
 namespace Account\Service;
 
-use Zend\EventManager\ListenerAggregateTrait;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Doctrine\ORM\EntityManager;
@@ -12,15 +11,36 @@ use Payment\Event as PaymentEvent;
 class Account implements ListenerAggregateInterface
 {
 
-    use ListenerAggregateTrait;
-
     protected $em;
     protected $entity;
+    protected $listeners = array();
 
+    /**
+     * {@inheritDoc}
+     */
     public function __construct(EntityManager $em = null)
     {
         if (null !== $em) {
             $this->setEntityManager($em);
+        }
+    }
+
+    public function setEntityManager(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    public function getEntityManager()
+    {
+        return $this->em;
+    }
+
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->listeners[$index]);
+            }
         }
     }
 

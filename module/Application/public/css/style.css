@@ -2577,3 +2577,39 @@ form#newsletter input[type=submit] {
 	
 }
 	
+/*admin*/
+#admin.navbar,#admin  .navbar-inner,#admin .nav,#admin .navbar-inverse{
+    background-color: #000 !important;
+}
+#admin.navbar .nav > li > a {
+    border-top: medium none !important;
+    font-size: 14px !important;
+    padding-bottom: 5px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 5px !important;
+}
+#admin.navbar .nav > .active > a, .navbar .nav > .active > a:focus {
+    background-color: #000000 !important;
+    border-top: medium none !important;
+    color: #FFFFFF !important;
+}
+#admin.navbar .nav > li > a:focus, .navbar .nav > li > a:hover{
+    border:none !important;
+    background-color: #000 !important;
+}
+#admin.navbar .brand {
+    margin-left: 0 !important;
+    padding: 0 25px !important;
+}
+
+#admin .brand {
+    font-size: 14px !important;
+    margin-top: 5px !important;
+}
+#admin .navbar-inner{
+    min-height: 30px !important;
+}
+#admin.navbar .btn-navbar {
+    margin-top: 0;
+}

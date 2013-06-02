@@ -18,6 +18,23 @@ return array(
                     ),
                 ),
             ),
+            'admin' => array(
+                'child_routes' => array(
+                    'user' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/user/:action',
+                            'constraints' => array(
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'User\Controller\User',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                )
+            ),
         ),
     ),
     'doctrine' => array(
@@ -34,14 +51,15 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'User\Form\Login'    => 'User\Form\Login',
+            'User\Form\Login' => 'User\Form\Login',
             'User\Form\Register' => 'User\Form\Register',
-            'User\Form\Profile'  => 'User\Form\Profile',
+            'User\Form\Profile' => 'User\Form\Profile',
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'User\Controller\Index' => 'User\Controller\IndexController'
+            'User\Controller\Index' => 'User\Controller\IndexController',
+            'User\Controller\User' => 'User\Controller\UserController',
         ),
     ),
     'controller_plugins' => array(
