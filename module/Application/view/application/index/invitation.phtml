@@ -1,4 +1,4 @@
-<?php $this->headTitle('Letter invitation<');?>
+<?php $this->headTitle('Letter invitation');?>
 <div id="page-title">
     <div id="page-title-inner">
         <div class="container">
@@ -21,10 +21,10 @@
                     <div class="arrow" style=" position: relative; top:50px"></div>
                     <div class="popover-content">
                         <p style="text-align: right;">
-                            <button class="btn btn-mini btn-primary" type="button" data-content="content" data-placement="left" data-toggle="popover" data-trigger="hover" data-toggle="button">Edit</button>
+                            <button class="btn btn-mini btn-primary" id="invite-letter-button" type="button" data-toggle="button">Edit</button>
                         </p>
                         <div class="title"><h3>Email Template:</h3></div>
-                        <p data-savable="true" data-provide="markdown-editable">
+                        <p data-savable="true" id="invite-letter">
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
                         </p>
                     </div>
@@ -35,8 +35,8 @@
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
                         </p>
                         <div class="controls controls-row">
-                            <textarea class="span5"type="text" id="invitelist" placeholder="Enter an email addresses"></textarea>
-                            <button class="btn btn-primary span1" type="button">Send</button>
+                            <textarea class="span5" type="text" id="invitelist" placeholder="Enter an email addresses"></textarea>
+                            <button class="btn btn-primary span1" type="button" id="invitelist-button">Send</button>
                         </div>
                     </div>
                 </div>
