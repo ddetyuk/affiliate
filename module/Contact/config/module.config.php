@@ -6,12 +6,16 @@ return array(
     'router' => array(
         'routes' => array(
             'contact' => array(
-                'type' => 'literal',
+                'type' => 'segment',
                 'options' => array(
-                    'route' => '/contact',
+                    'route' => '/contact[/:action][/page/:page]',
                     'defaults' => array(
                         'controller' => 'Contact\Controller\Index',
-                        'action' => 'index',
+                        'action' => 'add',
+                    ),
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page' => '[0-9]*',
                     ),
                 ),
             ),

@@ -4,6 +4,7 @@ return array(
     'Application\Module'                         => __DIR__ . '/Module.php',
     'Application\Controller\IndexController'     => __DIR__ . '/src/Application/Controller/IndexController.php',
     'Application\Entity\AbstractEntity'          => __DIR__ . '/src/Application/Entity/AbstractEntity.php',
+    'Application\Service\AdminNavigationFactory' => __DIR__ . '/src/Application/Service/AdminNavigationFactory.php',
     'Application\Service\GuestNavigationFactory' => __DIR__ . '/src/Application/Service/GuestNavigationFactory.php',
     'Application\Service\Result'                 => __DIR__ . '/src/Application/Service/Result.php',
     'Application\Service\UserNavigationFactory'  => __DIR__ . '/src/Application/Service/UserNavigationFactory.php',

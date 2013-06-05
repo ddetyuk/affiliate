@@ -2,11 +2,22 @@
 
 namespace Contact\Form;
 
+use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Form;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 
-class Contact extends Form implements InputFilterProviderInterface
+
+class Contact extends Form implements FactoryInterface, InputFilterProviderInterface
 {
+
+    public function createService(ServiceLocatorInterface $sm)
+    {
+        $em = $sm->get('Doctrine\ORM\EntityManager');
+        $this->setHydrator(new DoctrineEntity($em, 'Contact\Model\Entity\Message', false));
+        return $this;
+    }
 
     public function __construct()
     {
@@ -15,32 +26,28 @@ class Contact extends Form implements InputFilterProviderInterface
         $this->setAttribute('method', 'post');
 
         $this->add(array(
-            'type' => 'Zend\Form\Element\Csrf',
-            'name' => 'csrf'
+            'name' => 'csrf',
+            'type' => 'csrf',
         ));
 
         $this->add(array(
             'name' => 'subject',
+            'type' => 'text',
             'options' => array(
                 'label' => 'Subject:'
             ),
-            'attributes' => array(
-                'type' => 'text'
-            )
         ));
         $this->add(array(
             'name' => 'message',
+            'type' => 'textarea',
             'options' => array(
                 'label' => 'Message:'
             ),
-            'attributes' => array(
-                'type' => 'textarea'
-            )
         ));
         $this->add(array(
             'name' => 'submit',
+            'type' => 'submit',
             'attributes' => array(
-                'type' => 'submit',
                 'value' => 'Submit'
             )
         ));
@@ -51,9 +58,17 @@ class Contact extends Form implements InputFilterProviderInterface
         return array(
             'subject' => array(
                 'required' => true,
+                'filters' => array(
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StripTags')
+                ),
             ),
             'message' => array(
                 'required' => true,
+                'filters' => array(
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StripTags')
+                ),
             )
         );
     }

@@ -7,6 +7,9 @@ use Zend\EventManager\ListenerAggregateInterface;
 use Doctrine\ORM\EntityManager;
 use User\Event as UserEvent;
 use Payment\Event as PaymentEvent;
+use Account\Model\Entity\Payment;
+use Account\Model\Entity\Repayment;
+use Account\Model\Entity\Commision;
 
 class Account implements ListenerAggregateInterface
 {
@@ -58,16 +61,81 @@ class Account implements ListenerAggregateInterface
         //update referral rate value
     }
 
-    public function onCreatePayment($user, $amount)
+    public function onCreatePayment($e)
     {
+        $transaction = $e->setTransaction();
+        $transaction->getUser();
+
         //create user payment
+        $now = new \DateTime();
+        $payment = new Payment();
+        $payment->setAmount($transaction->getAmount());
+        $payment->setBalance(0);
+        $payment->setPercent();
+        $payment->setStatus('active');
+        $payment->setCreated($now);
+        $payment->setUpdated($now);
+
+        $this->em->persist($payment);
+        $this->em->flush();
+
         //increase system account amount
-        //get user referral to repayment
+        
+        //get user referral to referral commision level 1
+        $this->createCommisionPayment($user, $payment, $amount);
+
+        //get user referral to referral commision level 2
+        $this->createCommisionPayment($user, $payment, $amount);
+        
+        //get user referral to repayment level 4
+        //get referal payments
+        
         //create repayment(s)
-        //incease referral user balance
+        $this->createRepaymentPayment($user, $inPayment, $outPayment, $amount);
+
+        $this->em->flush();
+
         //increase system account percent amount
     }
 
+    protected function createCommisionPayment($user, $payment, $amount)
+    {
+        $now = new \DateTime();
+        $commision = new Commision();
+        $commision->setAmount($amount);
+        $commision->setPayment($payment);
+        $commision->setUser($user);
+        $commision->setCreated($now);
+        $commision->setUpdated($now);
+        $this->em->persist($commision);
+
+        //incease user balance
+        $user = $user->getUser();
+        $user->setBalance($user->getBalance() + $amount);
+        $this->em->merge($user);
+    }
+
+    protected function createRepaymentPayment($user, $inPayment, $outPayment, $amount)
+    {
+        $now = new \DateTime();
+        $repayment = new Repayment();
+        $repayment->setAmount($amount);
+        $repayment->setCreated($now);
+        $repayment->setUpdated($now);
+        $repayment->setInPayment($inPayment);
+        $repayment->setOutPayment($outPayment);
+        $this->em->persist($repayment);
+        
+        //incease payment balance
+        $outPayment->setBalance($outPayment->getBalance() + $amount);
+        $this->em->merge($outPayment);
+
+        //incease user balance
+        $user = $user->getUser();
+        $user->setBalance($user->getBalance() + $amount);
+        $this->em->merge($user);
+    }
+    
     public function onCreatePayout($user, $amount)
     {
         //create user payout

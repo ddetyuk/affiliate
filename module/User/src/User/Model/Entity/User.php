@@ -124,6 +124,11 @@ class User extends AbstractEntity
     protected $payments;
     
     /**
+     * @ORM\OneToMany(targetEntity="Account\Model\Entity\Commision", mappedBy="user")
+     */
+    protected $commisions;
+    
+    /**
      * @ORM\OneToMany(targetEntity="Payment\Model\Entity\Transaction", mappedBy="user")
      */
     protected $transactions;

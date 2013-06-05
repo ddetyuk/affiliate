@@ -14,6 +14,7 @@ class Module
                     $service = new \Contact\Service\Contact($em);
                     return $service;
                 },
+                'Contact\Form\Contact' => 'Contact\Form\Contact'
             ),
         );
     }

@@ -2,8 +2,12 @@
 
 namespace User\Service;
 
+use Zend\Paginator\Paginator;
 use Zend\EventManager\EventManagerInterface;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Doctrine\ORM\EntityManager;
+
 use Application\Service\Result as ServiceResult;
 use User\Model\Entity\User as UserEntity;
 use User\Event;
@@ -48,7 +52,18 @@ class User
     {
         return $this->em;
     }
-
+    
+    public function getPaginator($params = null)
+    {
+        try {
+            $query = $this->em->getRepository($this->entity)->createQueryBuilder('p');
+            $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
+            return new ServiceResult(ServiceResult::SUCCESS, $paginator);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
+        }
+    }
+    
     public function create(UserEntity $user)
     {
         $validator = new \DoctrineModule\Validator\ObjectExists(array(

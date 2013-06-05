@@ -2,13 +2,13 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-        'DoctrineModule',
-        'DoctrineORMModule',
         'AsseticBundle',
         'ZfcTwitterBootstrap',
         'ZendDeveloperTools',
-        'DOMPDFModule',
+        //'DOMPDFModule',
         'ZF2NetteDebug',
+        'DoctrineModule',
+        'DoctrineORMModule',
         
         'Application',
         'User',
