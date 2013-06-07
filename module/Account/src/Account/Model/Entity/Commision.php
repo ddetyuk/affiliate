@@ -27,7 +27,7 @@ class Commision extends AbstractEntity
      * @access protected
      */
     protected $amount;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var string
@@ -47,7 +47,7 @@ class Commision extends AbstractEntity
      * @ORM\JoinColumn(name="inpaymentId", referencedColumnName="id")
      */
     protected $payment;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="User\Model\Entity\User", inversedBy="commisions")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")

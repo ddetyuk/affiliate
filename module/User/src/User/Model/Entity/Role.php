@@ -60,14 +60,15 @@ class Role extends AbstractEntity
      *      joinColumns={@ORM\JoinColumn(name="roled", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="permissionId", referencedColumnName="id", unique=true)}
      *      )
-     **/
+     * */
     protected $permissions;
 
-    public function __construct() {
-        $this->children = new ArrayCollection();
+    public function __construct()
+    {
+        $this->children    = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
-    
+
     public function getPermissions()
     {
         return $this->permissions;
@@ -77,4 +78,5 @@ class Role extends AbstractEntity
     {
         $this->permissions = $permissions;
     }
+
 }

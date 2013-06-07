@@ -1,0 +1,16 @@
+<?php $this->headTitle('Settings'); ?>
+<div id="page-title">
+    <div id="page-title-inner">
+        <div class="container">
+            <h2 style=" width: 100%; padding: 10px 0px 5px 0px"><?php echo $this->Translate('Settings'); ?></h2>
+        </div>
+    </div>	
+</div>
+
+<div class="container">
+    <div id="contact-form">
+        <?php echo $this->ztbFlashMessenger('error'); ?>
+        <?php echo $this->ztbFlashMessenger('success'); ?>
+        <?php echo $this->ztbForm($this->form); ?>
+    </div>
+</div>

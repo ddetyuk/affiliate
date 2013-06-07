@@ -9,26 +9,27 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class Login extends Form implements FactoryInterface, InputFilterProviderInterface
 {
+
     public function createService(ServiceLocatorInterface $sm)
     {
         return $this;
     }
-    
+
     public function __construct()
     {
         parent::__construct('login');
 
         $this->setLabel('Login');
-        
+
         $this->add(array(
             'name' => 'csrf',
             'type' => 'csrf',
         ));
-        
+
         $this->add(array(
-            'name' => 'email',
+            'name'    => 'email',
             'options' => array(
-                'label' => 'Email:'
+                'label'      => 'Email:'
             ),
             'attributes' => array(
                 'type' => 'text'
@@ -36,9 +37,9 @@ class Login extends Form implements FactoryInterface, InputFilterProviderInterfa
         ));
 
         $this->add(array(
-            'name' => 'password',
+            'name'    => 'password',
             'options' => array(
-                'label' => 'Password:'
+                'label'      => 'Password:'
             ),
             'attributes' => array(
                 'type' => 'password'
@@ -46,9 +47,9 @@ class Login extends Form implements FactoryInterface, InputFilterProviderInterfa
         ));
 
         $this->add(array(
-            'name' => 'submit',
+            'name'       => 'submit',
             'attributes' => array(
-                'type' => 'submit',
+                'type'  => 'submit',
                 'value' => 'Login',
             )
         ));
@@ -64,22 +65,22 @@ class Login extends Form implements FactoryInterface, InputFilterProviderInterfa
     {
         return array(
             'csrf' => array(
-                'required' => true,
+                'required'   => true,
                 'validators' => array(
                     array(
-                        'name' => 'csrf',
+                        'name'  => 'csrf',
                     ),
                 ),
             ),
             'email' => array(
                 'required' => true,
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'StringTrim'),
-                    array('name' => 'StripTags')
+                    array('name'       => 'StripTags')
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'EmailAddress',
+                        'name'       => 'EmailAddress',
                     ),
                 ),
                 'properties' => array(
@@ -87,17 +88,17 @@ class Login extends Form implements FactoryInterface, InputFilterProviderInterfa
                 )
             ),
             'password' => array(
-                'required' => true,
+                'required'   => true,
                 'properties' => array(
-                    'required' => true
+                    'required'   => true
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min' => 6,
-                            'max' => 32
+                            'min'      => 6,
+                            'max'      => 32
                         ),
                     ),
                 )

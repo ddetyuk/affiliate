@@ -1,10 +1,10 @@
 <?php $this->headTitle('Register'); ?>
 <?php $this->form->setAttribute('action', $this->url('user', array('action' => 'register'))); ?>
 <?php
-$email = $this->form->get('email')->setAttributes(array('class' => 'span12', 'placeholder' => 'Email'));
-$password = $this->form->get('password')->setAttributes(array('class' => 'span12', 'placeholder' => 'Password'));
-$password_retype = $this->form->get('password_retype')->setAttributes(array('class' => 'span12', 'placeholder' => 'Confirm Password'));
-$referal = $this->form->get('referal')->setAttributes(array('class' => 'span12', 'placeholder' => 'Referal Code'));
+$email   = $this->form->get('email')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Email'));
+$password     = $this->form->get('password')->setAttributes(array('class'          => 'span12', 'placeholder'    => 'Password'));
+$password_retype = $this->form->get('password_retype')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Confirm Password'));
+$referal      = $this->form->get('referal')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Referal Code'));
 ?>
 <div id="page-title">
     <div id="page-title-inner">
@@ -22,19 +22,19 @@ $referal = $this->form->get('referal')->setAttributes(array('class' => 'span12',
                         <?php echo $this->ztbFlashMessenger('error'); ?>
                         <?php echo $this->form()->openTag($this->form); ?>
                         <div class="row-fluid">
-                            <div class="control-group<?php echo $email->getMessages()?' error':'';?>">
+                            <div class="control-group<?php echo $email->getMessages() ? ' error' : ''; ?>">
                                 <?php echo $this->formInput($email); ?>
                                 <?php echo $this->formElementErrors($email); ?>
                             </div>
-                            <div class="control-group<?php echo $password->getMessages()?' error':'';?>">
+                            <div class="control-group<?php echo $password->getMessages() ? ' error' : ''; ?>">
                                 <?php echo $this->formInput($password); ?>
                                 <?php echo $this->formElementErrors($password); ?>
                             </div>
-                            <div class="control-group<?php echo $password_retype->getMessages()?' error':'';?>">
+                            <div class="control-group<?php echo $password_retype->getMessages() ? ' error' : ''; ?>">
                                 <?php echo $this->formInput($password_retype); ?>
                                 <?php echo $this->formElementErrors($password_retype); ?>
                             </div>
-                            <div class="control-group<?php echo $referal->getMessages()?' error':'';?>">
+                            <div class="control-group<?php echo $referal->getMessages() ? ' error' : ''; ?>">
                                 <?php echo $this->formInput($referal); ?>
                                 <?php echo $this->formElementErrors($referal); ?>
                             </div>

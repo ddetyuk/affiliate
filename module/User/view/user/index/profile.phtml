@@ -1,11 +1,11 @@
 <?php $this->headTitle('Profile'); ?>
-<?php $form->setAttribute('action', $this->url('user', array('action' => 'profile'))); ?>
+<?php $form->setAttribute('action', $this->url('user', array('action'   => 'profile'))); ?>
 <?php
-$firstname = $this->form->get('firstname')->setAttributes(array('class' => 'span12', 'placeholder' => 'First name'));
-$lastname = $this->form->get('lastname')->setAttributes(array('class' => 'span12', 'placeholder' => 'Last name'));
-$password_old = $this->form->get('password_old')->setAttributes(array('class' => 'span12', 'placeholder' => 'Password'));
-$password = $this->form->get('password')->setAttributes(array('class' => 'span12', 'placeholder' => 'New Password'));
-$password_retype = $this->form->get('password_retype')->setAttributes(array('class' => 'span12', 'placeholder' => 'Confirm New Password'));
+$firstname = $this->form->get('firstname')->setAttributes(array('class'       => 'span12', 'placeholder' => 'First name'));
+$lastname     = $this->form->get('lastname')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Last name'));
+$password_old = $this->form->get('password_old')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Password'));
+$password     = $this->form->get('password')->setAttributes(array('class'          => 'span12', 'placeholder'    => 'New Password'));
+$password_retype = $this->form->get('password_retype')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Confirm New Password'));
 ?>
 
 <div id="page-title">

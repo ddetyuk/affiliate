@@ -19,9 +19,9 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-        $sm = $this->getServiceLocator();
+        $sm      = $this->getServiceLocator();
         $service = $sm->get('PayzaPayment\Service\PayzaService');
-        echo  $service->getBalance();
+        echo $service->getBalance();
 //        echo  $service->sendMoney('5','client_1_ddetyuk@gmail.com');
     }
 
@@ -38,14 +38,14 @@ class IndexController extends AbstractActionController
     public function listenerAction()
     {
         //check is it post
-        if( $this->request->isPost() ){
-            $sm = $this->getServiceLocator();
+        if ($this->request->isPost()) {
+            $sm     = $this->getServiceLocator();
             //checking IPNServerIP
             $config = $sm->get('Config');
-            if( $_SERVER['REMOTE_ADDR'] == $config['payza']['IPNServerIP'] ){
+            if ($_SERVER['REMOTE_ADDR'] == $config['payza']['IPNServerIP']) {
                 $service = $sm->get('PayzaPayment\Service\PayzaService');
-                $result = $service->getIPNV2Handler($this->fromPost('token'));
-                if($result){
+                $result  = $service->getIPNV2Handler($this->fromPost('token'));
+                if ($result) {
                     //send event
                     return array();
                 }

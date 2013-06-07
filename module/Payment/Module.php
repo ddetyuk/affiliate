@@ -4,12 +4,13 @@ namespace Payment;
 
 class Module
 {
+
     public function getServiceConfig()
     {
         return array(
             'factories' => array(
                 'Payment\Service\Payment' => function($sm) {
-                    $em = $sm->get('Doctrine\ORM\EntityManager');
+                    $em      = $sm->get('Doctrine\ORM\EntityManager');
                     $service = new \Payment\Service\Payment($em);
                     return $service;
                 },

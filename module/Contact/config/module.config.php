@@ -6,16 +6,16 @@ return array(
     'router' => array(
         'routes' => array(
             'contact' => array(
-                'type' => 'segment',
+                'type'    => 'segment',
                 'options' => array(
-                    'route' => '/contact[/:action][/page/:page]',
+                    'route'    => '/contact[/:action][/page/:page]',
                     'defaults' => array(
-                        'controller' => 'Contact\Controller\Index',
-                        'action' => 'add',
+                        'controller'  => 'Contact\Controller\Index',
+                        'action'      => 'add',
                     ),
                     'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'page' => '[0-9]*',
+                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'page'     => '[0-9]*',
                     ),
                 ),
             ),
@@ -33,12 +33,12 @@ return array(
             )
         ),
     ),
-    'controllers' => array(
+    'controllers'          => array(
         'invokables' => array(
             'Contact\Controller\Index' => 'Contact\Controller\IndexController'
         ),
     ),
-    'view_manager' => array(
+    'view_manager'             => array(
         'template_path_stack' => array(__DIR__ . '/../view'),
     ),
 );

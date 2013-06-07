@@ -48,14 +48,14 @@ class Transaction extends AbstractEntity
      * @access protected
      */
     protected $gateway;
-    
+
     /**
      * @ORM\Column(type="string") 
      * @var string
      * @access protected
      */
     protected $logging;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var string

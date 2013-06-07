@@ -29,7 +29,7 @@ class User extends AbstractAdapter
     public function authenticate()
     {
         $password = $this->credential;
-        $result = $this->getUserService()->getUserByEmail($this->identity);
+        $result   = $this->getUserService()->getUserByEmail($this->identity);
         if ($result->isSuccess()) {
             $entity = $result->getEntity();
             if ($entity->getPassword() == $password) {

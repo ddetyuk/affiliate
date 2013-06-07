@@ -12,9 +12,9 @@ class IndexController extends AbstractActionController
 
     public function profileAction()
     {
-        $user = $this->getUser();
-        $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $form = $this->getServiceLocator()->get('User\Form\Profile');
+        $user    = $this->getUser();
+        $em      = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $form    = $this->getServiceLocator()->get('User\Form\Profile');
         $form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User', false));
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -24,7 +24,7 @@ class IndexController extends AbstractActionController
                 $password = $user->getPassword();
                 if (!empty($password)) {
                     $service = $this->getServiceLocator()->get('User\Service\Authentication');
-                    $result = $service->check($user, $form->getData('old_password'));
+                    $result  = $service->check($user, $form->getData('old_password'));
                     if (!$result->isSuccess()) {
                         foreach ($result->getMessages() as $message) {
                             $this->flashMessenger()->addErrorMessage($message);
@@ -34,9 +34,9 @@ class IndexController extends AbstractActionController
                 }
 
                 $service = $this->getServiceLocator()->get('User\Service\User');
-                $result = $service->update($user);
+                $result  = $service->update($user);
                 if ($result->isSuccess()) {
-                    return $this->redirect()->toRoute('user', array('action' =>'profile'));
+                    return $this->redirect()->toRoute('user', array('action' => 'profile'));
                 } else {
                     foreach ($result->getMessages() as $message) {
                         $this->flashMessenger()->addErrorMessage($message);
@@ -51,9 +51,9 @@ class IndexController extends AbstractActionController
 
     public function loginAction()
     {
-        $user = new User();
-        $form = $this->getServiceLocator()->get('User\Form\Login');
-        $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $user    = new User();
+        $form    = $this->getServiceLocator()->get('User\Form\Login');
+        $em      = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User'));
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -61,7 +61,7 @@ class IndexController extends AbstractActionController
             if ($form->isValid()) {
                 $user->populate($form->getData());
                 $service = $this->getServiceLocator()->get('User\Service\Authentication');
-                $result = $service->login($user);
+                $result  = $service->login($user);
                 if ($result->isSuccess()) {
                     return $this->redirect()->toRoute('home');
                 } else {
@@ -75,17 +75,17 @@ class IndexController extends AbstractActionController
         }
         return new ViewModel(array('form' => $form));
     }
-    
+
     public function forgotAction()
     {
         
     }
-    
+
     public function registerAction()
     {
-        $user = new User();
-        $form = $this->getServiceLocator()->get('User\Form\Register');
-        $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $user    = new User();
+        $form    = $this->getServiceLocator()->get('User\Form\Register');
+        $em      = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $form->setHydrator(new DoctrineEntity($em, 'User\Model\Entity\User', false));
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -93,9 +93,9 @@ class IndexController extends AbstractActionController
             if ($form->isValid()) {
                 $user->populate($form->getData());
                 $service = $this->getServiceLocator()->get('User\Service\User');
-                $result = $service->create($user);
+                $result  = $service->create($user);
                 if ($result->isSuccess()) {
-                    $auth = $this->getServiceLocator()->get('User\Service\Authentication');
+                    $auth   = $this->getServiceLocator()->get('User\Service\Authentication');
                     $result = $auth->login($user);
                     if ($result->isSuccess()) {
                         return $this->redirect()->toRoute('home');

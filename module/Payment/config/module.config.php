@@ -6,7 +6,7 @@ return array(
     'gateway' => array(
         'payza' => array(
             'options' => array(
-                //in config/local.php
+            //in config/local.php
             )
         ),
     ),
@@ -15,18 +15,18 @@ return array(
             'Payment\Controller\Index' => 'Payment\Controller\IndexController',
         ),
     ),
-    'router' => array(
+    'router'                   => array(
         'routes' => array(
             'payment' => array(
-                'type' => 'segment',
+                'type'    => 'segment',
                 'options' => array(
-                    'route' => '/payment[/:action]',
+                    'route'       => '/payment[/:action]',
                     'constraints' => array(
-                        'keyword' => '[a-zA-Z0-9]+',
+                        'keyword'  => '[a-zA-Z0-9]+',
                     ),
                     'defaults' => array(
-                        'controller' => 'Payment\Controller\Index',
-                        'action' => 'index',
+                        'controller'   => 'Payment\Controller\Index',
+                        'action'       => 'index',
                     ),
                 ),
             ),
@@ -34,7 +34,7 @@ return array(
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            __NAMESPACE__ => __DIR__ . '/../view',
+            __NAMESPACE__  => __DIR__ . '/../view',
         ),
     ),
     'view_helpers' => array(
@@ -42,7 +42,7 @@ return array(
             'PaymentButton' => 'Payment\View\Helper\PaymentButton',
         ),
     ),
-    'doctrine' => array(
+    'doctrine'      => array(
         'driver' => array(
             'mapping_driver' => array(
                 'paths' => array(__DIR__ . '/../src/Payment/Model/Entity')

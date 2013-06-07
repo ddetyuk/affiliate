@@ -36,14 +36,14 @@ class Page extends AbstractEntity
      * @access protected
      */
     protected $content;
-    
+
     /**
      * @ORM\Column(type="string", columnDefinition="ENUM('page', 'email')", options={"default":"page"} ) 
      * @var string
      * @access protected
      */
     protected $type;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var string
@@ -57,11 +57,11 @@ class Page extends AbstractEntity
      * @access protected
      */
     protected $updated;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="User\Model\Entity\User", inversedBy="pages")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     protected $user;
-    
+
 }

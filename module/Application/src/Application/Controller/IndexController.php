@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -14,44 +15,50 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
+
     public function indexAction()
     {
         return new ViewModel();
     }
-    
+
     public function aboutAction()
     {
         return new ViewModel();
     }
-    
+
     public function setTheRateAction()
     {
         return new ViewModel();
     }
+
     public function purchaseTheRateAction()
     {
         return new ViewModel();
     }
+
     public function balanceAction()
     {
         return new ViewModel();
     }
-    
+
     public function howItWorksAction()
     {
         return new ViewModel();
     }
+
     public function stepByStepAction()
     {
         return new ViewModel();
     }
+
     public function wellcomeAction()
     {
         return new ViewModel();
     }
+
     public function invitationAction()
     {
         return new ViewModel();
     }
-    
+
 }

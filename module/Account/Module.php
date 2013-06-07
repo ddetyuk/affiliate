@@ -10,8 +10,8 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $app = $e->getApplication();
-        $em = $app->getEventManager();
-        $sm = $app->getServiceManager();
+        $em  = $app->getEventManager();
+        $sm  = $app->getServiceManager();
         $em->attachAggregate($sm->get('Account\Service\Account'));
     }
 
@@ -19,9 +19,16 @@ class Module
     {
         return array(
             'factories' => array(
+                'Account\Form\Setting'    => 'Account\Form\Setting',
                 'Account\Service\Account' => function($sm) {
-                    $em = $sm->get('Doctrine\ORM\EntityManager');
-                    $service = new \Account\Service\Account($em);
+                    $em                       = $sm->get('Doctrine\ORM\EntityManager');
+                    $setting                  = $sm->get('Setting\Service\Setting');
+                    $service                  = new \Account\Service\Account($em, $setting);
+                    return $service;
+                },
+                'Setting\Service\Setting' => function($sm) {
+                    $em      = $sm->get('Doctrine\ORM\EntityManager');
+                    $service = new \Account\Service\Setting($em);
                     return $service;
                 },
             ),

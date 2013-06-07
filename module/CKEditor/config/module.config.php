@@ -11,7 +11,7 @@ return array(
         ),
         'modules' => array(
             __NAMESPACE__ => array(
-                'root_path' => __DIR__ . '/../public',
+                'root_path'   => __DIR__ . '/../public',
                 'collections' => array(
                     'ckeditor_js' => array(
                         'assets' => array(
@@ -19,7 +19,7 @@ return array(
                             'js/ckeditor/adapters/jquery.js'
                         ),
                         'options' => array(
-                            'output' => 'js/ckeditor/ckeditor.js',
+                            'output'   => 'js/ckeditor/ckeditor.js',
                         ),
                     ),
                     'ckeditor' => array(

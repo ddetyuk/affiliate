@@ -6,155 +6,155 @@ return array(
     'router' => array(
         'routes' => array(
             'admin' => array(
-                'type' => 'literal',
+                'type'    => 'literal',
                 'options' => array(
-                    'route' => '/admin',
+                    'route'    => '/admin',
                     'defaults' => array(
-                        'controller' => 'User\Controller\User',
-                        'action'     => 'index',
+                        'controller'    => 'User\Controller\User',
+                        'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
-                'child_routes' => array(
+                'child_routes'  => array(
                 )
             ),
             'home' => array(
-                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'type'    => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
-                    'route' => '/',
+                    'route'    => '/',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Index',
-                        'action' => 'index',
+                        'action'     => 'index',
                     ),
                 ),
             ),
-            'page' => array(
-                'type' => 'Segment',
+            'page'       => array(
+                'type'    => 'Segment',
                 'options' => array(
-                    'route' => '/:action[/:id]',
+                    'route'       => '/:action[/:id]',
                     'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'       => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Application\Controller',
-                        'controller' => 'Index',
-                        'action' => 'index',
+                        'controller'    => 'Index',
+                        'action'        => 'index',
                     ),
                 ),
             ),
         ),
     ),
     //admin menu
-    'navigation' => array(
+    'navigation'    => array(
         'admin-menu' => array(
             'Users' => array(
-                'label' => 'Users',
-                'route' => 'admin/user',
+                'label'    => 'Users',
+                'route'    => 'admin/user',
             ),
             'Messages' => array(
-                'label' => 'Messages',
-                'route' => 'contact',
-                'params' => array('action' => 'index')
+                'label'  => 'Messages',
+                'route'  => 'contact',
+                'params' => array('action'   => 'index')
             ),
             'Payments' => array(
-                'label' => 'Payments',
-                'route' => 'admin/user',
+                'label'    => 'Payments',
+                'route'    => 'admin/user',
             ),
             'Settings' => array(
-                'label' => 'Settings',
-                'route' => 'admin/user',
+                'label'      => 'Settings',
+                'route'      => 'settings',
             ),
         ),
         'guest-menu' => array(
             'Home' => array(
-                'label' => 'Home',
-                'route' => 'home',
+                'label'        => 'Home',
+                'route'        => 'home',
             ),
             'How it works' => array(
-                'label' => 'How it works',
-                'route' => 'page',
-                'params' => array('action' => 'how-it-works'),
+                'label'  => 'How it works',
+                'route'  => 'page',
+                'params' => array('action'   => 'how-it-works'),
             ),
             'About us' => array(
-                'label' => 'About us',
-                'route' => 'page',
+                'label'  => 'About us',
+                'route'  => 'page',
                 'params' => array('action' => 'about'),
             ),
-            'Login' => array(
-                'label' => 'Login',
-                'route' => 'user',
-                'params' => array('action' => 'login'),
+            'Login'  => array(
+                'label'  => 'Login',
+                'route'  => 'user',
+                'params' => array('action'   => 'login'),
             ),
             'Register' => array(
-                'label' => 'Register',
-                'route' => 'user',
-                'params' => array('action' => 'register'),
+                'label'  => 'Register',
+                'route'  => 'user',
+                'params' => array('action'    => 'register'),
             ),
         ),
         'user-menu' => array(
             'Welcome' => array(
-                'label' => 'Welcome',
-                'route' => 'page',
-                'params' => array('action' => 'wellcome'),
+                'label'  => 'Welcome',
+                'route'  => 'page',
+                'params' => array('action'       => 'wellcome'),
             ),
             'Step by Step' => array(
-                'label' => 'Step by Step',
-                'route' => 'page',
+                'label'  => 'Step by Step',
+                'route'  => 'page',
                 'params' => array('action' => 'step-by-step'),
-                'pages' => array(
+                'pages'  => array(
                     array(
-                        'label' => 'Step 1',
-                        'route' => 'page',
+                        'label'  => 'Step 1',
+                        'route'  => 'page',
                         'params' => array('action' => ''),
                     ),
                     array(
-                        'label' => 'Step 2',
-                        'route' => 'page',
+                        'label'  => 'Step 2',
+                        'route'  => 'page',
                         'params' => array('action' => 'step2'),
                     ),
                     array(
-                        'label' => 'Step 3',
-                        'route' => 'page',
-                        'params' => array('action' => 'step3'),
+                        'label'  => 'Step 3',
+                        'route'  => 'page',
+                        'params' => array('action'         => 'step3'),
                     )
                 )
             ),
             'Rate of Return' => array(
-                'label' => 'Rate of Return',
-                'route' => 'page',
+                'label'  => 'Rate of Return',
+                'route'  => 'page',
                 'params' => array('action' => 'set-the-rate'),
-                'pages' => array(
+                'pages'  => array(
                     array(
-                        'label' => 'Rate of Return',
-                        'route' => 'page',
+                        'label'  => 'Rate of Return',
+                        'route'  => 'page',
                         'params' => array('action' => 'set-the-rate'),
                     ),
                     array(
-                        'label' => 'Purchase the Rate',
-                        'route' => 'page',
+                        'label'  => 'Purchase the Rate',
+                        'route'  => 'page',
                         'params' => array('action' => 'purchase-the-rate'),
                     ),
                     array(
-                        'label' => 'Balance',
-                        'route' => 'page',
-                        'params' => array('action' => 'balance'),
+                        'label'  => 'Balance',
+                        'route'  => 'page',
+                        'params' => array('action'     => 'balance'),
                     )
                 )
             ),
             'Contact Us' => array(
-                'label' => 'Contact Us',
-                'route' => 'contact',
+                'label'   => 'Contact Us',
+                'route'   => 'contact',
             ),
             'Profile' => array(
-                'label' => 'Profile',
-                'route' => 'user',
+                'label'  => 'Profile',
+                'route'  => 'user',
                 'params' => array('action' => 'profile'),
             ),
             'Logout' => array(
-                'label' => 'Logout',
-                'route' => 'user',
-                'params' => array('action' => 'logout'),
+                'label'  => 'Logout',
+                'route'  => 'user',
+                'params' => array('action'          => 'logout'),
             ),
         ),
     ),
@@ -166,27 +166,27 @@ return array(
         'aliases' => array(
             'translator' => 'MvcTranslator',
         ),
-        'factories' => array(
+        'factories'  => array(
             'Application\Service\GuestNavigationFactory' => 'Application\Service\GuestNavigationFactory',
-            'Application\Service\UserNavigationFactory' => 'Application\Service\UserNavigationFactory',
+            'Application\Service\UserNavigationFactory'  => 'Application\Service\UserNavigationFactory',
             'Application\Service\AdminNavigationFactory' => 'Application\Service\AdminNavigationFactory',
         )
     ),
-    'translator' => array(
-        'locale' => 'en_US',
+    'translator'                                 => array(
+        'locale'                    => 'en_US',
         'translation_file_patterns' => array(
             array(
-                'type' => 'gettext',
+                'type'     => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
-                'pattern' => '%s.mo',
+                'pattern'  => '%s.mo',
             ),
         ),
     ),
     'doctrine' => array(
         'driver' => array(
             'mapping_driver' => array(
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'filesystem',
+                'class'       => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache'       => 'filesystem',
             ),
             'orm_default' => array(
                 'drivers' => array(
@@ -195,31 +195,31 @@ return array(
             )
         )
     ),
-    'controllers' => array(
+    'controllers'              => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'
         ),
     ),
-    'view_manager' => array(
+    'view_manager'                 => array(
         'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'doctype' => 'HTML5',
-        'not_found_template' => 'error/404',
-        'exception_template' => 'error/index',
-        'template_map' => array(
-            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map'             => array(
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'error/404' => __DIR__ . '/../view/error/404.phtml',
-            'error/index' => __DIR__ . '/../view/error/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
-        'template_path_stack' => array(
+        'template_path_stack'     => array(
             __DIR__ . '/../view',
         ),
     ),
     'assetic_configuration' => array(
         'buildOnRequest' => true,
-        'debug' => true,
-        'default' => array(
+        'debug'          => true,
+        'default'        => array(
             'assets' => array(
                 '@base_css',
                 '@base_js',
@@ -227,12 +227,12 @@ return array(
                 '@slider_js',
             ),
             'options' => array(
-                'mixin' => true
+                'mixin'   => true
             ),
         ),
         'modules' => array(
             'application' => array(
-                'root_path' => __DIR__ . '/../public',
+                'root_path'   => __DIR__ . '/../public',
                 'collections' => array(
                     'base_css' => array(
                         'assets' => array(
@@ -240,12 +240,12 @@ return array(
                             'css/style.css',
                             'css/icons.css',
                             'css/bootstrap-responsive.css',
-                             'js/tagsinput/*.css',
+                            'js/tagsinput/*.css',
                             'js/markdown/css/*.css',
                         ),
                         'filters' => array(
                             'CssRewriteFilter' => array(
-                                'name' => 'Assetic\Filter\CssRewriteFilter'
+                                'name'    => 'Assetic\Filter\CssRewriteFilter'
                             )
                         ),
                         'options' => array(),
@@ -275,11 +275,10 @@ return array(
                             'move_raw' => true,
                         )
                     ),
-                    
                 ),
             ),
             'slider' => array(
-                'root_path' => __DIR__ . '/../public',
+                'root_path'   => __DIR__ . '/../public',
                 'collections' => array(
                     'slider_img' => array(
                         'assets' => array(
@@ -287,7 +286,7 @@ return array(
                             'slider/css/fonts/*.*',
                         ),
                         'options' => array(
-                            'move_raw' => true,
+                            'move_raw'  => true,
                         )
                     ),
                     'slider_js' => array(
@@ -301,7 +300,7 @@ return array(
                         ),
                         'filters' => array(
                             'CssRewriteFilter' => array(
-                                'name' => 'Assetic\Filter\CssRewriteFilter'
+                                'name'    => 'Assetic\Filter\CssRewriteFilter'
                             )
                         ),
                         'options' => array(),

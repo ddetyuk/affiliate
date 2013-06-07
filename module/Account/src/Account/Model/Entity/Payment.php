@@ -34,7 +34,7 @@ class Payment extends AbstractEntity
      * @access protected
      */
     protected $balance;
-    
+
     /**
      * @ORM\Column(type="integer")
      * @var integer
@@ -55,7 +55,7 @@ class Payment extends AbstractEntity
      * @access protected
      */
     protected $type;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var string
@@ -80,9 +80,10 @@ class Payment extends AbstractEntity
      * @ORM\OneToMany(targetEntity="Account\Model\Entity\Repayment", mappedBy="outpayment")
      */
     protected $inrepayments;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Account\Model\Entity\Repayment", mappedBy="inpayment")
      */
     protected $outrepayments;
+
 }

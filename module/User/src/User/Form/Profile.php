@@ -22,36 +22,36 @@ class Profile extends Form implements FactoryInterface, InputFilterProviderInter
         $this->setLabel('Profile');
 
         $this->add(array(
-            'name' => 'firstname',
+            'name'    => 'firstname',
             'options' => array(
-                'label' => 'First name:'
+                'label'      => 'First name:'
             ),
             'attributes' => array(
                 'type' => 'text'
             )
         ));
         $this->add(array(
-            'name' => 'lastname',
+            'name'    => 'lastname',
             'options' => array(
-                'label' => 'Last name:'
+                'label'      => 'Last name:'
             ),
             'attributes' => array(
                 'type' => 'text'
             )
         ));
         $this->add(array(
-            'name' => 'password_old',
+            'name'    => 'password_old',
             'options' => array(
-                'label' => 'Password:'
+                'label'      => 'Password:'
             ),
             'attributes' => array(
                 'type' => 'password'
             )
         ));
         $this->add(array(
-            'name' => 'password',
+            'name'    => 'password',
             'options' => array(
-                'label' => 'New Password:'
+                'label'      => 'New Password:'
             ),
             'attributes' => array(
                 'type' => 'password'
@@ -59,9 +59,9 @@ class Profile extends Form implements FactoryInterface, InputFilterProviderInter
         ));
 
         $this->add(array(
-            'name' => 'password_retype',
+            'name'    => 'password_retype',
             'options' => array(
-                'label' => 'Confirm New Password:'
+                'label'      => 'Confirm New Password:'
             ),
             'attributes' => array(
                 'type' => 'password'
@@ -69,9 +69,9 @@ class Profile extends Form implements FactoryInterface, InputFilterProviderInter
         ));
 
         $this->add(array(
-            'name' => 'submit',
+            'name'       => 'submit',
             'attributes' => array(
-                'type' => 'submit',
+                'type'  => 'submit',
                 'value' => 'Save',
             )
         ));
@@ -88,57 +88,57 @@ class Profile extends Form implements FactoryInterface, InputFilterProviderInter
         return array(
             'firstname' => array(
                 'required' => false,
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'StringTrim'),
-                    array('name' => 'StripTags')
+                    array('name'     => 'StripTags')
                 ),
             ),
             'lastname' => array(
                 'required' => false,
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'StringTrim'),
-                    array('name' => 'StripTags')
+                    array('name'         => 'StripTags')
                 ),
             ),
             'password_old' => array(
-                'required' => false,
+                'required'   => false,
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min' => 6,
-                            'max' => 32
+                            'min'      => 6,
+                            'max'      => 32
                         ),
                     ),
                 )
             ),
             'password' => array(
-                'required' => false,
+                'required'   => false,
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min' => 6,
-                            'max' => 32
+                            'encoding'        => 'UTF-8',
+                            'min'             => 6,
+                            'max'             => 32
                         ),
                     ),
                 )
             ),
             'password_retype' => array(
-                'required' => false,
+                'required'   => false,
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min' => 6,
-                            'max' => 32
+                            'min'      => 6,
+                            'max'      => 32
                         ),
                     ),
                     array(
-                        'name' => 'Identical',
+                        'name'    => 'Identical',
                         'options' => array(
                             'token' => 'password'
                         )

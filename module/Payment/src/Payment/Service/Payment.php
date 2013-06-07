@@ -51,7 +51,7 @@ class Payment
 
     public function payment($user, $amount)
     {
-        $now = new \DateTime();
+        $now         = new \DateTime();
         $transaction = new Transaction();
         $transaction->setAmount($amount);
         $transaction->setUser($user);

@@ -8,7 +8,6 @@ use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Form\Form;
 use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 
-
 class Contact extends Form implements FactoryInterface, InputFilterProviderInterface
 {
 
@@ -31,22 +30,22 @@ class Contact extends Form implements FactoryInterface, InputFilterProviderInter
         ));
 
         $this->add(array(
-            'name' => 'subject',
-            'type' => 'text',
+            'name'    => 'subject',
+            'type'    => 'text',
             'options' => array(
                 'label' => 'Subject:'
             ),
         ));
         $this->add(array(
-            'name' => 'message',
-            'type' => 'textarea',
+            'name'    => 'message',
+            'type'    => 'textarea',
             'options' => array(
                 'label' => 'Message:'
             ),
         ));
         $this->add(array(
-            'name' => 'submit',
-            'type' => 'submit',
+            'name'       => 'submit',
+            'type'       => 'submit',
             'attributes' => array(
                 'value' => 'Submit'
             )
@@ -58,14 +57,14 @@ class Contact extends Form implements FactoryInterface, InputFilterProviderInter
         return array(
             'subject' => array(
                 'required' => true,
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'StringTrim'),
-                    array('name' => 'StripTags')
+                    array('name'    => 'StripTags')
                 ),
             ),
             'message' => array(
                 'required' => true,
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'StringTrim'),
                     array('name' => 'StripTags')
                 ),

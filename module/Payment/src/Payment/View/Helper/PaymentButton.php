@@ -12,15 +12,15 @@ class PaymentButton extends AbstractHelper
 
     public function __invoke($gateway = 'payza')
     {
-        $sm = $this->getServiceLocator();
-        $config = $sm->get('Config');
+        $sm       = $this->getServiceLocator();
+        $config   = $sm->get('Config');
         $renderer = $sm->get('ViewRenderer');
 
         switch ($gateway) {
             case 'payza':
-                $baseurl = $renderer->plugin('ServerUrl')->__invoke();
-                $alerturl = $baseurl . $renderer->plugin('Url')->__invoke('payment', array('action' => 'listener'));
-                $cancelurl = $baseurl . $renderer->plugin('Url')->__invoke('payment', array('action' => 'cancel'));
+                $baseurl  = $renderer->plugin('ServerUrl')->__invoke();
+                $alerturl = $baseurl . $renderer->plugin('Url')->__invoke('payment', array('action'   => 'listener'));
+                $cancelurl = $baseurl . $renderer->plugin('Url')->__invoke('payment', array('action'    => 'cancel'));
                 $successurl = $baseurl . $renderer->plugin('Url')->__invoke('payment', array('action' => 'success'));
 
                 $model = new ViewModel();

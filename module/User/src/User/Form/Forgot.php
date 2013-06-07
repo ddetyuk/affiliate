@@ -22,9 +22,9 @@ class Forgot extends Form implements FactoryInterface, InputFilterProviderInterf
         $this->setLabel('Register');
 
         $this->add(array(
-            'name' => 'email',
+            'name'    => 'email',
             'options' => array(
-                'label' => 'Email:'
+                'label'      => 'Email:'
             ),
             'attributes' => array(
                 'type' => 'text'
@@ -32,9 +32,9 @@ class Forgot extends Form implements FactoryInterface, InputFilterProviderInterf
         ));
 
         $this->add(array(
-            'name' => 'password',
+            'name'    => 'password',
             'options' => array(
-                'label' => 'Password:'
+                'label'      => 'Password:'
             ),
             'attributes' => array(
                 'type' => 'password'
@@ -42,27 +42,27 @@ class Forgot extends Form implements FactoryInterface, InputFilterProviderInterf
         ));
 
         $this->add(array(
-            'name' => 'password_retype',
+            'name'    => 'password_retype',
             'options' => array(
-                'label' => 'Confirm Password:'
+                'label'      => 'Confirm Password:'
             ),
             'attributes' => array(
                 'type' => 'password'
             )
         ));
         $this->add(array(
-            'name' => 'referal',
+            'name'    => 'referal',
             'options' => array(
-                'label' => 'Referal Code:'
+                'label'      => 'Referal Code:'
             ),
             'attributes' => array(
                 'type' => 'text'
             )
         ));
         $this->add(array(
-            'name' => 'submit',
+            'name'       => 'submit',
             'attributes' => array(
-                'type' => 'submit',
+                'type'  => 'submit',
                 'value' => 'Register',
             )
         ));
@@ -79,13 +79,13 @@ class Forgot extends Form implements FactoryInterface, InputFilterProviderInterf
         return array(
             'email' => array(
                 'required' => true,
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'StringTrim'),
-                    array('name' => 'StripTags')
+                    array('name'       => 'StripTags')
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'EmailAddress',
+                        'name'       => 'EmailAddress',
                     ),
                 ),
                 'properties' => array(
@@ -93,51 +93,51 @@ class Forgot extends Form implements FactoryInterface, InputFilterProviderInterf
                 )
             ),
             'password' => array(
-                'required' => true,
+                'required'   => true,
                 'properties' => array(
-                    'required' => true
+                    'required'   => true
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min' => 6,
-                            'max' => 32
+                            'encoding'        => 'UTF-8',
+                            'min'             => 6,
+                            'max'             => 32
                         ),
                     ),
                 )
             ),
             'password_retype' => array(
-                'required' => true,
+                'required'   => true,
                 'properties' => array(
-                    'required' => true
+                    'required'   => true
                 ),
                 'validators' => array(
                     array(
-                        'name' => 'StringLength',
+                        'name'    => 'StringLength',
                         'options' => array(
                             'encoding' => 'UTF-8',
-                            'min' => 6,
-                            'max' => 32
+                            'min'      => 6,
+                            'max'      => 32
                         ),
                     ),
                     array(
-                        'name' => 'Identical',
+                        'name'    => 'Identical',
                         'options' => array(
-                            'token' => 'password'
+                            'token'   => 'password'
                         )
                     )
                 )
             ),
             'referal' => array(
-                'required' => true,
+                'required'   => true,
                 'properties' => array(
                     'required' => true
                 ),
-                'filters' => array(
+                'filters'  => array(
                     array('name' => 'StringTrim'),
-                    array('name' => 'StripTags')
+                    array('name'       => 'StripTags')
                 ),
                 'validators' => array(
                     array(

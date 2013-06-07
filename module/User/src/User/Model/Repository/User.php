@@ -3,6 +3,7 @@
 namespace User\Model\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use User\Model\Entity\User as UserEntity;
 
 /**
  * User
@@ -12,4 +13,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class User extends EntityRepository
 {
+
+    public function getReferral(UserEntity $user, $level = 1)
+    {
+        
+    }
+
 }

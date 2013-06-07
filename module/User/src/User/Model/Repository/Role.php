@@ -15,7 +15,7 @@ class Role extends EntityRepository
 
     public function getRolesPermissions()
     {
-
+        
     }
 
 }

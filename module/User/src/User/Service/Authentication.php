@@ -14,8 +14,7 @@ class Authentication
     protected $authenticationService;
     protected $userService;
 
-    public function __construct(AuthenticationService $service = null,
-                                UserService $user = null)
+    public function __construct(AuthenticationService $service = null, UserService $user = null)
     {
         if (null !== $service) {
             $this->setAuthenticationService($service);
@@ -54,8 +53,8 @@ class Authentication
     {
         $username = $user->getEmail();
         $password = $this->encodePassword($password);
-        $service = $this->getAuthenticationService();
-        $adapter = $service->getAdapter();
+        $service  = $this->getAuthenticationService();
+        $adapter  = $service->getAdapter();
         $adapter->setIdentity($username);
         $adapter->setCredential($password);
 
@@ -67,13 +66,13 @@ class Authentication
 
         return new ServiceResult(ServiceResult::FAILURE, null, $result->getMessages());
     }
-    
+
     public function login(UserEntity $user)
     {
         $username = $user->getEmail();
         $password = $this->encodePassword($user->getPassword());
-        $service = $this->getAuthenticationService();
-        $adapter = $service->getAdapter();
+        $service  = $this->getAuthenticationService();
+        $adapter  = $service->getAdapter();
         $adapter->setIdentity($username);
         $adapter->setCredential($password);
 
@@ -92,7 +91,7 @@ class Authentication
         $service->clearIdentity();
         return new ServiceResult(ServiceResult::SUCCESS);
     }
-    
+
     public function hasIdentity()
     {
         return $this->getAuthenticationService()->hasIdentity();
@@ -102,4 +101,5 @@ class Authentication
     {
         return $this->getAuthenticationService()->getIdentity();
     }
+
 }

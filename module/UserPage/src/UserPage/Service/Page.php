@@ -14,8 +14,7 @@ class UserPage
     protected $authenticationService;
     protected $userService;
 
-    public function __construct(AuthenticationService $service = null,
-                                UserService $user = null)
+    public function __construct(AuthenticationService $service = null, UserService $user = null)
     {
         if (null !== $service) {
             $this->setAuthenticationService($service);
@@ -54,8 +53,8 @@ class UserPage
     {
         $username = $user->getEmail();
         $password = $this->encodePassword($user->getPassword());
-        $service = $this->getAuthenticationService();
-        $adapter = $service->getAdapter();
+        $service  = $this->getAuthenticationService();
+        $adapter  = $service->getAdapter();
         $adapter->setIdentity($username);
         $adapter->setCredential($password);
 
@@ -74,7 +73,7 @@ class UserPage
         $service->clearIdentity();
         return new ServiceResult(ServiceResult::SUCCESS);
     }
-    
+
     public function hasIdentity()
     {
         return $this->getAuthenticationService()->hasIdentity();
@@ -84,4 +83,5 @@ class UserPage
     {
         return $this->getAuthenticationService()->getIdentity();
     }
+
 }

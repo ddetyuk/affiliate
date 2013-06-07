@@ -3,22 +3,21 @@
 namespace User\Service;
 
 use Doctrine\ORM\EntityManager;
-
 use Application\Service\Result as ServiceResult;
 use User\Model\Entity\User as UserEntity;
 
 class Role
 {
+
     protected $em;
     protected $entity;
-
 
     public function __construct(EntityManager $em = null)
     {
         if (null !== $em) {
             $this->setEntityManager($em);
         }
-        
+
         $this->entity = 'User\Model\Entity\Role';
     }
 
@@ -59,7 +58,7 @@ class Role
     public function getAll()
     {
         $collection = $this->em->getRepository($this->entity)->findAll();
-        if(!is_null($collection)){
+        if (!is_null($collection)) {
             return new ServiceResult(ServiceResult::SUCCESS, $collection);
         }
         return new ServiceResult(ServiceResult::FAILURE);

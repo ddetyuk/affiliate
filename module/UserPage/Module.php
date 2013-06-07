@@ -9,11 +9,11 @@ use User\Collector\RoleCollector;
 
 class Module
 {
+
     public function getServiceConfig()
     {
         return array(
             'factories' => array(
-
             ),
         );
     }

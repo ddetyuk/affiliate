@@ -7,7 +7,6 @@ use Zend\EventManager\EventManagerInterface;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Doctrine\ORM\EntityManager;
-
 use Application\Service\Result as ServiceResult;
 use User\Model\Entity\User as UserEntity;
 use User\Event;
@@ -15,7 +14,6 @@ use User\Event;
 class User
 {
 
-//    use ProvidesEvents;
     protected $events;
     protected $em;
     protected $entity;
@@ -52,30 +50,30 @@ class User
     {
         return $this->em;
     }
-    
+
     public function getPaginator($params = null)
     {
         try {
-            $query = $this->em->getRepository($this->entity)->createQueryBuilder('p');
+            $query     = $this->em->getRepository($this->entity)->createQueryBuilder('p');
             $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
             return new ServiceResult(ServiceResult::SUCCESS, $paginator);
         } catch (\Exception $e) {
             return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
         }
     }
-    
+
     public function create(UserEntity $user)
     {
         $validator = new \DoctrineModule\Validator\ObjectExists(array(
                     'object_repository' => $this->em->getRepository($this->entity),
-                    'fields' => array('email')
+                    'fields'            => array('email')
                 ));
         if ($validator->isValid($user->getEmail())) {
             return new ServiceResult(ServiceResult::FAILURE, $user, array('Email already exists'));
         }
         $validator = new \DoctrineModule\Validator\ObjectExists(array(
                     'object_repository' => $this->em->getRepository($this->entity),
-                    'fields' => array('id')
+                    'fields'            => array('id')
                 ));
         if (!$validator->isValid($user->getReferal())) {
             return new ServiceResult(ServiceResult::FAILURE, $user, array('Referal code not found'));

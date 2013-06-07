@@ -27,7 +27,7 @@ class Repayment extends AbstractEntity
      * @access protected
      */
     protected $amount;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var string
@@ -47,7 +47,7 @@ class Repayment extends AbstractEntity
      * @ORM\JoinColumn(name="inpaymentId", referencedColumnName="id")
      */
     protected $inpayment;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Account\Model\Entity\Payment", inversedBy="inrepayments")
      * @ORM\JoinColumn(name="outpaymentId", referencedColumnName="id")

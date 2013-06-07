@@ -48,7 +48,7 @@ class User extends AbstractEntity
      * @var integer
      * @access protected
      */
-    protected $referal;
+    protected $referral;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -112,7 +112,7 @@ class User extends AbstractEntity
      * @ORM\OneToMany(targetEntity="UserPage\Model\Entity\Page", mappedBy="user")
      */
     protected $pages;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Account\Model\Entity\Payout", mappedBy="user")
      */
@@ -122,17 +122,17 @@ class User extends AbstractEntity
      * @ORM\OneToMany(targetEntity="Account\Model\Entity\Payment", mappedBy="user")
      */
     protected $payments;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Account\Model\Entity\Commision", mappedBy="user")
      */
     protected $commisions;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Payment\Model\Entity\Transaction", mappedBy="user")
      */
     protected $transactions;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="Contact\Model\Entity\Message", mappedBy="user")
      */

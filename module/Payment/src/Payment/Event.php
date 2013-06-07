@@ -9,7 +9,7 @@ class Event extends ZendEvent
 {
 
     const EVENT_CREATE_PAYMENT = 'createpayment';
-    const EVENT_CREATE_PAYOUT = 'createpayout';
+    const EVENT_CREATE_PAYOUT  = 'createpayout';
 
     protected $transaction;
 

@@ -10,8 +10,8 @@ class Module
         return array(
             'factories' => array(
                 'Contact\Service\Contact' => function($sm) {
-                    $em = $sm->get('Doctrine\ORM\EntityManager');
-                    $service = new \Contact\Service\Contact($em);
+                    $em                    = $sm->get('Doctrine\ORM\EntityManager');
+                    $service               = new \Contact\Service\Contact($em);
                     return $service;
                 },
                 'Contact\Form\Contact' => 'Contact\Form\Contact'

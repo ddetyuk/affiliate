@@ -5,7 +5,6 @@ namespace Contact\Service;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Doctrine\ORM\EntityManager;
-
 use Zend\Paginator\Paginator;
 use Application\Service\Result as ServiceResult;
 use Contact\Model\Entity\Message;
@@ -37,7 +36,7 @@ class Contact
     public function getPaginator($params = null)
     {
         try {
-            $query = $this->em->getRepository($this->entity)->createQueryBuilder('p');
+            $query     = $this->em->getRepository($this->entity)->createQueryBuilder('p');
             $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
             return new ServiceResult(ServiceResult::SUCCESS, $paginator);
         } catch (\Exception $e) {
