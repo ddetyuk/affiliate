@@ -1,0 +1,151 @@
+<?php $this->headTitle('Payments'); ?>
+<div id="page-title">
+    <div id="page-title-inner">
+        <div class="container">
+            <h2 style=" width: 100%; padding: 10px 0px 5px 0px"><?php echo $this->Translate('Payments'); ?></h2>
+        </div>
+    </div>	
+</div>
+
+<div class="container">
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#payments"  data-toggle="tab">Payments</a></li>
+            <li><a href="#repayments"  data-toggle="tab">Repayments</a></li>
+            <li><a href="#commisions"  data-toggle="tab">Commisions</a></li>
+            <li><a href="#payouts"  data-toggle="tab">Payouts</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="payments">
+                <?php if ($this->payments): ?>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><?php echo $this->Translate('User'); ?></th>
+                                <th width="115px"><?php echo $this->Translate('Date'); ?></th>
+                                <th><?php echo $this->Translate('Amount'); ?></th>
+                                <th><?php echo $this->Translate('Percent'); ?></th>
+                                <th><?php echo $this->Translate('Profit'); ?></th>
+                                <th><?php echo $this->Translate('Status'); ?></th>
+                                <th width="125px"><?php echo $this->Translate('Actions'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->payments as $payment): ?>
+                                <tr>
+                                    <td><?php echo $payment->getId(); ?></td>
+                                    <td><?php echo $payment->getUser()->getEmail(); ?></td>
+                                    <td><?php echo $payment->getCreated()->format("Y-m-d H:i:s"); ?></td>
+                                    <td><?php echo $payment->getAmount(); ?></td>
+                                    <td><?php echo $payment->getPercent(); ?></td>
+                                    <td><?php echo $payment->getBalance(); ?></td>
+                                    <td><?php echo $payment->getStatus(); ?></td>
+                                    <td>
+                                        <a class="btn btn-mini" href="#"><i class="icon-edit"></i> <?php echo $this->Translate('Edit'); ?></a>
+                                        <a class="btn btn-mini" href="#"><i class="icon-remove"></i> <?php echo $this->Translate('Remove'); ?></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+                <?php echo $this->PaginationControl($this->payments, 'Sliding', 'application/partial/paginator.phtml', array('params' => array('action' => 'index'))); ?>
+            </div>
+            <div class="tab-pane" id="repayments">
+                <?php if ($this->repayments): ?>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><?php echo $this->Translate('From'); ?></th>
+                                <th><?php echo $this->Translate('For'); ?></th>
+                                <th width="115px"><?php echo $this->Translate('Date'); ?></th>
+                                <th><?php echo $this->Translate('Amount'); ?></th>
+                                <th width="125px"><?php echo $this->Translate('Actions'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->repayments as $repayment): ?>
+                                <tr>
+                                    <td><?php echo $repayment->getId(); ?></td>
+                                    <td><?php echo $repayment->getId(); ?></td>
+                                    <td><?php echo $repayment->getInpayment()->getId(); ?></td>
+                                    <td><?php echo $repayment->getOutpayment()->getId(); ?></td>
+                                    <td><?php echo $repayment->getCreated()->format("Y-m-d H:i:s"); ?></td>
+                                    <td><?php echo $repayment->getAmount(); ?></td>
+                                    <td>
+                                        <a class="btn btn-mini" href="#"><i class="icon-edit"></i> <?php echo $this->Translate('Edit'); ?></a>
+                                        <a class="btn btn-mini" href="#"><i class="icon-remove"></i> <?php echo $this->Translate('Remove'); ?></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+                <?php echo $this->PaginationControl($this->repayments, 'Sliding', 'application/partial/paginator.phtml', array('params' => array('action' => 'index'))); ?>
+            </div>
+            <div class="tab-pane" id="commisions">
+                <?php if ($this->commisions): ?>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><?php echo $this->Translate('User'); ?></th>
+                                <th width="115px"><?php echo $this->Translate('Date'); ?></th>
+                                <th><?php echo $this->Translate('Amount'); ?></th>
+                                <th width="125px"><?php echo $this->Translate('Actions'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->commisions as $commision): ?>
+                                <tr>
+                                    <td><?php echo $commision->getId(); ?></td>
+                                    <td><?php echo $commision->getUser()->getEmail(); ?></td>
+                                    <td><?php echo $commision->getCreated()->format("Y-m-d H:i:s"); ?></td>
+                                    <td><?php echo $commision->getAmount(); ?></td>
+                                    <td>
+                                        <a class="btn btn-mini" href="#"><i class="icon-edit"></i> <?php echo $this->Translate('Edit'); ?></a>
+                                        <a class="btn btn-mini" href="#"><i class="icon-remove"></i> <?php echo $this->Translate('Remove'); ?></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+                <?php echo $this->PaginationControl($this->commisions, 'Sliding', 'application/partial/paginator.phtml', array('params' => array('action' => 'index'))); ?>
+            </div>
+            <div class="tab-pane" id="payouts">
+                <?php if ($this->payouts): ?>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><?php echo $this->Translate('User'); ?></th>
+                                <th width="115px"><?php echo $this->Translate('Date'); ?></th>
+                                <th><?php echo $this->Translate('Amount'); ?></th>
+                                <th width="125px"><?php echo $this->Translate('Actions'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->payouts as $payout): ?>
+                                <tr>
+                                    <td><?php echo $payout->getId(); ?></td>
+                                    <td><?php echo $payout->getUser()->getEmail(); ?></td>
+                                    <td><?php echo $payout->getCreated()->format("Y-m-d H:i:s"); ?></td>
+                                    <td><?php echo $payout->getAmount(); ?></td>
+                                    <td>
+                                        <a class="btn btn-mini" href="#"><i class="icon-edit"></i> <?php echo $this->Translate('Edit'); ?></a>
+                                        <a class="btn btn-mini" href="#"><i class="icon-remove"></i> <?php echo $this->Translate('Remove'); ?></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php endif; ?>
+                <?php echo $this->PaginationControl($this->payouts, 'Sliding', 'application/partial/paginator.phtml', array('params' => array('action' => 'index'))); ?>
+            </div>
+        </div>
+
+    </div>
+</div>

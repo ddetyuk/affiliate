@@ -2,86 +2,82 @@
 
 namespace UserPage\Service;
 
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Result;
-use User\Service\User as UserService;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\ListenerAggregateInterface;
+use Zend\EventManager\EventInterface;
+use Zend\Paginator\Paginator;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+use Doctrine\ORM\EntityManager;
 use Application\Service\Result as ServiceResult;
-use User\Model\Entity\User as UserEntity;
+use User\Event as UserEvent;
+use UserPage\Model\Entity\Page as PageEntity;
 
-class UserPage
+class Page implements ListenerAggregateInterface
 {
 
-    protected $authenticationService;
-    protected $userService;
+    protected $em;
+    protected $entity;
+    protected $listeners = array();
 
-    public function __construct(AuthenticationService $service = null, UserService $user = null)
+    public function __construct(EntityManager $em = null)
     {
-        if (null !== $service) {
-            $this->setAuthenticationService($service);
+        if (null !== $em) {
+            $this->setEntityManager($em);
         }
-        if (null !== $user) {
-            $this->setUserService($user);
+        $this->entity = 'UserPage\Model\Entity\Page';
+    }
+
+    public function setEntityManager(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
+    public function getEntityManager()
+    {
+        return $this->em;
+    }
+
+    public function detach(EventManagerInterface $events)
+    {
+        foreach ($this->listeners as $index => $callback) {
+            if ($events->detach($callback)) {
+                unset($this->listeners[$index]);
+            }
         }
     }
 
-    public function setAuthenticationService(AuthenticationService $service)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $this->authenticationService = $service;
+        $this->listeners[] = $events->attach(UserEvent::EVENT_CREATE_USER, array($this, 'onCreateUser'), $priority);
     }
 
-    public function getAuthenticationService()
+    public function onCreateUser(EventInterface $e)
     {
-        return $this->authenticationService;
-    }
-
-    public function setUserService(UserService $service)
-    {
-        $this->userService = $service;
-    }
-
-    public function getUserService()
-    {
-        return $this->userService;
-    }
-
-    public function encodePassword($password)
-    {
-        return $password;
-    }
-
-    public function login(UserEntity $user)
-    {
-        $username = $user->getEmail();
-        $password = $this->encodePassword($user->getPassword());
-        $service  = $this->getAuthenticationService();
-        $adapter  = $service->getAdapter();
-        $adapter->setIdentity($username);
-        $adapter->setCredential($password);
-
-        $result = $service->authenticate();
-
-        if ($result->getCode() == Result::SUCCESS) {
-            return new ServiceResult(ServiceResult::SUCCESS);
+        $user = $e->getUser();
+        try {
+            $page = new PageEntity();
+            $page->setUser($user);
+            $page->setType('page');
+            $this->em->persist($page);
+            
+            
+            $this->em->flush();
+            
+        } catch (\Exception $e) {
+            //logging
         }
-
-        return new ServiceResult(ServiceResult::FAILURE, null, $result->getMessages());
     }
 
-    public function logout()
+    public function getPaginator($params = null)
     {
-        $service = $this->getAuthenticationService();
-        $service->clearIdentity();
-        return new ServiceResult(ServiceResult::SUCCESS);
-    }
-
-    public function hasIdentity()
-    {
-        return $this->getAuthenticationService()->hasIdentity();
-    }
-
-    public function getIdentity()
-    {
-        return $this->getAuthenticationService()->getIdentity();
+        try {
+            $query     = $this->em->getRepository($this->entity)->createQueryBuilder('p');
+            $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
+            return new ServiceResult(ServiceResult::SUCCESS, $paginator);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
+        }
     }
 
 }

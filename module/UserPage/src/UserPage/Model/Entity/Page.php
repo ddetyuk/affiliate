@@ -3,12 +3,10 @@
 namespace UserPage\Model\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
 use Application\Entity\AbstractEntity;
-use User\Model\Entity\User;
 
 /**
- * @ORM\Entity(repositoryClass="UserPage\Model\Repository\Page")
+ * @ORM\Entity
  * @ORM\Table(name="userpage_pages")
  */
 class Page extends AbstractEntity
@@ -36,13 +34,6 @@ class Page extends AbstractEntity
      * @access protected
      */
     protected $content;
-
-    /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('page', 'email')", options={"default":"page"} ) 
-     * @var string
-     * @access protected
-     */
-    protected $type;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)

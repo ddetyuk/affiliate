@@ -3,7 +3,7 @@
 return array(
     'UserPage\Module'                     => __DIR__ . '/Module.php',
     'UserPage\Controller\IndexController' => __DIR__ . '/src/UserPage/Controller/IndexController.php',
+    'UserPage\Controller\PageController'  => __DIR__ . '/src/UserPage/Controller/PageController.php',
     'UserPage\Model\Entity\Page'          => __DIR__ . '/src/UserPage/Model/Entity/Page.php',
-    'UserPage\Model\Repository\Page'      => __DIR__ . '/src/UserPage/Model/Repository/Page.php',
-    'UserPage\Service\UserPage'           => __DIR__ . '/src/UserPage/Service/Page.php',
+    'UserPage\Service\Page'               => __DIR__ . '/src/UserPage/Service/Page.php',
 );

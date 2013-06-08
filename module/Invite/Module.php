@@ -1,27 +1,17 @@
 <?php
 
-namespace UserPage;
-
-use Zend\Mvc\MvcEvent;
+namespace Invite;
 
 class Module
 {
-
-    public function onBootstrap(MvcEvent $e)
-    {
-        $app    = $e->getApplication();
-        $sm     = $app->getServiceManager();
-        $events = $app->getEventManager();
-        $events->attachAggregate($sm->get('UserPage\Service\Page'));
-    }
 
     public function getServiceConfig()
     {
         return array(
             'factories' => array(
-                'UserPage\Service\Page' => function($sm) {
-                    $em      = $sm->get('Doctrine\ORM\EntityManager');
-                    $service = new \UserPage\Service\Page($em);
+                'Invite\Service\Invite' => function($sm) {
+                    $em              = $sm->get('Doctrine\ORM\EntityManager');
+                    $service         = new \Invite\Service\Invite($em);
                     return $service;
                 },
             ),

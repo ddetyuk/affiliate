@@ -19,6 +19,19 @@ class Module
         $platform->registerDoctrineTypeMapping('enum', 'string');
     }
 
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Application\Service\Mail' => function($sm) {
+                    $transport = new \Zend\Mail\Transport\Sendmail();
+                    $renderer  = $sm->get('ViewRenderer');
+                    return new \Application\Service\Mail(array(), $transport, $renderer);
+                },
+            ),
+        );
+    }
+
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';

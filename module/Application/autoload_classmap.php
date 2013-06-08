@@ -6,6 +6,7 @@ return array(
     'Application\Entity\AbstractEntity'          => __DIR__ . '/src/Application/Entity/AbstractEntity.php',
     'Application\Service\AdminNavigationFactory' => __DIR__ . '/src/Application/Service/AdminNavigationFactory.php',
     'Application\Service\GuestNavigationFactory' => __DIR__ . '/src/Application/Service/GuestNavigationFactory.php',
+    'Application\Service\Mail'                   => __DIR__ . '/src/Application/Service/Mail.php',
     'Application\Service\Result'                 => __DIR__ . '/src/Application/Service/Result.php',
     'Application\Service\UserNavigationFactory'  => __DIR__ . '/src/Application/Service/UserNavigationFactory.php',
 );

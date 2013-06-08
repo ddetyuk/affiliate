@@ -45,9 +45,14 @@ return array(
             ),
         ),
     ),
+    'mailer'        => array(),
     //admin menu
-    'navigation'    => array(
+    'navigation' => array(
         'admin-menu' => array(
+            'Pages' => array(
+                'label' => 'User\'s Pages',
+                'route' => 'admin/user-pages',
+            ),
             'Users' => array(
                 'label'    => 'Users',
                 'route'    => 'admin/user',
@@ -277,7 +282,7 @@ return array(
                     ),
                 ),
             ),
-            'slider' => array(
+            'slider'   => array(
                 'root_path'   => __DIR__ . '/../public',
                 'collections' => array(
                     'slider_img' => array(
