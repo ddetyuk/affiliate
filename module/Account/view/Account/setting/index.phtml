@@ -8,9 +8,22 @@
 </div>
 
 <div class="container">
-    <div id="contact-form">
-        <?php echo $this->ztbFlashMessenger('error'); ?>
-        <?php echo $this->ztbFlashMessenger('success'); ?>
-        <?php echo $this->ztbForm($this->form); ?>
+    <div class="row">
+        <div class="span3">
+            <?php echo $this->ztbFlashMessenger('error'); ?>
+            <?php echo $this->ztbFlashMessenger('success'); ?>
+            <?php echo $this->ztbForm($this->form); ?>
+        </div>
+        <div class="span2">
+            <h3>Info</h3>
+            <ul>
+                <li>
+                    <h4>System balance: <b><?php echo $this->sbalance; ?>$</b></h4>
+                </li>
+                <li>
+                    <h4>Users balance: <b><?php echo $this->ubalance; ?>$</b></h4>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

@@ -4,7 +4,13 @@ namespace Account\Service;
 
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
+use Zend\EventManager\EventInterface;
+
+use Zend\Paginator\Paginator;
 use Doctrine\ORM\EntityManager;
+use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
+use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
+use Application\Service\Result as ServiceResult;
 use User\Event as UserEvent;
 use Payment\Event as PaymentEvent;
 use Account\Model\Entity\Payout;
@@ -75,20 +81,12 @@ class Account implements ListenerAggregateInterface
         $this->listeners[] = $events->attach(PaymentEvent::EVENT_CREATE_PAYOUT, array($this, 'onCreatePayout'), $priority);
     }
 
-    public function getUserPercent($user)
+    public function onCreateUser(EventInterface $e)
     {
-        $user->getRate();
-        return .1;
-    }
-
-    public function onCreateUser($user)
-    {
+        $user = $e->getUser();
         try {
-            //set user balance
-            $user->setBalance(0);
-            $user->setRate(0);
             //update referral rate value
-            $referral = $user->getReferral();
+            $referral = $this->em->getRepository($this->entity)->findOneById($user->getReferral());
             $referral->setRate($referral->getRate() + 1);
 
             $this->em->merge($user);
@@ -99,9 +97,9 @@ class Account implements ListenerAggregateInterface
         }
     }
 
-    public function onCreatePayment($e)
+    public function onCreatePayment(EventInterface $e)
     {
-        $transaction = $e->setTransaction();
+        $transaction = $e->getTransaction();
         $user        = $transaction->getUser();
         $amount      = $transaction->getAmount();
 
@@ -113,6 +111,7 @@ class Account implements ListenerAggregateInterface
             $payment->setBalance(0);
             $payment->setPercent($this->getUserPercent($user));
             $payment->setStatus('active');
+            $payment->setUser($user);
             $payment->setCreated($now);
             $payment->setUpdated($now);
 
@@ -131,6 +130,7 @@ class Account implements ListenerAggregateInterface
 
         //get user referral to referral commision level 1
         $referral1 = $this->em->getRepository($this->entity)->getReferral($user, 1);
+
         if ($referral1) {
             $percent1 = $amount * $this->getConfigValue(self::LEVEL1_PERSENT, 0.10);
             if ($this->createCommisionPayment($referral1, $payment, $percent1)) {
@@ -164,7 +164,7 @@ class Account implements ListenerAggregateInterface
                             $percent4 = $profit - $rpayment->getBalance();
                         }
                         //create repayment
-                        if ($this->createRepaymentPayment($user, $payment, $rpayment, $percent4)) {
+                        if ($this->createRepaymentPayment($referral4, $payment, $rpayment, $percent4)) {
                             $usersBalance += $percent4;
                         }
                         break;
@@ -178,8 +178,11 @@ class Account implements ListenerAggregateInterface
         $this->setConfigValue(self::USERS_BALANCE, $usersBalance);
     }
 
-    public function onCreatePayout($user, $amount)
+    public function onCreatePayout(EventInterface $e)
     {
+        $transaction = $e->getTransaction();
+        $user        = $transaction->getUser();
+        $amount      = $transaction->getAmount();
         if ($user->getBalance() >= $amount) {
             try {
                 $now    = new \DateTime();
@@ -192,6 +195,7 @@ class Account implements ListenerAggregateInterface
 
                 //decrease user balance
                 $user->setBalance($user->getBalance() - $amount);
+                $this->em->persist($payout);
                 $this->em->merge($user);
                 $this->em->flush();
 
@@ -200,6 +204,7 @@ class Account implements ListenerAggregateInterface
                 $this->setConfigValue(self::USERS_BALANCE, $usersBalance);
             } catch (\Exception $e) {
                 //logging
+                echo $e->getMessage();
                 return false;
             }
         }
@@ -236,8 +241,8 @@ class Account implements ListenerAggregateInterface
             $repayment->setAmount($amount);
             $repayment->setCreated($now);
             $repayment->setUpdated($now);
-            $repayment->setInPayment($inPayment);
-            $repayment->setOutPayment($outPayment);
+            $repayment->setInpayment($inPayment);
+            $repayment->setOutpayment($outPayment);
             $this->em->persist($repayment);
 
             //incease payment balance
@@ -271,6 +276,55 @@ class Account implements ListenerAggregateInterface
             return true;
         }
         return false;
+    }
+
+    public function getPaymentsPaginator()
+    {
+        try {
+            $query     = $this->em->getRepository('Account\Model\Entity\Payment')->createQueryBuilder('p');
+            $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
+            return new ServiceResult(ServiceResult::SUCCESS, $paginator);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
+        }
+    }
+
+    public function getRepaymentsPaginator()
+    {
+        try {
+            $query     = $this->em->getRepository('Account\Model\Entity\Repayment')->createQueryBuilder('p');
+            $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
+            return new ServiceResult(ServiceResult::SUCCESS, $paginator);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
+        }
+    }
+    
+    public function getCommisionsPaginator()
+    {
+        try {
+            $query     = $this->em->getRepository('Account\Model\Entity\Commision')->createQueryBuilder('p');
+            $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
+            return new ServiceResult(ServiceResult::SUCCESS, $paginator);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
+        }
+    }
+    
+    public function getPayoutsPaginator()
+    {
+        try {
+            $query     = $this->em->getRepository('Account\Model\Entity\Payout')->createQueryBuilder('p');
+            $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
+            return new ServiceResult(ServiceResult::SUCCESS, $paginator);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
+        }
+    }
+    
+    public function getUserPercent($user)
+    {
+        return ($user->getRate() / 5) + 2;
     }
 
 }

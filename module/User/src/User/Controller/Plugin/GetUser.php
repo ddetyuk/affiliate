@@ -14,9 +14,7 @@ class GetUser extends AbstractPlugin
         $service        = $this->getController()->getServiceLocator()->get('User\Service\User');
         $result         = $service->getUserById($identity->getId());
         if ($result->isSuccess()) {
-            $user = $result->getEntity();
-            $user->setPassword('');
-            return $user;
+            return $result->getEntity();
         }
     }
 

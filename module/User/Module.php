@@ -36,7 +36,8 @@ class Module
                 },
                 'User\Service\User' => function($sm) {
                     $em                 = $sm->get('Doctrine\ORM\EntityManager');
-                    $events             = $sm->get('EventManager');
+                    $app                = $sm->get('Application');
+                    $events             = $app->getEventManager();
                     $service            = new \User\Service\User($em, $events);
                     return $service;
                 },

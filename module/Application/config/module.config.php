@@ -59,7 +59,7 @@ return array(
             ),
             'Payments' => array(
                 'label'    => 'Payments',
-                'route'    => 'admin/user',
+                'route'    => 'admin/payments',
             ),
             'Settings' => array(
                 'label'      => 'Settings',

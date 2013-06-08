@@ -4,7 +4,7 @@
 $email   = $this->form->get('email')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Email'));
 $password     = $this->form->get('password')->setAttributes(array('class'          => 'span12', 'placeholder'    => 'Password'));
 $password_retype = $this->form->get('password_retype')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Confirm Password'));
-$referal      = $this->form->get('referal')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Referal Code'));
+$referral      = $this->form->get('referral')->setAttributes(array('class'       => 'span12', 'placeholder' => 'Referal Code'));
 ?>
 <div id="page-title">
     <div id="page-title-inner">
@@ -34,9 +34,9 @@ $referal      = $this->form->get('referal')->setAttributes(array('class'       =
                                 <?php echo $this->formInput($password_retype); ?>
                                 <?php echo $this->formElementErrors($password_retype); ?>
                             </div>
-                            <div class="control-group<?php echo $referal->getMessages() ? ' error' : ''; ?>">
-                                <?php echo $this->formInput($referal); ?>
-                                <?php echo $this->formElementErrors($referal); ?>
+                            <div class="control-group<?php echo $referral->getMessages() ? ' error' : ''; ?>">
+                                <?php echo $this->formInput($referral); ?>
+                                <?php echo $this->formElementErrors($referral); ?>
                             </div>
                         </div>
                         <div class="actions">

@@ -16,7 +16,16 @@ class User extends EntityRepository
 
     public function getReferral(UserEntity $user, $level = 1)
     {
-        
+        $alias = 'u0';
+        $qb    = $this->getEntityManager()->createQueryBuilder();
+        $qb->from($this->getEntityName(), $alias);
+        $qb->where($qb->expr()->eq('u0.id', $user->getReferral()));
+        for ($i = 1; $i < $level; $i++) {
+            $alias = 'u' . $i;
+            $qb->from($this->getEntityName(), $alias);
+            $qb->andWhere($qb->expr()->eq('u' . ($i - 1) . '.referral', $alias . '.id'));
+        }
+        $qb->select($alias);
+        return $qb->getQuery()->getOneOrNullResult();
     }
-
 }

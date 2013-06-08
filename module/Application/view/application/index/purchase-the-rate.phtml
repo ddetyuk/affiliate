@@ -31,7 +31,7 @@
                                 <div class="controls">
                                     <div class="input-prepend">
                                         <span class="add-on"><i class="icon-user"></i></span>
-                                        <input class="span2" id="rate" value ="0" type="text" disabled="disabled">
+                                        <input class="span2" id="rate" value ="<?php echo $this->getUser()->getRate(); ?>" type="text" disabled="disabled">
                                     </div>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                                 <div class="controls">
                                     <div class="input-prepend">
                                         <span class="add-on">$</span>
-                                        <input class="span2" name="ratefee" value ="0" type="text" data-toggle="popover" data-trigger="hover" data-placement="left" data-original-title="Rate Fee" data-content="Rate Fee">
+                                        <input class="span2" id="fee" value ="0" type="text" data-toggle="popover" data-trigger="hover" data-placement="left" data-original-title="Rate Fee" data-content="Rate Fee">
                                     </div>
                                 </div>
                             </div>

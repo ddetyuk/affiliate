@@ -11,7 +11,7 @@ use Payment\Event;
 class Payment
 {
 
-    use ProvidesEvents;
+    //use ProvidesEvents;
 
     protected $em;
     protected $entity;
@@ -60,6 +60,7 @@ class Payment
         $transaction->setCreated($now);
         $transaction->setUpdated($now);
         $transaction->setStatus('success');
+        $transaction->setLogging('success');
 
         $this->em->persist($transaction);
         $this->em->flush();
@@ -71,6 +72,7 @@ class Payment
 
     public function payout($user, $amount)
     {
+        $now         = new \DateTime();
         $transaction = new Transaction();
         $transaction->setAmount($amount);
         $transaction->setUser($user);
@@ -79,6 +81,7 @@ class Payment
         $transaction->setCreated($now);
         $transaction->setUpdated($now);
         $transaction->setStatus('success');
+        $transaction->setLogging('success');
 
         $this->em->persist($transaction);
         $this->em->flush();

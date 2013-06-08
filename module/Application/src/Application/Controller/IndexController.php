@@ -38,7 +38,7 @@ class IndexController extends AbstractActionController
 
     public function balanceAction()
     {
-        return new ViewModel();
+
     }
 
     public function howItWorksAction()

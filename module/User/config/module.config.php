@@ -72,6 +72,7 @@ return array(
         'invokables' => array(
             'IsGranted'    => 'User\View\Helper\IsGranted',
             'HasIdentity'  => 'User\View\Helper\HasIdentity',
+            'GetUser'      => 'User\View\Helper\GetUser',
         ),
     ),
     'view_manager' => array(

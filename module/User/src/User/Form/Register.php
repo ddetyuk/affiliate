@@ -130,7 +130,7 @@ class Register extends Form implements FactoryInterface, InputFilterProviderInte
                     )
                 )
             ),
-            'referal' => array(
+            'referral' => array(
                 'required'   => true,
                 'properties' => array(
                     'required' => true

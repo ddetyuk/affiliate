@@ -10,9 +10,9 @@ class Module
     public function onBootstrap(MvcEvent $e)
     {
         $app = $e->getApplication();
-        $em  = $app->getEventManager();
         $sm  = $app->getServiceManager();
-        $em->attachAggregate($sm->get('Account\Service\Account'));
+        $events = $app->getEventManager();
+        $events->attachAggregate($sm->get('Account\Service\Account'));
     }
 
     public function getServiceConfig()

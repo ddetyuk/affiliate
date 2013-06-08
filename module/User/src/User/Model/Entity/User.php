@@ -37,28 +37,28 @@ class User extends AbstractEntity
     protected $password;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=false)
      * @var string
      * @access protected
      */
     protected $reset;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      * @var integer
      * @access protected
      */
     protected $referral;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      * @var integer
      * @access protected
      */
     protected $balance;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=false)
      * @var integer
      * @access protected
      */
@@ -79,7 +79,7 @@ class User extends AbstractEntity
     protected $lastname;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('active', 'inactive')", options={"default":"active"} ) 
+     * @ORM\Column(type="string", columnDefinition="ENUM('active', 'inactive')", options={"default":"active"}, nullable=false ) 
      * @var string
      * @access protected
      */

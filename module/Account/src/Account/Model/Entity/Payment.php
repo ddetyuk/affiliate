@@ -50,13 +50,6 @@ class Payment extends AbstractEntity
     protected $status;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('referralcommision', 'rateofreturn')", options={"default":"rateofreturn"} ) 
-     * @var string
-     * @access protected
-     */
-    protected $type;
-
-    /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var string
      * @access protected

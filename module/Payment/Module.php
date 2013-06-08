@@ -11,7 +11,9 @@ class Module
             'factories' => array(
                 'Payment\Service\Payment' => function($sm) {
                     $em      = $sm->get('Doctrine\ORM\EntityManager');
-                    $service = new \Payment\Service\Payment($em);
+                    $app     = $sm->get('Application');
+                    $events  = $app->getEventManager();
+                    $service = new \Payment\Service\Payment($em, $events);
                     return $service;
                 },
             ),

@@ -75,9 +75,17 @@ class User
                     'object_repository' => $this->em->getRepository($this->entity),
                     'fields'            => array('id')
                 ));
-        if (!$validator->isValid($user->getReferal())) {
+        if (!$validator->isValid($user->getReferral())) {
             return new ServiceResult(ServiceResult::FAILURE, $user, array('Referal code not found'));
         }
+        $now = new \DateTime();
+        $user->setCreated($now);
+        $user->setUpdated($now);
+        $user->setStatus('active');
+        $user->setBalance(0);
+        $user->setRate(0);
+        $user->setReset(''); #FIXME:
+
         $this->em->persist($user);
         $this->em->flush();
 

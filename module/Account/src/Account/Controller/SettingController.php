@@ -11,6 +11,7 @@ class SettingController extends AbstractActionController
 
     public function indexAction()
     {
+        $model   = new ViewModel();
         $form    = $this->getServiceLocator()->get('Account\Form\Setting');
         $setting = $this->getServiceLocator()->get('Setting\Service\Setting');
         if ($this->request->isPost()) {
@@ -36,7 +37,16 @@ class SettingController extends AbstractActionController
                 $form->get('level4')->setValue($result->getEntity()->getValue());
             }
         }
-        return new ViewModel(array('form' => $form));
+        $model->setVariable('form', $form);
+        $result = $setting->get(Account::SYSTEM_BALANCE);
+        if ($result->isSuccess()) {
+            $model->setVariable('sbalance', $result->getEntity()->getValue());
+        }
+        $result = $setting->get(Account::USERS_BALANCE);
+        if ($result->isSuccess()) {
+            $model->setVariable('ubalance', $result->getEntity()->getValue());
+        }
+        return $model;
     }
 
 }

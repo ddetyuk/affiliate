@@ -25,6 +25,10 @@ return array(
         'toolbar' => array(
             'enabled' => false,
         )
-    )
+    ),
+    'nette_debug' => array(
+        'enabled'      => false,
+        'mode'         => true,
+    ),
 );
 

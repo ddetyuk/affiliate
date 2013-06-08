@@ -15,6 +15,23 @@ return array(
                     ),
                 ),
             ),
+            'admin'      => array(
+                'child_routes' => array(
+                    'payments' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'       => '/payments/:action',
+                            'constraints' => array(
+                                'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Account\Controller\Payment',
+                                'action'     => 'index',
+                            ),
+                        ),
+                    ),
+                )
+            ),
         ),
     ),
     'doctrine'   => array(
@@ -31,7 +48,8 @@ return array(
     ),
     'controllers'          => array(
         'invokables' => array(
-            'Account\Controller\Setting' => 'Account\Controller\SettingController'
+            'Account\Controller\Setting' => 'Account\Controller\SettingController',
+            'Account\Controller\Payment' => 'Account\Controller\PaymentController',
         ),
     ),
     'view_manager'               => array(
