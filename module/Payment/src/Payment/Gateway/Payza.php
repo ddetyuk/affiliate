@@ -23,30 +23,36 @@ class Payza
 
     public function __construct($options)
     {
-        $this->username        = $options['Username'];
-        $this->password        = $options['Password'];
-        $this->APIServer       = $options['APIServer'];
+        $this->username = $options['Username'];
+        $this->password = $options['Password'];
+        $this->APIServer = $options['APIServer'];
         $this->IPNSecurityCode = $options['IPNSecurityCode'];
-        $this->IPNV2Handler    = $options['IPNV2Handler'];
+        $this->IPNV2Handler = $options['IPNV2Handler'];
+        $this->IPNServerIP = $options['IPNV2Handler'];
     }
 
     public function sendMoney($amountPaid, $receiverEmail)
     {
-        $data   = $this->buildSendMoneytVariables($amountPaid, 'USD', $receiverEmail, '', 0, '', '0');
+        $data = $this->buildSendMoneytVariables($amountPaid, 'USD', $receiverEmail, '', 0, '', '0');
         $result = $this->send($this->APIServer . 'sendmoney', $data);
         return $result;
     }
 
     public function getBalance()
     {
-        $data   = $this->buildGetBalanceVariables('USD');
+        $data = $this->buildGetBalanceVariables('USD');
         $result = $this->send($this->APIServer . 'GetBalance', $data);
         return $result;
     }
 
+    public function checkRemoteAddr($addr)
+    {
+        return $addr == $this->IPNServerIP;
+    }
+
     public function getIPNV2Handler($token)
     {
-        $data   = "token=" + urlencode($token);
+        $data = "token=" + urlencode($token);
         $result = $this->send($this->IPNV2Handler, $data);
         if (strlen($result) > 0) {
             if (urldecode($result) != "INVALID TOKEN") {

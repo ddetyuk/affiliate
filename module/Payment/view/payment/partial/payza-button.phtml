@@ -1,6 +1,6 @@
 <form action="<?php echo $this->posturl; ?>" method="post"/>
-Price: 
-<input type='text' name='ap_amount' value=' ' />
+<input type="hidden"  name='apc_1' value='<?php echo $this->getUser()->getEmail(); ?>' />
+<input type="hidden"  name='ap_amount' value='' />
 <input type="hidden" name="ap_purchasetype" value="item-goods" />
 <input type="hidden" name="ap_merchant" value="<?php echo $this->username; ?>" />
 <input type="hidden" name="ap_itemname" value="Payment" />

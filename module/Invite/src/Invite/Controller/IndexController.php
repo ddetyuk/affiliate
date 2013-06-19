@@ -3,6 +3,8 @@
 namespace Invite\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 
 class IndexController extends AbstractActionController
 {
@@ -27,31 +29,36 @@ class IndexController extends AbstractActionController
 
     public function editAction()
     {
-        $form    = $this->getServiceLocator()->get('Contact\Form\Contact');
-        $message = new Message();
+        $model   = new JsonModel();
         $service = $this->getServiceLocator()->get('Invite\Service\Invite');
-        $result  = $service->get($this->params()->fromPost('id', 0));
-        if ($result->isSuccess()) {
-            $message = $result->getEntity();
-            $form->bind($message);
-            if ($this->request->isPost()) {
-                $form->setData($this->request->getPost());
-                if ($form->isValid()) {
-                    $result = $service->update($message);
-                    if ($result->isSuccess()) {
-                        $this->flashMessenger()->addSuccessMessage('Message successfully updated');
-                    } else {
-                        foreach ($result->getMessages() as $message) {
-                            $this->flashMessenger()->addErrorMessage($message);
-                        }
-                    }
-                }
-            }
-        } else {
-            foreach ($result->getMessages() as $message) {
-                $this->flashMessenger()->addErrorMessage($message);
+        if ($this->request->isPost()) {
+            $post   = $this->request->getPost();
+            $result = $service->update($post['subject'], $post['content'], $this->getUser());
+            if ($result->isSuccess()) {
+                $model->setVariable('message', array('Letter successfully updated'));
+                $model->setVariable('success', true);
+            } else {
+                $model->setVariable('message', $result->getMessages());
             }
         }
-        return new ViewModel(array('form' => $form));
+        return $model;
     }
+    
+    public function sendAction()
+    {
+        $model   = new JsonModel();
+        $service = $this->getServiceLocator()->get('Invite\Service\Invite');
+        if ($this->request->isPost()) {
+            $post   = $this->request->getPost();
+            $result = $service->send($post['emails'], $this->getUser());
+            if ($result->isSuccess()) {
+                $model->setVariable('message', array('Letters successfully sent'));
+                $model->setVariable('success', true);
+            } else {
+                $model->setVariable('message', $result->getMessages());
+            }
+        }
+        return $model;
+    }
+
 }

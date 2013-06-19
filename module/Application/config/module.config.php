@@ -51,7 +51,7 @@ return array(
         'admin-menu' => array(
             'Pages' => array(
                 'label' => 'User\'s Pages',
-                'route' => 'admin/user-pages',
+                'route' => 'user-pages',
             ),
             'Users' => array(
                 'label'    => 'Users',

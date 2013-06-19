@@ -3,23 +3,41 @@
 namespace Invite\Service;
 
 use Zend\Paginator\Paginator;
+use Zend\View\Model\ViewModel;
 use DoctrineORMModule\Paginator\Adapter\DoctrinePaginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as ORMPaginator;
 use Doctrine\ORM\EntityManager;
 use Application\Service\Result as ServiceResult;
+use Invite\Model\Entity\Letter;
+
 
 class Invite
 {
 
     protected $em;
     protected $entity;
+    protected $mailer;
+    protected $renderer;
 
-    public function __construct(EntityManager $em = null)
+    public function __construct(EntityManager $em = null, $mailer = null)
     {
         if (null !== $em) {
             $this->setEntityManager($em);
         }
+        if (null !== $mailer) {
+            $this->setMailService($mailer);
+        }
         $this->entity = 'Invite\Model\Entity\Letter';
+    }
+
+    public function setMailService($mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
+    public function getMailService()
+    {
+        return $this->mailer;
     }
 
     public function setEntityManager(EntityManager $em)
@@ -30,6 +48,16 @@ class Invite
     public function getEntityManager()
     {
         return $this->em;
+    }
+
+    protected function getRenderer()
+    {
+        return $this->renderer;
+    }
+
+    protected function setRenderer($renderer)
+    {
+        $this->renderer = $renderer;
     }
 
     public function getPaginator($params = null)
@@ -43,41 +71,92 @@ class Invite
         }
     }
 
-    public function update($entity)
+    public function update($subject, $content, $user)
     {
-        $now         = new \DateTime();
-        $transaction = new Transaction();
-        $transaction->setAmount($amount);
-        $transaction->setUser($user);
-        $transaction->setType('payment');
-        $transaction->setGateway('payza');
-        $transaction->setCreated($now);
-        $transaction->setUpdated($now);
-        $transaction->setStatus('success');
-        $transaction->setLogging('success');
+        try {
+            $letter = $this->em->getRepository($this->entity)->findOneByUserId($user->getId());
 
-        $this->em->persist($transaction);
-        $this->em->flush();
+            if (!$letter) {
+                $result = $this->create($user);
+                if ($result->isSuccess()) {
+                    $letter = $result->getEntity();
+                }
+            }
+
+            $now = new \DateTime();
+            $letter->setSubject($subject);
+            $letter->setContent($content);
+            $letter->setUpdated($now);
+            $this->em->merge($letter);
+            $this->em->flush();
+            return new ServiceResult(ServiceResult::SUCCESS, $letter);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
+        }
     }
 
-    public function send($entity, array $emails)
+    public function create($user)
     {
-        $subject = $entity->getSubject();
-        $content = $entity->getContent();
-        $mailer  = $this->locator->get('Application\Service\Mail');
-        $message = $mailer->createHtmlMessage($email, $subject, 'invite/mail/template', array(
-            'content' => $content,
-            'subject' => $subject,
-        ));
-        foreach ($emails as $email) {
-            
+        try {
+            $now    = new \DateTime();
+            $letter = new Letter();
+            $letter->setUser($user);
+            $letter->setInvited(0);
+            $letter->setIsdefault(1);
+            $letter->setCreated($now);
+            $letter->setUpdated($now);
+            $this->em->persist($letter);
+            $this->em->flush();
+            return new ServiceResult(ServiceResult::SUCCESS, $letter);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
         }
-        $result = $mailer->send($message);
-        if ($result->isSuccess()) {
-            
-        } else {
-            
+    }
+
+    public function send(array $emails, $user)
+    {
+        try {
+            $letter = $this->em->getRepository($this->entity)->findOneByUserId($user->getId());
+            if ($letter->getIsdefault()) {
+                $content = $this->getDefaultContent();
+                $subject = $this->getDefaultSubject();
+            } else {
+                $content = $this->getContent();
+                $subject = $this->getSubject();
+            }
+            $mailer  = $this->getMailService();
+            $message = $mailer->createHtmlMessage('invite/mail/template', array(
+                'content' => $content,
+                'subject' => $subject,
+            ));
+            foreach ($emails as $email) {
+                $message->setTo($email);
+                $result = $mailer->send($message);
+                if (!$result->isSuccess()) {
+                    //logging
+                } else {
+                    $letter->setInvited($letter->getInvited() + 1);
+                    $this->em->merge($letter);
+                    $this->em->flush();
+                }
+            }
+            return new ServiceResult(ServiceResult::SUCCESS);
+        } catch (\Exception $e) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
         }
+    }
+
+    public function getDefaultContent()
+    {
+        $model    = new ViewModel();
+        $model->setTemplate('invite/mail/content');
+        $renderer = $this->getRenderer();
+        return $renderer->render($model);
+    }
+
+    public function getDefaultSubject()
+    {
+        return 'Hello';
     }
 
 }

@@ -24,7 +24,7 @@ class Mail
         }
     }
 
-    public function createHtmlMessage($to, $subject, $model, $values = array())
+    public function createHtmlMessage($model, $values = array())
     {
         $renderer = $this->getRenderer();
         $content  = $renderer->render($model, $values);
@@ -40,25 +40,27 @@ class Mail
 
         $message = new Message();
         $message->setEncoding('utf-8');
-        $message->setSubject($subject);
         $message->setBody($body);
-        $message->setTo($to);
+        if (array_key_exists('subject', $values)) {
+            $message->setSubject($values['subject']);
+        }
 
         $message->getHeaders()->get('content-type')->setType('multipart/alternative');
 
         return $message;
     }
 
-    public function createTextMessage($to, $subject, $model, $values = array())
+    public function createTextMessage($model, $values = array())
     {
         $renderer = $this->getRenderer();
         $content  = $renderer->render($model, $values);
 
         $message = new Message();
         $message->setEncoding('utf-8');
-        $message->setSubject($subject);
         $message->setBody($content);
-        $message->setTo($to);
+        if (array_key_exists('subject', $values)) {
+            $message->setSubject($values['subject']);
+        }
 
         return $message;
     }

@@ -13,7 +13,9 @@
             <div class="span2">
                 <ul class="nav nav-tabs nav-stacked">  
                     <li class="active"><a href="<?php echo $this->url('page', array('action' => 'wellcome')); ?>">Wellcome Page</a></li>
-                    <li><a href="<?php echo $this->url('page', array('action' => 'invitation')); ?>">Letter invitation</a></li> 
+                    <?php if ($this->getUser()->getLetter()->getInvited() < 5): ?>
+                        <li><a href="<?php echo $this->url('page', array('action' => 'invitation')); ?>">Letter invitation</a></li> 
+                    <?php endif; ?>
                 </ul>
             </div>
             <div class="span10">

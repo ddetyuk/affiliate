@@ -78,5 +78,10 @@ class Payment extends AbstractEntity
      * @ORM\OneToMany(targetEntity="Account\Model\Entity\Repayment", mappedBy="inpayment")
      */
     protected $outrepayments;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Account\Model\Entity\Commision", mappedBy="payment")
+     */
+    protected $commisions;
 
 }

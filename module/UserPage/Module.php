@@ -12,7 +12,7 @@ class Module
         $app    = $e->getApplication();
         $sm     = $app->getServiceManager();
         $events = $app->getEventManager();
-        $events->attachAggregate($sm->get('UserPage\Service\Page'));
+        $events->attachAggregate($sm->get('UserPage\Listener\CreateUser'));
     }
 
     public function getServiceConfig()
@@ -23,6 +23,10 @@ class Module
                     $em      = $sm->get('Doctrine\ORM\EntityManager');
                     $service = new \UserPage\Service\Page($em);
                     return $service;
+                },
+                'UserPage\Listener\CreateUser' => function($sm) {
+                    $service = $sm->get('UserPage\Service\Page');
+                    return new \UserPage\Listener\CreateUser($service);
                 },
             ),
         );

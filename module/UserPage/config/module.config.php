@@ -8,33 +8,29 @@ return array(
             'wellcome' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'       => '/wellcome[/:id[/:action]]',
+                    'route'       => '/wellcome[/:id]',
                     'constraints' => array(
-                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'   => '[0-9]*',
                     ),
                     'defaults' => array(
                         'id'         => '',
                         'controller' => 'UserPage\Controller\Index',
-                        'action'     => 'index',
+                        'action'     => 'wellcome',
                     ),
                 ),
             ),
-            'admin'      => array(
-                'child_routes' => array(
-                    'user-pages' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'       => '/user-page/:action',
-                            'constraints' => array(
-                                'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'UserPage\Controller\Page',
-                                'action'     => 'index',
-                            ),
-                        ),
+            'user-pages' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'       => '/user-page/:action',
+                    'constraints' => array(
+                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
-                )
+                    'defaults' => array(
+                        'controller' => 'UserPage\Controller\Index',
+                        'action'     => 'index',
+                    ),
+                ),
             ),
         ),
     ),
@@ -52,8 +48,8 @@ return array(
     ),
     'controllers'           => array(
         'invokables' => array(
+            'UserPage\Controller\Page'  => 'UserPage\Controller\PageController',
             'UserPage\Controller\Index' => 'UserPage\Controller\IndexController',
-            'UserPage\Controller\Page'  => 'UserPage\Controller\PageController'
         ),
     ),
     'view_manager'              => array(

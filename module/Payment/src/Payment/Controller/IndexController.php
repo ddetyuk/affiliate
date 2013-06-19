@@ -19,10 +19,7 @@ class IndexController extends AbstractActionController
 
     public function indexAction()
     {
-        $sm      = $this->getServiceLocator();
-        $service = $sm->get('PayzaPayment\Service\PayzaService');
-        echo $service->getBalance();
-//        echo  $service->sendMoney('5','client_1_ddetyuk@gmail.com');
+        
     }
 
     public function cancelAction()
@@ -35,18 +32,45 @@ class IndexController extends AbstractActionController
         
     }
 
+    public function withdrawAction()
+    {
+        if ($this->request->isPost()) {
+            $sm = $this->getServiceLocator();
+            //FIXME:
+            $email = $this->params()->fromPost('email');
+            $amount = $this->params()->fromPost('amount');
+
+            $service = $sm->get('Payment\Gateway\Payza');
+            $result = $service->sendMoney($amount, $email);
+            if ($result) {
+                $paymentService = $sm->get('Payment\Service\Payment');
+                $paymentService->payout($this->getUser(), $amount);
+                return array();
+            }
+        }
+    }
+
     public function listenerAction()
     {
         //check is it post
         if ($this->request->isPost()) {
-            $sm     = $this->getServiceLocator();
-            //checking IPNServerIP
-            $config = $sm->get('Config');
-            if ($_SERVER['REMOTE_ADDR'] == $config['payza']['IPNServerIP']) {
-                $service = $sm->get('PayzaPayment\Service\PayzaService');
-                $result  = $service->getIPNV2Handler($this->fromPost('token'));
+            $sm = $this->getServiceLocator();
+
+            $addr = $this->getRequest()->getServer()->get('REMOTE_ADDR');
+            $service = $sm->get('Payment\Gateway\Payza');
+
+            if ($service->checkRemoteAddr($addr)) {
+                $result = $service->getIPNV2Handler($this->params()->fromPost('token'));
                 if ($result) {
-                    //send event
+
+                    $email = '';
+                    $amount = '';
+
+                    $userService = $sm->get('Payment\Service\Payment');
+                    $user = $userService->getUserByEmail($email);
+
+                    $paymentService = $sm->get('Payment\Service\Payment');
+                    $paymentService->payment($user, $amount);
                     return array();
                 }
             }

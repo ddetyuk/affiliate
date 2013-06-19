@@ -16,6 +16,7 @@ return array(
         'UserPage',
         'Account',
         'Payment',
+        'Invite',
         'CKEditor'
     ),
 

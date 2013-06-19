@@ -22,14 +22,14 @@ class Page extends AbstractEntity
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      * @access protected
      */
     protected $title;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      * @access protected
      */
@@ -50,7 +50,7 @@ class Page extends AbstractEntity
     protected $updated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User\Model\Entity\User", inversedBy="pages")
+     * @ORM\OneToOne(targetEntity="User\Model\Entity\User", inversedBy="page")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     protected $user;

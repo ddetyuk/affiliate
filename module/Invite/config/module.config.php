@@ -5,22 +5,18 @@ namespace Invite;
 return array(
     'router' => array(
         'routes' => array(
-            'admin' => array(
-                'child_routes' => array(
-                    'invite' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'       => '/invite/:action',
-                            'constraints' => array(
-                                'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                'controller' => 'Invite\Controller\Index',
-                                'action'     => 'index',
-                            ),
-                        ),
+            'invite' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'       => '/invite/:action',
+                    'constraints' => array(
+                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
-                )
+                    'defaults' => array(
+                        'controller' => 'Invite\Controller\Index',
+                        'action'     => 'index',
+                    ),
+                ),
             ),
         ),
     ),

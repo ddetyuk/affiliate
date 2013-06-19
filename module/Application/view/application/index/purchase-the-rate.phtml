@@ -20,49 +20,52 @@
                 <div class="popover right" style="position: relative; display: block; max-width:100%">
                     <div class="arrow" style=" position: relative; top:52px"></div>
                     <div class="popover-content">
-                        <div class="title"><h3>Purchase the Rate:</h3></div>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                        </p>
-
-                        <form class="form-horizontal">
-                            <div class="control-group">
-                                <label class="control-label" for="rate">Current Rate of Return</label>
-                                <div class="controls">
-                                    <div class="input-prepend">
-                                        <span class="add-on"><i class="icon-user"></i></span>
-                                        <input class="span2" id="rate" value ="<?php echo $this->getUser()->getRate(); ?>" type="text" disabled="disabled">
+                        <ul>
+                            <li id="wizzard_step1">
+                                <div class="title"><h3>Purchase the Rate:</h3></div>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                                </p>
+                                <form class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label" for="rate">Current Rate of Return</label>
+                                        <div class="controls">
+                                            <div class="input-prepend">
+                                                <span class="add-on"><i class="icon-user"></i></span>
+                                                <input class="span2" id="rate" value ="<?php echo $this->getUser()->getRate(); ?>" type="text" disabled="disabled">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="ratefee">Rate Fee</label>
-                                <div class="controls">
-                                    <div class="input-prepend">
-                                        <span class="add-on">$</span>
-                                        <input class="span2" id="fee" value ="0" type="text" data-toggle="popover" data-trigger="hover" data-placement="left" data-original-title="Rate Fee" data-content="Rate Fee">
+                                    <div class="control-group">
+                                        <label class="control-label" for="ratefee">Rate Fee</label>
+                                        <div class="controls">
+                                            <div class="input-prepend">
+                                                <span class="add-on">$</span>
+                                                <input class="span2" id="fee" value ="0" type="text" data-toggle="popover" data-trigger="hover" data-placement="left" data-original-title="Rate Fee" data-content="Rate Fee">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="profit">Potential Return</label>
-                                <div class="controls">
-                                    <div class="input-prepend">
-                                        <span class="add-on">$</span>
-                                        <input class="span2" id="profit" value ="0" type="text" disabled="disabled">
+                                    <div class="control-group">
+                                        <label class="control-label" for="profit">Potential Return</label>
+                                        <div class="controls">
+                                            <div class="input-prepend">
+                                                <span class="add-on">$</span>
+                                                <input class="span2" id="profit" value ="0" type="text" disabled="disabled">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </form>
-
-                        <ul class="pager">
-                            <li class="next">
-                                <a href="#">Purchase &rarr;</a>
+                                </form>
+                                <ul class="pager">
+                                    <li class="next">
+                                        <a href="#" id="purchase_btn" >Purchase &rarr;</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="wizzard_step2" style="display:none;">
+                            <?php echo $this->render('payment/index/index.phtml'); ?>
                             </li>
                         </ul>
                     </div>
-
-
                 </div>
             </div>	
         </div>

@@ -1,4 +1,10 @@
 <?php $this->headTitle('Set The Rate'); ?>
+<?php
+$user    = $this->getUser();
+$invited = $user->getLetter()->getInvited();
+$joined  = $user->getRate();
+?>
+
 <div id="page-title">
     <div id="page-title-inner">
         <div class="container">
@@ -27,8 +33,8 @@
                         </p>
                         <div class="controls">
                             <div class="progress">
-                                <div class="bar bar-success" style="width: 35%;"  data-trigger="hover" data-placement="top" data-original-title="Joined" data-content="Joined" >Joined (5)</div>
-                                <div class="bar bar-warning" style="width: 20%;"  data-trigger="hover" data-placement="top" data-original-title="Invited" data-content="Invited" >Invited(15)</div>
+                                <div class="bar bar-success" style="width: 35%;"  data-trigger="hover" data-placement="top" data-original-title="Joined" data-content="Joined" >Joined (<?php echo $joined; ?>)</div>
+                                <div class="bar bar-warning" style="width: 20%;"  data-trigger="hover" data-placement="top" data-original-title="Invited" data-content="Invited" >Invited(<?php echo $invited; ?>)</div>
                             </div> 
                         </div>
 
@@ -112,9 +118,11 @@
                             <div class="btn-group">
                                 <a class="btn btn-small" href="<?php echo $this->url('page', array('action' => 'wellcome', 'id'     => 1)); ?>" data-trigger="hover" data-placement="left" data-original-title="Personal Link" data-content="Personal Link" >Personal Link</a>
                             </div>
+                            <?php if($this->getUser()->getLetter()->getInvited()<5):?>
                             <div class="btn-group">
                                 <a class="btn btn-small" href="<?php echo $this->url('page', array('action' => 'invitation')); ?>" data-trigger="hover" data-placement="left" data-original-title="Send an Email Invitation" data-content="Send an Email Invitation" >Send an Email Invitation</a>
                             </div>
+                            <?php endif;?>
                         </div>
                         <ul class="pager">
                             <li class="next">

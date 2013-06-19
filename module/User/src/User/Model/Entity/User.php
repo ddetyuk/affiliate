@@ -109,11 +109,6 @@ class User extends AbstractEntity
     protected $roles;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserPage\Model\Entity\Page", mappedBy="user")
-     */
-    protected $pages;
-
-    /**
      * @ORM\OneToMany(targetEntity="Account\Model\Entity\Payout", mappedBy="user")
      */
     protected $payouts;
@@ -137,7 +132,16 @@ class User extends AbstractEntity
      * @ORM\OneToMany(targetEntity="Contact\Model\Entity\Message", mappedBy="user")
      */
     protected $messages;
-
+    
+    /**
+     * @ORM\OneToOne(targetEntity="UserPage\Model\Entity\Page", mappedBy="user",cascade={"persist"})
+     */
+    protected $page;
+   /**
+    * @ORM\OneToOne(targetEntity="Invite\Model\Entity\Letter", mappedBy="user",cascade={"persist"})
+   */
+   protected $letter;
+   
     public function __construct()
     {
         $this->roles = new ArrayCollection();

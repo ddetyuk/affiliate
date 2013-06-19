@@ -22,14 +22,28 @@ class Letter extends AbstractEntity
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
+     * @var integer
+     * @access protected
+     */
+    protected $invited;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @var integer
+     * @access protected
+     */
+    protected $isdefault;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      * @access protected
      */
     protected $subject;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      * @access protected
      */
@@ -50,7 +64,7 @@ class Letter extends AbstractEntity
     protected $updated;
 
     /**
-     * @ORM\OneyToOne(targetEntity="User\Model\Entity\User", inversedBy="letter")
+     * @ORM\OneToOne(targetEntity="User\Model\Entity\User", inversedBy="letter")
      * @ORM\JoinColumn(name="userId", referencedColumnName="id")
      */
     protected $user;

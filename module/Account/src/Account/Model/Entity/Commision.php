@@ -43,8 +43,8 @@ class Commision extends AbstractEntity
     protected $updated;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Account\Model\Entity\Payment", inversedBy="outrepayments")
-     * @ORM\JoinColumn(name="inpaymentId", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Account\Model\Entity\Payment", inversedBy="commisions")
+     * @ORM\JoinColumn(name="paymentId", referencedColumnName="id")
      */
     protected $payment;
 

@@ -24,9 +24,9 @@ class PaymentButton extends AbstractHelper
                 $successurl = $baseurl . $renderer->plugin('Url')->__invoke('payment', array('action' => 'success'));
 
                 $model = new ViewModel();
-                $model->setTemplate('payment/partial/button.phtml');
-                $model->setVariable('username', $config['payza']['Username']);
-                $model->setVariable('posturl', $config['payza']['URLPost']);
+                $model->setTemplate('payment/partial/payza-button.phtml');
+                $model->setVariable('username', $config['gateway']['payza']['options']['Username']);
+                $model->setVariable('posturl', $config['gateway']['payza']['options']['URLPost']);
                 $model->setVariable('alerturl', $alerturl);
                 $model->setVariable('cancelurl', $cancelurl);
                 $model->setVariable('successurl', $successurl);

@@ -28,7 +28,9 @@ class IndexController extends AbstractActionController
 
     public function setTheRateAction()
     {
-        return new ViewModel();
+        $invited = 0;
+        $joined = 0;
+        return new ViewModel(array('invited' => $invited, 'joined'  => $joined));
     }
 
     public function purchaseTheRateAction()
@@ -38,7 +40,7 @@ class IndexController extends AbstractActionController
 
     public function balanceAction()
     {
-
+        
     }
 
     public function howItWorksAction()
@@ -58,6 +60,9 @@ class IndexController extends AbstractActionController
 
     public function invitationAction()
     {
+        if($this->getUser()->getLetter()->getInvited() > 5){
+            return $this->notFoundAction();
+        }
         return new ViewModel();
     }
 
