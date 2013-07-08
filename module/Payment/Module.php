@@ -9,6 +9,11 @@ class Module
     {
         return array(
             'factories' => array(
+                'Payment\Gateway\Payza' => function($sm) {
+                    $config     = $sm->get('Config');
+                    $options = $config['gateway']['payza']['options'];
+                    return new \Payment\Gateway\Payza($options);
+                },
                 'Payment\Service\Payment' => function($sm) {
                     $em      = $sm->get('Doctrine\ORM\EntityManager');
                     $app     = $sm->get('Application');

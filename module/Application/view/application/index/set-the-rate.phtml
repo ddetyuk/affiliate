@@ -1,7 +1,11 @@
 <?php $this->headTitle('Set The Rate'); ?>
 <?php
 $user    = $this->getUser();
-$invited = $user->getLetter()->getInvited();
+if($user->getLetter()){
+    $invited = $user->getLetter()->getInvited();
+}else{
+    $invited = 0;
+}
 $joined  = $user->getRate();
 ?>
 
@@ -118,7 +122,7 @@ $joined  = $user->getRate();
                             <div class="btn-group">
                                 <a class="btn btn-small" href="<?php echo $this->url('page', array('action' => 'wellcome', 'id'     => 1)); ?>" data-trigger="hover" data-placement="left" data-original-title="Personal Link" data-content="Personal Link" >Personal Link</a>
                             </div>
-                            <?php if($this->getUser()->getLetter()->getInvited()<5):?>
+                            <?php if($invited<5):?>
                             <div class="btn-group">
                                 <a class="btn btn-small" href="<?php echo $this->url('page', array('action' => 'invitation')); ?>" data-trigger="hover" data-placement="left" data-original-title="Send an Email Invitation" data-content="Send an Email Invitation" >Send an Email Invitation</a>
                             </div>

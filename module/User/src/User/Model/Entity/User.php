@@ -79,7 +79,7 @@ class User extends AbstractEntity
     protected $lastname;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('active', 'inactive')", options={"default":"active"}, nullable=false ) 
+     * @ORM\Column(type="string", columnDefinition="ENUM('active', 'inactive', 'deleted')", options={"default":"active"}, nullable=false ) 
      * @var string
      * @access protected
      */

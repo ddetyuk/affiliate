@@ -29,21 +29,21 @@ class Payment extends AbstractEntity
     protected $amount;
 
     /**
-     * @ORM\Column(type="decimal")
+     * @ORM\Column(type="decimal", scale=2)
      * @var decimal
      * @access protected
      */
     protected $balance;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var integer
+     * @ORM\Column(type="decimal", scale=3)
+     * @var decimal
      * @access protected
      */
     protected $percent;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('active', 'inactive')", options={"default":"active"} ) 
+     * @ORM\Column(type="string", columnDefinition="ENUM('active', 'inactive', 'expired')", options={"default":"active"} ) 
      * @var string
      * @access protected
      */
@@ -69,6 +69,12 @@ class Payment extends AbstractEntity
      */
     protected $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Account\Model\Entity\Product", inversedBy="payments")
+     * @ORM\JoinColumn(name="productId", referencedColumnName="id")
+     */
+    protected $product;
+    
     /**
      * @ORM\OneToMany(targetEntity="Account\Model\Entity\Repayment", mappedBy="outpayment")
      */
