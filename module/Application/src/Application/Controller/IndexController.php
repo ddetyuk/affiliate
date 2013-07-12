@@ -60,9 +60,6 @@ class IndexController extends AbstractActionController
 
     public function invitationAction()
     {
-        if($this->getUser()->getLetter()->getInvited() > 5){
-            return $this->notFoundAction();
-        }
         return new ViewModel();
     }
 

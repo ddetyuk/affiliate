@@ -3,62 +3,56 @@
 namespace User\Service;
 
 use User\Service\Authentication as AuthenticationService;
-use User\Service\User as UserService;
+use User\Permissions\Rbac\Rbac;
 
 class Authorization
 {
 
-    protected $authenticationService;
-    protected $userService;
+    protected $authentication;
+    protected $rbac;
 
-    public function __construct(AuthenticationService $service = null, UserService $userService = null)
+    public function __construct(AuthenticationService $service = null, Rbac $rbac = null)
     {
         if (null !== $service) {
-            $this->setAuthenticationService($service);
+            $this->setAuthentication($service);
         }
-        if (null !== $userService) {
-            $this->setUserService($userService);
+        if (null !== $rbac) {
+            $this->setRbac($rbac);
         }
-        $user = $service->getIdentity();
-        if (!$user) {
-            return;
+    }
+
+    public function setAuthentication(AuthenticationService $service)
+    {
+        $this->authentication = $service;
+    }
+
+    public function getAuthentication()
+    {
+        return $this->authentication;
+    }
+
+    public function setRbac(Rbac $rbac)
+    {
+        $this->rbac = $rbac;
+    }
+
+    public function getRbac()
+    {
+        return $this->rbac;
+    }
+
+    public function isGranted($permission)
+    {
+        $user = $this->getAuthentication()->getIdentity();
+        if ($user) {
+            $roles = $user->getRoles();
+            foreach ($roles as $role) {
+                if ($this->getRbac()->isGranted($role, $permission)) {
+                    return true;
+                }
+            }
         }
-        /*
-          $result= $userService->getUserByEmail($user->getEmail());
-          $entity = $result->getEntity();
-
-          foreach($entity->getRoles() as $role){
-          $permissions = $role->getPermissions();
-          foreach($permissions as $permission){
-
-          }
-          }
-         */
-    }
-
-    public function setAuthenticationService(AuthenticationService $service)
-    {
-        $this->authenticationService = $service;
-    }
-
-    public function getAuthenticationService()
-    {
-        return $this->authenticationService;
-    }
-
-    public function setUserService(UserService $service)
-    {
-        $this->userService = $service;
-    }
-
-    public function getUserService()
-    {
-        return $this->userService;
-    }
-
-    public function isGranted()
-    {
-        return true;
+        return false;
     }
 
 }

@@ -33,6 +33,11 @@ class User extends AbstractAdapter
         if ($result->isSuccess()) {
             $entity = $result->getEntity();
             if ($entity->getPassword() == $password) {
+                $roles = array();
+                foreach($entity->getRoles() as $role){
+                    $roles[] = $role->getName();
+                };
+                $entity->setRoles($roles);
                 return new Result(Result::SUCCESS, $entity, array('Authentication successful.'));
             }
         }

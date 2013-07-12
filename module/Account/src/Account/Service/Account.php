@@ -22,7 +22,7 @@ class Account implements ListenerAggregateInterface
 
     const LEVEL1_PERSENT  = 'account_level1_percent';
     const LEVEL2_PERSENT  = 'account_level2_percent';
-    const LEVEL4_PERSENT  = 'account_level3_percent';
+    const LEVEL3_PERSENT  = 'account_level3_percent';
     const USERS_BALANCE   = 'account_system_balance';
     const SYSTEM_BALANCE  = 'account_users_balance';
     const PAYMENT_BALANCE = 'account_payment_balance';

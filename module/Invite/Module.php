@@ -18,11 +18,13 @@ class Module
 
     public function getServiceConfig()
     {
-        return array(
-            'factories' => array(
+        return array (
+            'factories' => array (
                 'Invite\Service\Invite' => function($sm) {
-                    $em      = $sm->get('Doctrine\ORM\EntityManager');
-                    $service = new \Invite\Service\Invite($em);
+                    $em       = $sm->get('Doctrine\ORM\EntityManager');
+                    $mailer   = $sm->get('Application\Service\Mail');
+                    $renderer = $sm->get('ViewRenderer');
+                    $service  = new \Invite\Service\Invite($em, $mailer, $renderer);
                     return $service;
                 },
                 'Invite\Listener\CreateUser' => function($sm) {
@@ -40,12 +42,12 @@ class Module
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+        return array (
+            'Zend\Loader\ClassMapAutoloader' => array (
                 __DIR__ . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            'Zend\Loader\StandardAutoloader' => array (
+                'namespaces' => array (
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),

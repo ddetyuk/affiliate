@@ -3,6 +3,17 @@
 namespace Contact;
 
 return array(
+    'rbac' => array(
+        'Administrator' => array(
+            'permissions' => array(
+                array('name'=>'contact.view'),
+                array('name'=>'contact.create'),
+                array('name'=>'contact.update'),
+                array('name'=>'contact.delete'),
+                array('name'=>'contact.get'),
+            ),
+        )
+    ),
     'router' => array(
         'routes' => array(
             'contact' => array(

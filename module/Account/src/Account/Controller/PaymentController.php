@@ -10,6 +10,9 @@ class PaymentController extends AbstractActionController
 
     public function indexAction()
     {
+        if(!$this->IsGranted('account.payment.view')){
+            $this->redirect()->toRoute('user', array('action'=>'login'));
+        }
         $model   = new ViewModel();
         $service = $this->getServiceLocator()->get('Account\Service\Account');
         $result  = $service->getPaymentsPaginator();

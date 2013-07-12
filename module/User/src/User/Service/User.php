@@ -51,32 +51,43 @@ class User
         return $this->em;
     }
 
+    public function IsGranted($permission)
+    {
+        return true;
+    }
+
     public function getPaginator($params = null)
     {
+        if (!$this->IsGranted('user.view')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         try {
             $query     = $this->em->getRepository($this->entity)->createQueryBuilder('p');
             $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
             return new ServiceResult(ServiceResult::SUCCESS, $paginator);
         } catch (\Exception $e) {
-            return new ServiceResult(ServiceResult::FAILURE, null, array($e->getMessage()));
+            return new ServiceResult(ServiceResult::FAILURE, null, array ($e->getMessage()));
         }
     }
 
     public function create(UserEntity $user)
     {
-        $validator = new \DoctrineModule\Validator\ObjectExists(array(
+        if (!$this->IsGranted('user.create')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
+        $validator = new \DoctrineModule\Validator\ObjectExists(array (
                     'object_repository' => $this->em->getRepository($this->entity),
-                    'fields'            => array('email')
+                    'fields'            => array ('email')
                 ));
         if ($validator->isValid($user->getEmail())) {
-            return new ServiceResult(ServiceResult::FAILURE, $user, array('Email already exists'));
+            return new ServiceResult(ServiceResult::FAILURE, $user, array ('Email already exists'));
         }
-        $validator = new \DoctrineModule\Validator\ObjectExists(array(
+        $validator = new \DoctrineModule\Validator\ObjectExists(array (
                     'object_repository' => $this->em->getRepository($this->entity),
-                    'fields'            => array('id')
+                    'fields'            => array ('id')
                 ));
         if (!$validator->isValid($user->getReferral())) {
-            return new ServiceResult(ServiceResult::FAILURE, $user, array('Referal code not found'));
+            return new ServiceResult(ServiceResult::FAILURE, $user, array ('Referal code not found'));
         }
         $now = new \DateTime();
         $user->setCreated($now);
@@ -98,6 +109,9 @@ class User
 
     public function update(UserEntity $user)
     {
+        if (!$this->IsGranted('user.update')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         $password = $user->getPassword();
         if (empty($password)) {
             $user->setPassword(null);
@@ -112,6 +126,9 @@ class User
 
     public function delete(UserEntity $user)
     {
+        if (!$this->IsGranted('user.delete')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         $user->setStatus('inactive');
         $this->update($user);
         return new ServiceResult(ServiceResult::SUCCESS, $user);
@@ -119,6 +136,9 @@ class User
 
     public function getUserByEmail($email)
     {
+        if (!$this->IsGranted('user.get')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         $user = $this->em->getRepository($this->entity)->findOneByEmail($email);
         if (!is_null($user)) {
             return new ServiceResult(ServiceResult::SUCCESS, $user);
@@ -128,6 +148,9 @@ class User
 
     public function getUserById($id)
     {
+        if (!$this->IsGranted('user.get')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         $user = $this->em->getRepository($this->entity)->findOneById($id);
         if (!is_null($user)) {
             return new ServiceResult(ServiceResult::SUCCESS, $user);

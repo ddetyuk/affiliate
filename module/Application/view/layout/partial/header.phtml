@@ -1,5 +1,5 @@
 <header>
-    <?php if ($this->HasIdentity()): ?>
+    <?php if ($this->IsGranted('admin.panel')): ?>
         <div id="admin" class="navbar navbar-inverse">
             <div class="navbar-inner">
                 <div class="container">

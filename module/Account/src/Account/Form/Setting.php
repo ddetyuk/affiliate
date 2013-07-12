@@ -30,21 +30,28 @@ class Setting extends Form implements FactoryInterface, InputFilterProviderInter
             'name'    => 'level1',
             'type'    => 'text',
             'options' => array(
-                'label' => 'Commision Level 1:'
+                'label' => 'Repayment Level 1 (%):'
             ),
         ));
         $this->add(array(
             'name'    => 'level2',
             'type'    => 'text',
             'options' => array(
-                'label' => 'Commision Level 2:'
+                'label' => 'Repayment Level 2 (%):'
             ),
         ));
         $this->add(array(
-            'name'    => 'level4',
+            'name'    => 'level3',
             'type'    => 'text',
             'options' => array(
-                'label' => 'Rate Of Return Level 4:'
+                'label' => 'Repayment Level 3 (%):'
+            ),
+        ));
+        $this->add(array(
+            'name'    => 'minval',
+            'type'    => 'text',
+            'options' => array(
+                'label' => 'Min Buffer value (%):'
             ),
         ));
         $this->add(array(
@@ -73,7 +80,14 @@ class Setting extends Form implements FactoryInterface, InputFilterProviderInter
                     array('name'   => 'StripTags')
                 ),
             ),
-            'level4' => array(
+            'level3' => array(
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StringTrim'),
+                    array('name' => 'StripTags')
+                ),
+            ),
+            'minval' => array(
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StringTrim'),

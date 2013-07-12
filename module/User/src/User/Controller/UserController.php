@@ -10,6 +10,9 @@ class UserController extends AbstractActionController
 
     public function indexAction()
     {
+        if(!$this->IsGranted('user.view')){
+            $this->redirect()->toRoute('user', array('action'=>'login'));
+        }
         $model   = new ViewModel();
         $service = $this->getServiceLocator()->get('User\Service\User');
         $result  = $service->getPaginator();
@@ -28,6 +31,9 @@ class UserController extends AbstractActionController
 
     public function addAction()
     {
+        if(!$this->IsGranted('user.create')){
+            $this->redirect()->toRoute('user', array('action'=>'login'));
+        }
         $form    = $this->getServiceLocator()->get('Contact\Form\Contact');
         $message = new Message();
         $form->bind($message);
@@ -51,6 +57,9 @@ class UserController extends AbstractActionController
 
     public function editAction()
     {
+        if(!$this->IsGranted('user.update')){
+            $this->redirect()->toRoute('user', array('action'=>'login'));
+        }
         $form    = $this->getServiceLocator()->get('Contact\Form\Contact');
         $message = new Message();
         $service = $this->getServiceLocator()->get('Contact\Service\Contact');
@@ -81,6 +90,9 @@ class UserController extends AbstractActionController
 
     public function deleteAction()
     {
+        if(!$this->IsGranted('user.delete')){
+            $this->redirect()->toRoute('user', array('action'=>'login'));
+        }
         $message        = new Message();
         $contactService = $this->getServiceLocator()->get('Contact\Service\Contact');
         $result         = $contactService->get($this->params()->fromPost('id', 0));

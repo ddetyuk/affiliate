@@ -3,6 +3,18 @@
 namespace User;
 
 return array(
+    'rbac' => array(
+        array(
+            'name' => 'Administrator',
+            'permissions' => array(
+                array('name'=>'user.view'),
+                array('name'=>'user.creat'),
+                array('name'=>'user.update'),
+                array('name'=>'user.delete'),
+                array('name'=>'user.get'),
+            ),
+        )
+    ),
     'router' => array(
         'routes' => array(
             'user' => array(
@@ -66,6 +78,7 @@ return array(
         'invokables' => array(
             'isGranted'    => 'User\Controller\Plugin\IsGranted',
             'getUser'      => 'User\Controller\Plugin\GetUser',
+            'hasIdentity'  => 'User\Controller\Plugin\HasIdentity',
         )
     ),
     'view_helpers' => array(

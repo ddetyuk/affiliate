@@ -3,6 +3,17 @@
 namespace Invite;
 
 return array(
+    'rbac' => array(
+        'Administrator' => array(
+            'permissions' => array(
+                array('name'=>'invite.view'),
+                array('name'=>'invite.create'),
+                array('name'=>'invite.update'),
+                array('name'=>'invite.delete'),
+                array('name'=>'invite.get'),
+            ),
+        )
+    ),
     'router' => array(
         'routes' => array(
             'invite' => array(

@@ -19,13 +19,16 @@ class Invite
     protected $mailer;
     protected $renderer;
 
-    public function __construct(EntityManager $em = null, $mailer = null)
+    public function __construct(EntityManager $em = null, $mailer = null, $renderer = null)
     {
         if (null !== $em) {
             $this->setEntityManager($em);
         }
         if (null !== $mailer) {
             $this->setMailService($mailer);
+        }
+        if (null !== $renderer) {
+            $this->setRenderer($renderer);
         }
         $this->entity = 'Invite\Model\Entity\Letter';
     }
@@ -59,9 +62,17 @@ class Invite
     {
         $this->renderer = $renderer;
     }
-
+    
+    public function IsGranted($permission)
+    {
+        return true;
+    }
+    
     public function getPaginator($params = null)
     {
+        if (!$this->IsGranted('invite.view')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         try {
             $query     = $this->em->getRepository($this->entity)->createQueryBuilder('p');
             $paginator = new Paginator(new DoctrinePaginator(new ORMPaginator($query)));
@@ -73,8 +84,11 @@ class Invite
 
     public function update($subject, $content, $user)
     {
+        if (!$this->IsGranted('invite.update')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         try {
-            $letter = $this->em->getRepository($this->entity)->findOneByUserId($user->getId());
+            $letter = $this->em->getRepository($this->entity)->findOneByUser($user);
 
             if (!$letter) {
                 $result = $this->create($user);
@@ -97,6 +111,9 @@ class Invite
 
     public function create($user)
     {
+        if (!$this->IsGranted('invite.create')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         try {
             $now    = new \DateTime();
             $letter = new Letter();
@@ -115,8 +132,17 @@ class Invite
 
     public function send(array $emails, $user)
     {
+        if (!$this->IsGranted('invite.send')) {
+            return new ServiceResult(ServiceResult::FAILURE, null, array ('Access denied'));
+        }
         try {
-            $letter = $this->em->getRepository($this->entity)->findOneByUserId($user->getId());
+            $letter = $this->em->getRepository($this->entity)->findOneByUser($user);
+            if (!$letter) {
+                $result = $this->create($user);
+                if ($result->isSuccess()) {
+                    $letter = $result->getEntity();
+                }
+            }
             if ($letter->getIsdefault()) {
                 $content = $this->getDefaultContent();
                 $subject = $this->getDefaultSubject();

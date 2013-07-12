@@ -3,6 +3,14 @@
 namespace Account;
 
 return array(
+    'rbac' => array(
+        'Administrator' => array(
+            'permissions' => array(
+                array('name'=>'account.payment.view'),
+                array('name'=>'account.setting.update'),
+            ),
+        )
+    ),
     'router' => array(
         'routes' => array(
             'settings' => array(

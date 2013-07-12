@@ -8,8 +8,27 @@ use Zend\View\Model\JsonModel;
 
 class IndexController extends AbstractActionController
 {
+
+    public function wellcomeAction()
+    {
+        if(!$this->IsGranted('userpage.wellcome')){
+            $this->redirect()->toRoute('user', array('action'=>'login'));
+        }
+        $id      = $this->params()->fromRoute();
+        $model   = new ViewModel();
+        $service = $this->getServiceLocator()->get('UserPage\Service\Page');
+        $result  = $service->get($id);
+        if ($result->isSuccess()) {
+            $model->setVariable('page', $result->getEntity());
+        }
+        return $model;
+    }
+
     public function indexAction()
     {
+        if(!$this->IsGranted('userpage.view')){
+            $this->redirect()->toRoute('user', array('action'=>'login'));
+        }
         $model   = new ViewModel();
         $service = $this->getServiceLocator()->get('UserPage\Service\Page');
         $result  = $service->getPaginator();
@@ -28,30 +47,17 @@ class IndexController extends AbstractActionController
 
     public function editAction()
     {
+        if(!$this->IsGranted('userpage.update')){
+            $this->redirect()->toRoute('user', array('action'=>'login'));
+        }
         $model   = new JsonModel();
         $service = $this->getServiceLocator()->get('UserPage\Service\Page');
         if ($this->request->isPost()) {
-            $post   = $this->request->getPost();
-            $result = $service->update($post['subject'], $post['content'], $this->getUser());
+            $content = $this->params()->fromRoute('content', '');
+            $title   = $this->params()->fromRoute('title', '');
+            $result = $service->update($title, $content, $this->getUser());
             if ($result->isSuccess()) {
-                $model->setVariable('message', array('Letter successfully updated'));
-                $model->setVariable('success', true);
-            } else {
-                $model->setVariable('message', $result->getMessages());
-            }
-        }
-        return $model;
-    }
-    
-    public function sendAction()
-    {
-        $model   = new JsonModel();
-        $service = $this->getServiceLocator()->get('Invite\Service\Invite');
-        if ($this->request->isPost()) {
-            $post   = $this->request->getPost();
-            $result = $service->send($post['emails'], $this->getUser());
-            if ($result->isSuccess()) {
-                $model->setVariable('message', array('Letters successfully sent'));
+                $model->setVariable('message', array ('Page successfully updated'));
                 $model->setVariable('success', true);
             } else {
                 $model->setVariable('message', $result->getMessages());

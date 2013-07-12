@@ -3,6 +3,18 @@
 namespace UserPage;
 
 return array(
+    'rbac' => array(
+        'Administrator' => array(
+            'permissions' => array(
+                array('name'=>'userpage.wellcome'),
+                array('name'=>'userpage.view'),
+                array('name'=>'userpage.create'),
+                array('name'=>'userpage.update'),
+                array('name'=>'userpage.delete'),
+                array('name'=>'userpage.get'),
+            ),
+        )
+    ),
     'router' => array(
         'routes' => array(
             'wellcome' => array(

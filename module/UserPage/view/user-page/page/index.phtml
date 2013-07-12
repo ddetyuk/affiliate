@@ -24,9 +24,9 @@
                     <tr>
                         <td><?php echo $page->getId(); ?></td>
                         <td><?php echo $page->getUser()->getEmail(); ?></td>
-                        <td><?php echo $page->getTitle(); ?></td>
+                        <td><?php echo $page->getSubject(); ?></td>
                         <td><?php echo $page->getType(); ?></td>
-                        <td><?php echo $page->getUpdated(); ?></td>
+                        <td><?php echo $page->getUpdated()->format("Y-m-d H:i:s");; ?></td>
                         <td>
                             <a class="btn btn-mini" href="#"><i class="icon-edit"></i> <?php echo $this->Translate('Edit'); ?></a>
                             <a class="btn btn-mini" href="#"><i class="icon-remove"></i> <?php echo $this->Translate('Remove'); ?></a>

@@ -12,6 +12,10 @@ class IndexController extends AbstractActionController
 
     public function profileAction()
     {
+        if(!$this->HasIdentity()){
+            $this->redirect()->toRoute('home');
+        }
+        
         $user    = $this->getUser();
         $em      = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $form    = $this->getServiceLocator()->get('User\Form\Profile');
@@ -51,6 +55,10 @@ class IndexController extends AbstractActionController
 
     public function loginAction()
     {
+        if($this->HasIdentity()){
+            $this->redirect()->toRoute('home');
+        }
+        
         $user    = new User();
         $form    = $this->getServiceLocator()->get('User\Form\Login');
         $em      = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
@@ -78,11 +86,17 @@ class IndexController extends AbstractActionController
 
     public function forgotAction()
     {
-        
+        if($this->HasIdentity()){
+            $this->redirect()->toRoute('home');
+        }
     }
 
     public function registerAction()
     {
+        if($this->HasIdentity()){
+            $this->redirect()->toRoute('home');
+        }
+        
         $user    = new User();
         $form    = $this->getServiceLocator()->get('User\Form\Register');
         $em      = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
@@ -116,6 +130,9 @@ class IndexController extends AbstractActionController
 
     public function logoutAction()
     {
+        if(!$this->HasIdentity()){
+            $this->redirect()->toRoute('home');
+        }
         $auth = $this->getServiceLocator()->get('User\Service\Authentication');
         $auth->logout();
         return $this->redirect()->toRoute('home');

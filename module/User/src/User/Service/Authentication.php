@@ -4,7 +4,6 @@ namespace User\Service;
 
 use Zend\Authentication\AuthenticationService;
 use Zend\Authentication\Result;
-use User\Service\User as UserService;
 use Application\Service\Result as ServiceResult;
 use User\Model\Entity\User as UserEntity;
 
@@ -12,15 +11,11 @@ class Authentication
 {
 
     protected $authenticationService;
-    protected $userService;
 
-    public function __construct(AuthenticationService $service = null, UserService $user = null)
+    public function __construct(AuthenticationService $service = null)
     {
         if (null !== $service) {
             $this->setAuthenticationService($service);
-        }
-        if (null !== $user) {
-            $this->setUserService($user);
         }
     }
 
@@ -34,18 +29,11 @@ class Authentication
         return $this->authenticationService;
     }
 
-    public function setUserService(UserService $service)
-    {
-        $this->userService = $service;
-    }
-
-    public function getUserService()
-    {
-        return $this->userService;
-    }
-
     public function encodePassword($password)
     {
+        for ($i = 0; $i < 25; $i++) {
+            $password = hash( "sha256", $password);
+        }
         return $password;
     }
 
@@ -71,6 +59,7 @@ class Authentication
     {
         $username = $user->getEmail();
         $password = $this->encodePassword($user->getPassword());
+
         $service  = $this->getAuthenticationService();
         $adapter  = $service->getAdapter();
         $adapter->setIdentity($username);

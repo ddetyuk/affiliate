@@ -23,7 +23,7 @@ class TestController extends AbstractActionController
                 $data = $form->getData();
                 $setting->set(Account::LEVEL1_PERSENT, $data['level1']);
                 $setting->set(Account::LEVEL2_PERSENT, $data['level2']);
-                $setting->set(Account::LEVEL4_PERSENT, $data['level4']);
+                $setting->set(Account::LEVEL3_PERSENT, $data['level4']);
                 $this->flashMessenger()->addSuccessMessage('Settings successfully updated');
             }
         } else {
@@ -35,9 +35,9 @@ class TestController extends AbstractActionController
             if ($result->isSuccess()) {
                 $form->get('level2')->setValue($result->getEntity()->getValue());
             }
-            $result = $setting->get(Account::LEVEL4_PERSENT);
+            $result = $setting->get(Account::LEVEL3_PERSENT);
             if ($result->isSuccess()) {
-                $form->get('level4')->setValue($result->getEntity()->getValue());
+                $form->get('level3')->setValue($result->getEntity()->getValue());
             }
         }
         return new ViewModel(array('form' => $form));

@@ -13,12 +13,22 @@ class RoleCollector implements CollectorInterface
      */
 
     const PRIORITY = 10;
+    
+    protected $roles = null;
 
     public function __construct(Authorization $authorization)
     {
-        
+        $user = $authorization->getAuthentication()->getIdentity();
+        if($user){
+            $this->roles = $user->getRoles();
+        }
     }
 
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+    
     /**
      * Collector Name.
      *
@@ -46,7 +56,7 @@ class RoleCollector implements CollectorInterface
      */
     public function collect(MvcEvent $mvcEvent)
     {
-        
+        return;
     }
 
 }

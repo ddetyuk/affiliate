@@ -19,7 +19,7 @@
                 $(this).text('Save');
             }else{
                 editor.updateElement()
-                $.post(".invite/edit", {
+                $.post("/invite/edit", {
                     'content' : editor.getData(),
                     'subject' : '',
                     'type' : 'letter'
@@ -37,7 +37,7 @@
                 editor.updateElement()
                 $.post("/user-page/edit", {
                     'content' : editor.getData(),
-                    'subject' : '',
+                    'title' : '',
                     'type' : 'page'
                 } );
                 $(this).text('Edit');
@@ -46,7 +46,12 @@
         });
         
         $( '#invitelist-button' ).click(function(){
-            console.log($( '#invitelist' ).val());
+            $.post("/invite/send", {
+                'emails' : $( '#invitelist' ).val()
+            } ).done(function(resp) { 
+                console.log(resp);
+                alert("Successfully sent"); 
+            });
         });
          
         $( '#purchase_btn' ).click(function(){

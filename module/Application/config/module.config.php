@@ -3,6 +3,13 @@
 namespace Application;
 
 return array(
+    'rbac' => array(
+        'Administrator' => array(
+            'permissions' => array(
+                array('name'=>'admin.panel'),
+            ),
+        )
+    ),
     'router' => array(
         'routes' => array(
             'admin' => array(
@@ -216,6 +223,10 @@ return array(
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy',
+            'ViewFeedStrategy',
         ),
         'template_path_stack'     => array(
             __DIR__ . '/../view',
